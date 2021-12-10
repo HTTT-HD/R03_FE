@@ -38,21 +38,9 @@ class StylistSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/appointments">
-                                        <FontAwesomeIcon icon={faCalendarCheck} />
-                                        <span>Lịch hẹn</span>
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link to="/my-customers">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Khách hàng của tôi</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/schedule-timings">
-                                        <FontAwesomeIcon icon={faHourglassStart} />
-                                        <span>Lên lịch</span>
                                     </Link>
                                 </li>
                                 <li>

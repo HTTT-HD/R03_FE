@@ -6,22 +6,6 @@ import { StylistSidebar } from './stylist-sidebar';
 
 // Import Image
 import CustomerImg from '../../assets/img/customers/customer.jpg';
-import CustomerImg1 from '../../assets/img/customers/customer1.jpg';
-import CustomerImg2 from '../../assets/img/customers/customer2.jpg';
-import CustomerImg3 from '../../assets/img/customers/customer3.jpg';
-import CustomerImg4 from '../../assets/img/customers/customer4.jpg';
-import CustomerImg5 from '../../assets/img/customers/customer5.jpg';
-import CustomerImg6 from '../../assets/img/customers/customer6.jpg';
-import CustomerImg7 from '../../assets/img/customers/customer7.jpg';
-import CustomerImg8 from '../../assets/img/customers/customer8.jpg';
-import CustomerImg9 from '../../assets/img/customers/customer9.jpg';
-import CustomerImg10 from '../../assets/img/customers/customer10.jpg';
-import CustomerImg11 from '../../assets/img/customers/customer11.jpg';
-
-// Import Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt } from '@fortawesome/fontawesome-free-solid';
-
 
 class MyCustomers extends React.Component {
 	

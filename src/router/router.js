@@ -25,15 +25,12 @@ import {
     StylistProfileSettings,
     StylistProfile,
     Register,
-    Reviews,
     ProfileSettings,
     CustomerDashboard,
     CustomerProfile,  
-    MyCustomers,
+    CRUDCustomer,
     StylistList,
     Calendar,
-    ScheduleTimings,
-    Appointments,
     BookingService,
     StaffDashboard,
     PaymentGuide,
@@ -102,14 +99,11 @@ class RouterComponent extends React.Component {
                         <Route path="/stylist-profile-settings" component={StylistProfileSettings} />
                         <Route path="/stylist-profile" component={StylistProfile} />
                         <Route path="/register" component={Register} />
-                        <Route path="/reviews" component={Reviews} />
                         <Route path="/profile-settings" component={ProfileSettings} />
                         <Route path="/customer-dashboard" component={CustomerDashboard} />
                         <Route path="/customer-profile" component={CustomerProfile} />
-                        <Route path="/my-customers" component={MyCustomers} />
-                        <Route path="/map-list" component={StylistList} />                        
-                        <Route path="/schedule-timings" component={ScheduleTimings} />
-                        <Route path="/appointments" component={Appointments} />
+                        <Route path="/my-customers" component={CRUDCustomer} />
+                        <Route path="/map-list" component={StylistList} />       
                         <Route path="/booking-service" component={BookingService} />
                         <Route path="/staff-dashboard" component={StaffDashboard} />
                         <Route path="/Payment-Guide" component={PaymentGuide} />

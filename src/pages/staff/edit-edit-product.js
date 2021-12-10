@@ -129,12 +129,6 @@ class EditEditProduct extends React.Component {
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label>Mã sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id_sp"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
                                                         <label>Tên sản phẩm</label>
                                                         <input defaultValue={item.tensanpham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
                                                     </div>
