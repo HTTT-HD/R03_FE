@@ -11,19 +11,19 @@ class PurchaseProduct extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            products: [],
+            sanphams: [],
             order: []
         }
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/product")
+        fetch("http://localhost:3003/product")
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        products: result.product
+                        sanphams: result
                     })
                 },
                 (error) => {
@@ -41,7 +41,14 @@ class PurchaseProduct extends React.Component {
         });
         // console.log(event);
     }
-
+    handleChangeInput(){
+		return (event) => {
+			const inputValue = event.target.value;
+			this.setState({
+				searchValue:inputValue
+			})
+		}
+	}
     render() {
         // console.log(this.state.order);
         return (
@@ -89,13 +96,25 @@ class PurchaseProduct extends React.Component {
                         </li>
                     </ul> */}
                     {/* Breadcrumb */}
+                    {/* Search */}
+					<div className="card search-widget">
+						<div className="card-body">
+							<form className="search-form">
+								<div className="input-group">
+									<input type="text" placeholder="Tìm kiếm..." className="form-control" onChange={this.handleChangeInput()}/>
+									<div className="input-group-append">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
                     {/* Page Content */}
                     <div className="content">
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-8 offset-lg-2">
                                     {/* Professor Widget */}
-                                    {this.state.products.map(product => (
+                                    {this.state.sanphams.map(sanpham => (
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="stylist-widget">
@@ -105,17 +124,17 @@ class PurchaseProduct extends React.Component {
                                                                 <img
                                                                     className="img-fluid"
                                                                     alt="User Image"
-                                                                    src={product.img} />
+                                                                    src={sanpham.img} />
                                                             </Link>
                                                         </div>
                                                         <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {product.name}</Link></h4>
+                                                            <h4 className="doc-name"><Link to="#"> {sanpham.name}</Link></h4>
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
-                                                                        <li>Giá: {product.price} VND</li>
-                                                                        <li>Thương hiệu: {product.brand} </li>
-                                                                        <li>Số lượng tồn: {product.amount}</li>
+                                                                        <li>Giá: {sanpham.dongia} VND</li>
+                                                                        <li>Thương hiệu: {sanpham.loaisanpham} </li>
+                                                                        <li>Số lượng: {sanpham.soluong}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

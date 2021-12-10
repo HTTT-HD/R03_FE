@@ -126,12 +126,12 @@ class AddProduct extends React.Component {
                                                         <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
                                                     </div>
                                                 </div>
-                                                {/* <div className="col-12">
+                                                <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Mô tả</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="mota"/>
                                                     </div>
-                                                </div> */}
+                                                </div>
                                                 <div className="submit-section">
                                                     <button type="submit" className="btn btn-primary submit-btn">Thêm sản phẩm</button>
                                                 </div>
