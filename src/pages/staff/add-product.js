@@ -27,10 +27,10 @@ class AddProduct extends React.Component {
     }
     handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state)
 		axios.post('http://localhost:3003/product/add',this.state.data)
 			.then(res => {
-                if(res.data.save)
+                console.log(res);
+                if(res.data=='True')
 				    {this.setState({redirect:true})}
 			})
 			.catch(error => {
@@ -94,12 +94,6 @@ class AddProduct extends React.Component {
                                                                 <small className="form-text text-muted">Cho phép JPG, GIF hoặc PNG. Kích thước tối đa 2MB</small>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Mã sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id_sp"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
