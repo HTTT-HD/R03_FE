@@ -76,12 +76,12 @@ class PurchaseProduct extends React.Component {
                                     {
                                         this.state.order.map(i => (
                                             <Dropdown.Item href="">
-                                                {i.name} - {i.price} VND
+                                                {i.tensanpham} - {i.dongia} VND
                                             </Dropdown.Item>
                                         ))
                                     }
                                     <Dropdown.Item>
-                                        Tổng tiền: {this.state.order.reduce((sum, i) => sum + parseInt(i.price.replace(".", "")), 0)} VND
+                                        Tổng tiền: {this.state.order.reduce((sum, i) => sum + parseInt(i.dongia.replace(".", "")), 0)} VND
                                     </Dropdown.Item>
                                     <Dropdown.Item>
                                         <Link to="./checkout">TIẾN HÀNH THANH TOÁN</Link>
@@ -128,12 +128,12 @@ class PurchaseProduct extends React.Component {
                                                             </Link>
                                                         </div>
                                                         <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {sanpham.name}</Link></h4>
+                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tensanpham}</Link></h4>
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
                                                                         <li>Giá: {sanpham.dongia} VND</li>
-                                                                        <li>Thương hiệu: {sanpham.loaisanpham} </li>
+                                                                        <li>Loại sản phẩm: {sanpham.loaisanpham} </li>
                                                                         <li>Số lượng: {sanpham.soluong}</li>
                                                                     </ul>
                                                                 </div>
