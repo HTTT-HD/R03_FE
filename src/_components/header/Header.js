@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, NavDropdown, Nav } from 'react-bootstrap';
 import $ from "jquery";
-import { Link , useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // Import Images
 import LogoWhite from '../../assets/img/logo-white.png';
@@ -10,7 +10,7 @@ import UserIcon from '../../assets/img/stylists/stylist-thumb-02.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faShoppingCart, faTimes, faUser } from '@fortawesome/fontawesome-free-solid';
+import { faChevronDown, faShoppingCart, faTimes, faUser, faSearch } from '@fortawesome/fontawesome-free-solid';
 
 function logOut(params) {
 	localStorage.clear();
@@ -118,6 +118,9 @@ class Header extends React.Component {
 									</li>
 								</ul>
 							</li>
+							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
+								<Link to="/purchase-product">Sản phẩm</Link>
+							</li>
 							{(pathname === ('/') || pathname === ('login') ?
 								(
 									<li className={pathname === ('/login') ? 'active' : ''}>
@@ -156,7 +159,7 @@ class Header extends React.Component {
 																<Link>
 																	<Link to="/login">Đăng nhập</Link>
 																	<Link to="/register">Đăng ký</Link>
-																	<Link to ="/nail-salon"onClick={logOut}>Đăng xuất</Link>
+																	<Link to="/nail-salon" onClick={logOut}>Đăng xuất</Link>
 																</Link>
 															</>
 													}
@@ -176,6 +179,9 @@ class Header extends React.Component {
 						</ul>
 					</div>
 					<ul className="nav header-navbar-rht menu-select">
+						<li>
+							<Link to="/checkout" className="add-cart"><FontAwesomeIcon icon={faSearch} /></Link>
+						</li>
 						<li className="dropdown language-select">
 							<Dropdown>
 								<Dropdown.Toggle variant="light" id="dropdown-basic2">
