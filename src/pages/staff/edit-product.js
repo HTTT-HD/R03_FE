@@ -32,7 +32,7 @@ class EditProduct extends React.Component {
                     console.log(result);
                     this.setState({
                         isLoaded: true,
-                        sanphams: result.sanpham
+                        sanphams: result
                     });
                 },
                 (error) => {
@@ -82,28 +82,28 @@ class EditProduct extends React.Component {
                                     </Link>
                                     {/* product */}
                                     {
-                                        this.state.sanphams.map(sanpham => (
+                                        this.state.sanphams.map(item => (
                                             <div className="appointment-list">
                                                 <div className="profile-info-widget">
                                                     <Link className="booking-doc-img">
-                                                        <img src={sanpham.img} alt="User Image" />
+                                                        <img src={item.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
-                                                        <h3>{`${sanpham.tensanpham}`}</h3>
+                                                        <h3>{`${item.tensanpham}`}</h3>
                                                         <div className="customer-details">
-                                                            <h5>Giá: {sanpham.dongia}</h5>
-                                                            <h5>Thương hiệu: {sanpham.loaisanpham}</h5>
-                                                            <h5>Số lượng tồn: {sanpham.soluong}</h5>
+                                                            <h5>Giá: {item.dongia}</h5>
+                                                            <h5>Thương hiệu: {item.loaisanpham}</h5>
+                                                            <h5>Số lượng tồn: {item.soluong}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(sanpham.id_sp)}>
+                                                    <button onClick={() => this.handleButtonClick(item.id_sp)}>
                                                         <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
                                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                                         </Link>
                                                     </button>
-                                                    <button onClick={() => this.handleButtonClick(sanpham.id_sp)}>
+                                                    <button onClick={() => this.handleButtonClick(item.id_sp)}>
                                                         <Link to="/delete-product" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>
