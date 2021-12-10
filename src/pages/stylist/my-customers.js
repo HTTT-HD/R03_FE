@@ -4,259 +4,124 @@ import { Link } from 'react-router-dom'
 // Import Sidebar
 import { StylistSidebar } from './stylist-sidebar';
 
-// Import Image
-import CustomerImg from '../../assets/img/customers/customer.jpg';
+// Import Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMinus, faEdit, faPlusCircle , faStar } from '@fortawesome/fontawesome-free-solid';
 
-class MyCustomers extends React.Component {
-	
+import UserImg from '../../assets/img/customers/customer.jpg';
+
+class CRUDCustomer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            nguoibans: []
+        };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+    handleButtonClick(value) {
+		localStorage.setItem("pro_id", value)
+    }
+    componentDidMount() {
+        fetch("http://localhost:3003/seller/")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        isLoaded: true,
+                        nguoibans: result
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
     render() {
         return (
-			<div>
-				{/* Breadcrumb */}
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-										<li className="breadcrumb-item active" aria-current="page">Khách hàng của tôi</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Khách hàng của tôi</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				{/* Breadcrumb */}
+            <div>
+                {/* Breadcrumb */}
+                <div className="breadcrumb-bar">
+                    <div className="container-fluid">
+                        <div className="row align-items-center">
+                            <div className="col-md-12 col-12">
+                                <nav aria-label="breadcrumb" className="page-breadcrumb">
+                                    <ol className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Quản lý khách hàng</li>
+                                    </ol>
+                                </nav>
+                                <h2 className="breadcrumb-title">Quản lý khách hàng</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Breadcrumb */}
 
-				{/* Page Content */}
-				<div className="content">
-					<div className="container">
-
-						<div className="row">
-							<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-								<StylistSidebar />
-							</div>
-
-							<div className="col-md-7 col-lg-8 col-xl-9">
-								<div className="row row-grid">
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="col-md-6 col-lg-4 col-xl-3">
-										<div className="card widget-profile pat-widget-profile">
-											<div className="card-body">
-												<div className="pro-widget-content">
-													<div className="profile-info-widget">
-														<Link to="/customer-profile" className="booking-doc-img">
-															<img src={CustomerImg} alt="User Image" />
-														</Link>
-														<div className="profile-det-info">
-															<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-															
-															<div className="customer-details">
-																<h5><b>ID khách hàng :</b> P0016</h5>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="customer-info">
-													<ul>
-														<li>SDT <span>+1 952 001 8563</span></li>
-														<li>Tuổi <span>38 Years, Male</span></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>		
-				{/* Page Content */}
-			</div>
+                {/* Page Content */}
+                <div className="content">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                                <StylistSidebar />
+                            </div>
+                            <div className="col-md-7 col-lg-8 col-xl-9">
+                                <div className="appointments">
+                                    <Link to="/add-product">
+                                        <h4 className="card-title d-flex justify-content-between">
+                                            <a className="edit-link">
+                                                <FontAwesomeIcon icon={faPlusCircle} className="mr-1" />Thêm khách hàng</a>
+                                        </h4>
+                                    </Link>
+                                    {/* product */}
+                                    {
+                                        this.state.nguoibans.map(nguoiban => (
+                                            <div className="appointment-list">
+                                                <div className="profile-info-widget">
+                                                    <Link className="booking-doc-img">
+                                                        <img src={nguoiban.img} alt="User Image" />
+                                                    </Link>
+                                                    <div className="profile-det-info">
+                                                        <h3>{`${nguoiban.tennguoiban}`}</h3>
+                                                        <div className="customer-details">
+                                                            <h5>SDT: {nguoiban.sdt}</h5>
+                                                            <h5>Địa chỉ: {nguoiban.diachi}</h5>
+                                                            <h5>Tên đăng nhập: {nguoiban.tendangnhap}</h5>
+                                                            <h5>Mật khẩu: {nguoiban.matkhau}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="appointment-action">
+                                                    <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
+                                                        <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
+                                                            <FontAwesomeIcon icon={faEdit} /> Sửa
+                                                        </Link>
+                                                    </button>
+                                                    <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
+                                                        <Link to="/delete-product" className="btn btn-sm bg-danger-light">
+                                                            <FontAwesomeIcon icon={faMinus} /> Xóa
+                                                        </Link>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                    {/* product */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Page Content */}
+            </div>
         )
     }
 }
-export { MyCustomers };
+export { CRUDCustomer };
