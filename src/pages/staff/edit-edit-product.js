@@ -27,6 +27,7 @@ class EditEditProduct extends React.Component {
 			.then(res => res.json())
 			.then(
 				(result) => {
+                    //console.log(result);
 					this.setState({
 						isLoaded: true,
 						sanphams: result
@@ -45,15 +46,14 @@ class EditEditProduct extends React.Component {
         newData["id_sp"] = localStorage.getItem("pro_id")
         newData[e.target.name]=e.target.value;
         this.setState({data:newData})
-        console.log(this.state.data)
     }
     handleSubmit(event) {
 		event.preventDefault();
 		//console.log(this.state)
-		axios.put('http://localhost:3003/product/update/{id}',this.state.data)
+		axios.put(`http://localhost:3003/product/update/${localStorage.getItem("pro_id")}`,this.state.data)
 			.then(res => {
 				console.log(res.data)
-				if(res.data.save)
+				if(res.data==="True")
 				    {this.setState({redirect:true})}
 			})
 			.catch(error => {
@@ -66,11 +66,13 @@ class EditEditProduct extends React.Component {
      	if (redirect) {
        		return <Redirect to='/edit-product'/>;
      	}
-        let {sanpham} = this.state.sanphams;
-        console.log(sanpham);
-        const pr=sanpham.filter(item=>{
+        //console.log(this.state.sanphams);
+        let {sanphams} = this.state;
+        //console.log(sanphams);
+        const pr=sanphams.filter(item=>{
             return item.id == localStorage.getItem("pro_id")
         })
+        //console.log(pr);
         return (
             <div>
                 {/* Breadcrumb */}
@@ -134,25 +136,25 @@ class EditEditProduct extends React.Component {
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Tên sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
+                                                        <input defaultValue={item.tensanpham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Giá sản phẩm (Ví dụ: 30.000 VND)</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="dongia"/>
+                                                        <input defaultValue={item.dongia} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="dongia"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Loại sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="loaisanpham" />
+                                                        <input defaultValue={item.loaisanpham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="loaisanpham" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Số lượng tồn</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                        <input defaultValue={item.soluong} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
                                                     </div>
                                                 </div>
                                                 {/* <div className="col-12">

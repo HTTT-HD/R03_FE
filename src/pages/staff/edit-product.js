@@ -97,12 +97,12 @@ class EditProduct extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(sanpham.id)}>
+                                                    <button onClick={() => this.handleButtonClick(item.id)}>
                                                         <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
                                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                                         </Link>
                                                     </button>
-                                                    <button onClick={() => this.handleButtonClick(sanpham.id)}>
+                                                    <button onClick={() => this.handleButtonClick(item.id)}>
                                                         <Link to="/delete-product" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>

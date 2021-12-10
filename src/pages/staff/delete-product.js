@@ -25,10 +25,10 @@ class DeleteProduct extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         //console.log(this.state)
-        axios.post('http://localhost:3003/product/del/{id}',{"id_sp":localStorage.getItem("id_sp")})
+        axios.delete(`http://localhost:3003/product/del/${localStorage.getItem("pro_id")}`)
             .then(res => {
-                console.log(res.data)
-                if(res.data.save)
+                console.log(res)
+                if(res.data=='True')
                     {this.setState({redirect:true})}
             })
             .catch(error => {
