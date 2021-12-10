@@ -16,20 +16,20 @@ class EditEditProduct extends React.Component {
 		this.state = {
 			error: null,
 			isLoaded: false,
-			product: [],
+			sanphams: [],
             data:[],
             redirect:false
 		}
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch("http://localhost:3003/product")
+		fetch("http://localhost:3003/product/")
 			.then(res => res.json())
 			.then(
 				(result) => {
 					this.setState({
 						isLoaded: true,
-						sanpham: result.sanpham
+						sanphams: result
 					});
 				},
 				(error) => {
@@ -42,7 +42,7 @@ class EditEditProduct extends React.Component {
 	}
     handleChange(e) {
         const newData = {...this.state.data};
-        newData["idproduct"] = localStorage.getItem("pro_id")
+        newData["id_sp"] = localStorage.getItem("pro_id")
         newData[e.target.name]=e.target.value;
         this.setState({data:newData})
         console.log(this.state.data)
@@ -50,7 +50,7 @@ class EditEditProduct extends React.Component {
     handleSubmit(event) {
 		event.preventDefault();
 		//console.log(this.state)
-		axios.put('http://localhost:3003/product/',this.state.data)
+		axios.put('http://localhost:3003/product/update/{id}',this.state.data)
 			.then(res => {
 				console.log(res.data)
 				if(res.data.save)
@@ -66,9 +66,10 @@ class EditEditProduct extends React.Component {
      	if (redirect) {
        		return <Redirect to='/edit-product'/>;
      	}
-        let {sanpham} = this.state;
+        let {sanpham} = this.state.sanphams;
+        console.log(sanpham);
         const pr=sanpham.filter(item=>{
-            return item.id_sp == localStorage.getItem("pro_id")
+            return item.id == localStorage.getItem("pro_id")
         })
         return (
             <div>
@@ -126,28 +127,40 @@ class EditEditProduct extends React.Component {
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label >Tên sản phẩm</label>
-                                                        <input defaultValue={item.name} onChange={(e)=>this.handleChange(e)} type="text" name="name" className="form-control" />
+                                                        <label>Mã sản phẩm</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id_sp"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label >Giá sản phẩm (Ví dụ: 30.000 VND)</label>
-                                                        <input defaultValue={item.price} onChange={(e)=>this.handleChange(e)} type="text" name="price" className="form-control" />
+                                                        <label>Tên sản phẩm</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label >Thương hiệu</label>
-                                                        <input defaultValue={item.brand} onChange={(e)=>this.handleChange(e)} type="text" name="brand" className="form-control" />
+                                                        <label>Giá sản phẩm (Ví dụ: 30.000 VND)</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="dongia"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label >Số lượng tồn</label>
-                                                        <input defaultValue={item.amount} onChange={(e)=>this.handleChange(e)} type="text" name="amount" className="form-control" />
+                                                        <label>Loại sản phẩm</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="loaisanpham" />
                                                     </div>
                                                 </div>
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>Số lượng tồn</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                    </div>
+                                                </div>
+                                                {/* <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>Mô tả</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                    </div>
+                                                </div> */}
                                                 <div className="submit-section">
                                                     <button type="submit" className="btn btn-primary submit-btn">Lưu thay đổi</button>
                                                 </div>
