@@ -28,7 +28,7 @@ class AddProduct extends React.Component {
     handleSubmit(event) {
 		event.preventDefault();
 		console.log(this.state)
-		axios.post('http://localhost:3003/product',this.state.data)
+		axios.post('http://localhost:3003/product/add',this.state.data)
 			.then(res => {
                 if(res.data.save)
 				    {this.setState({redirect:true})}
@@ -126,6 +126,12 @@ class AddProduct extends React.Component {
                                                         <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
                                                     </div>
                                                 </div>
+                                                {/* <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>Mô tả</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                    </div>
+                                                </div> */}
                                                 <div className="submit-section">
                                                     <button type="submit" className="btn btn-primary submit-btn">Thêm sản phẩm</button>
                                                 </div>
