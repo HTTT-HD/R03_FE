@@ -28,7 +28,7 @@ class AddProduct extends React.Component {
     handleSubmit(event) {
 		event.preventDefault();
 		console.log(this.state)
-		axios.post('http://localhost:3000/admin/product/add',this.state.data)
+		axios.post('http://localhost:3003/product',this.state.data)
 			.then(res => {
                 if(res.data.save)
 				    {this.setState({redirect:true})}
@@ -53,10 +53,10 @@ class AddProduct extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Thêm dịch vụ</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Thêm dịch vụ</h2>
+                                <h2 className="breadcrumb-title">Thêm sản phẩm</h2>
                             </div>
                         </div>
                     </div>
@@ -99,31 +99,31 @@ class AddProduct extends React.Component {
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Mã sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="idproduct"/>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id_sp"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Tên sản phẩm</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="name"/>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Giá sản phẩm (Ví dụ: 30.000 VND)</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="price"/>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="dongia"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
-                                                        <label>Thương hiệu</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="brand" />
+                                                        <label>Loại sản phẩm</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="loaisanpham" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Số lượng tồn</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="amount"/>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
                                                     </div>
                                                 </div>
                                                 <div className="submit-section">

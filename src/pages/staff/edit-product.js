@@ -17,7 +17,7 @@ class EditProduct extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            products: []
+            sanphams: []
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
@@ -25,13 +25,14 @@ class EditProduct extends React.Component {
 		localStorage.setItem("pro_id", value)
     }
     componentDidMount() {
-        fetch("http://localhost:3000/product")
+        fetch("http://localhost:3003/product/")
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result);
                     this.setState({
                         isLoaded: true,
-                        products: result.product
+                        sanphams: result.sanpham
                     });
                 },
                 (error) => {
@@ -54,10 +55,10 @@ class EditProduct extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Chỉnh sửa sản phẩm</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Quản lý sản phẩm</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Chỉnh sửa sản phẩm</h2>
+                                <h2 className="breadcrumb-title">Quản lý sản phẩm</h2>
                             </div>
                         </div>
                     </div>
@@ -81,28 +82,28 @@ class EditProduct extends React.Component {
                                     </Link>
                                     {/* product */}
                                     {
-                                        this.state.products.map(product => (
+                                        this.state.sanphams.map(sanpham => (
                                             <div className="appointment-list">
                                                 <div className="profile-info-widget">
                                                     <Link className="booking-doc-img">
-                                                        <img src={product.img} alt="User Image" />
+                                                        <img src={sanpham.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
-                                                        <h3>{`${product.name}`}</h3>
+                                                        <h3>{`${sanpham.tensanpham}`}</h3>
                                                         <div className="customer-details">
-                                                            <h5>Giá: {product.price}</h5>
-                                                            <h5>Thương hiệu: {product.brand}</h5>
-                                                            <h5>Số lượng tồn: {product.amount}</h5>
+                                                            <h5>Giá: {sanpham.dongia}</h5>
+                                                            <h5>Thương hiệu: {sanpham.loaisanpham}</h5>
+                                                            <h5>Số lượng tồn: {sanpham.soluong}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(product.idproduct)}>
+                                                    <button onClick={() => this.handleButtonClick(sanpham.id_sp)}>
                                                         <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
                                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                                         </Link>
                                                     </button>
-                                                    <button onClick={() => this.handleButtonClick(product.idproduct)}>
+                                                    <button onClick={() => this.handleButtonClick(sanpham.id_sp)}>
                                                         <Link to="/delete-product" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>

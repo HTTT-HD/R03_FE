@@ -23,13 +23,13 @@ class EditEditProduct extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch("http://localhost:3000/product")
+		fetch("http://localhost:3003/product")
 			.then(res => res.json())
 			.then(
 				(result) => {
 					this.setState({
 						isLoaded: true,
-						product: result.product
+						sanpham: result.sanpham
 					});
 				},
 				(error) => {
@@ -50,7 +50,7 @@ class EditEditProduct extends React.Component {
     handleSubmit(event) {
 		event.preventDefault();
 		//console.log(this.state)
-		axios.put('http://localhost:3000/admin/product/update',this.state.data)
+		axios.put('http://localhost:3003/product/',this.state.data)
 			.then(res => {
 				console.log(res.data)
 				if(res.data.save)
@@ -66,9 +66,9 @@ class EditEditProduct extends React.Component {
      	if (redirect) {
        		return <Redirect to='/edit-product'/>;
      	}
-        let {product} = this.state;
-        const pr=product.filter(item=>{
-            return item.idproduct == localStorage.getItem("pro_id")
+        let {sanpham} = this.state;
+        const pr=sanpham.filter(item=>{
+            return item.id_sp == localStorage.getItem("pro_id")
         })
         return (
             <div>

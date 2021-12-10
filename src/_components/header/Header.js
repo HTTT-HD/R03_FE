@@ -99,10 +99,10 @@ class Header extends React.Component {
 								<Link to="/">Trang chủ</Link>
 							</li>
 							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
-								<Link to="/stylist-dashboard">Nhân viên nail</Link>
+								<Link to="/stylist-dashboard">Admin</Link>
 							</li>
 							<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
-								<Link to="/staff-dashboard">Admin</Link>
+								<Link to="/staff-dashboard">Nhà cung cấp</Link>
 							</li>
 							<li className={`has-submenu ${pathname === ('/search') ? 'active' : pathname === ('/booking') ? 'active' : pathname === ('/customer-dashboard') ? 'active' : pathname === ('/login') ? 'active' : pathname === ('/register') ? 'active' : ''}`}>
 								<Link to="">Khách hàng <FontAwesomeIcon icon={faChevronDown} /></Link>
@@ -118,16 +118,6 @@ class Header extends React.Component {
 									</li>
 								</ul>
 							</li>
-							<li className={pathname === ('/blog-list') ? 'active' : ''}>
-								<Link to="/blog-list">Blog</Link>
-							</li>
-							<li className={pathname === ('/booking-service') ? 'active' : ''}>
-								<Link to="/booking-service">Dịch vụ</Link>
-							</li>
-							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
-								<Link to="/purchase-product">Sản phẩm</Link>
-							</li>
-
 							{(pathname === ('/') || pathname === ('login') ?
 								(
 									<li className={pathname === ('/login') ? 'active' : ''}>

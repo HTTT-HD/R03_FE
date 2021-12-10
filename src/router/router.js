@@ -43,10 +43,6 @@ import {
     AddService,
     EditEditService,
     DeleteService,
-    EditStylist,
-    DeleteStylist,
-    EditEditStylist,
-    AddStylist,
     PurchaseProduct,
     EditProduct,
     AddProduct,
@@ -123,10 +119,6 @@ class RouterComponent extends React.Component {
                         <Route path="/add-service" component={AddService} />
                         <Route path="/edit-edit-service" component={EditEditService} />
                         <Route path="/delete-service" component={DeleteService} />
-                        <Route path="/edit-stylist" component={EditStylist} />
-                        <Route path="/delete-stylist" component={DeleteStylist} />
-                        <Route path="/edit-edit-stylist" component={EditEditStylist} />
-                        <Route path="/add-stylist" component={AddStylist} />
                         <Route path="/purchase-product" component={PurchaseProduct} />
                         <Route path="/edit-product" component={EditProduct} />
                         <Route path="/add-product" component={AddProduct} />
