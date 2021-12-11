@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // const publicPath = '/';
-const publicPath = '/nailsalon/';
+const publicPath = '/rentalmarket/';
 
 module.exports = {
  mode: "development",
@@ -37,7 +37,7 @@ module.exports = {
       apiUrl: '',
       imageapiUrl: '',
       
-      publicPath : '/nailsalon'            
+      publicPath : '/rentalmarket'            
   })
 },
  output: {
@@ -121,7 +121,7 @@ performance: {
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         filename: "./index.html",
-        favicon: './public/favicon.ico'
+        favicon: './public/logo.ico'
       }),
         new MiniCssExtractPlugin({ // plugin for controlling how compiled css will be outputted and named
             filename: "css/[name].css",
