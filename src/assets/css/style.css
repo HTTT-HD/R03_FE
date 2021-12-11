@@ -1657,62 +1657,61 @@ button.bg-danger:hover {
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
-    background-color: #FDB7B7;
-
+    background-color: #EAE7DC;
 }
 .header {
 	position: sticky;
 	top: 0;
 	z-index: 1060;
-	background-color: #FDB7B7;
-	color: #000;
+	background-color: #EAE7DC;
+	color: #E98074;
 }
 .min-header .header-nav {
-    background-color: #FDB7B7;
+    background-color: #EAE7DC;
     border:none;
-	color: #000;
+	color: #E98074;
 
 }
 .header.min-header.nav-sticky {
 	position: sticky;
     top: 0;
-    background-color: #cc2d78;
+    background-color: #E98074;
 }
 .main-menu-wrapper {
     margin: 0;
     padding: 0;
-	color: #000;
+	color: #E98074;
 }
 .header-navbar-rht.menu-select {
     margin: 0;
     padding: 0;
     margin-left: 20px;
-    color: #000;
+    color: #E98074;
     font-size: 15px;
     font-weight: 600;
 }
 .min-header .header-navbar-rht.menu-select {
-	color: #000;
+	color: #E98074;
 }
 .header-navbar-rht.menu-select li {
 	cursor:pointer;
 }
 .min-header .main-nav li a {
-    color: #000;
+    color: #E98074;
 }
 .min-header .main-nav li a.dropdown-item {
-    color: #000;
+    color: #E98074;
     font-weight: 500;
 }
 .min-header .main-nav li a.dropdown-item:active {
-    color: #fff;
+    color: #8D8E8A;
     font-weight: 500;
 }
 .min-header .main-nav > li.active > a {
-    color: #fff;
+    color: #8D8E8A;
 }
 .min-header .main-nav > li.active > a:before {
-    background: #fff;
+    background: #8D8E8A;
     bottom: 25px;
     content: "";
     height: 2px;
@@ -1724,10 +1723,10 @@ button.bg-danger:hover {
 }
 .min-header .main-nav .log-select {
     background-color: #fff;
-    color: #cc2d78;
+    color: #E98074;
 }
 .main-nav .log-select {
-    background-color: #cc2d78;
+    background-color: #E98074;
     padding: 9px 7px !important;
     color: #fff;
     border-radius: 30px;
@@ -1739,12 +1738,12 @@ button.bg-danger:hover {
 }
 .min-header .main-nav .log-select svg {
     color: #fff;
-    background-color: #cc2d78;
+    background-color: #E98074;
 }
 .main-nav .log-select svg {
     border-radius: 50%;
     background-color: #fff;
-    color: #cc2d78;
+    color: #E98074;
     width: 22px !important;
     height: 22px;
     padding: 5px;
@@ -1756,7 +1755,7 @@ button.bg-danger:hover {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	background-color: #FDB7B7;
+	background-color: #EAE7DC;
 	border: 0;
 	border-bottom: 1px solid #f0f0f0;
 	display: -webkit-box;
@@ -1771,7 +1770,7 @@ button.bg-danger:hover {
 	height: 85px;
 	padding: 0 30px;
 	margin-bottom: 0;
-	color: #000;
+	color: #E98074;
 }
 .main-nav {
 	display: -webkit-box;
@@ -1780,12 +1779,12 @@ button.bg-danger:hover {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	background-color: #FDB7B7;
-	color: #000;
+	background-color: #EAE7DC;
+	color: #E98074;
 	
 }
 .main-nav > li.active > a {
-	color: #cc2d78;
+	color: #E98074;
 }
 .main-nav > li .submenu li a {
     display: block;
@@ -1793,7 +1792,7 @@ button.bg-danger:hover {
     clear: both;
     white-space: nowrap;
     font-size: 14px;
-    color: #2d3b48;
+    color: #E98074;
     -webkit-transition: all .35s ease;
     transition: all .35s ease;
 	width: 100%;
@@ -1838,14 +1837,14 @@ button.bg-danger:hover {
 	padding-left: 10px;
 }
 .header-contact-detail p.contact-header {
-	color: #484848;
+	color: #E98074;
 	font-size: 13px;
 	font-weight: 400;
 	margin-bottom: 2px;
 	text-align: left;
 }
 .header-contact-detail p.contact-info-header {
-	color: #000;
+	color: #E98074;
 	font-weight: 500;
 	font-size: 14px;
 	margin-bottom: 0;
@@ -1878,7 +1877,7 @@ button.bg-danger:hover {
 	display: inline-block;
 }
 .min-header .header-navbar-rht .add-cart, .menu-select.header-navbar-rht .add-cart {
-    background-color: #6d469c;
+    background-color: #E85A4F;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -1986,7 +1985,7 @@ button.bg-danger:hover {
 }
 .user-menu.nav > li > a:hover,
 .user-menu.nav > li > a:focus {
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: #E98074;
 }
 .user-menu.nav > li > a:hover i,
 .user-menu.nav > li > a:focus i {
@@ -2026,7 +2025,7 @@ button.bg-danger:hover {
     padding: 10px 15px;
 }
 .header-navbar-rht .dropdown-menu .dropdown-item:hover {
-    color: #cc2d78;
+    color: #E98074;
 }
 .user-header {
 	display: -webkit-box;
@@ -2121,7 +2120,7 @@ html.menu-opened body {
 -----------------------*/
 
 .footer {
-    background-color: #FDB7B7;
+    background-color: #E98074;
 	text-align: center;
 }
 .footer.footer-padding .footer-top {
@@ -2131,7 +2130,7 @@ html.menu-opened body {
 	padding: 40px 0;
 }
 .footer-title {
-    color: #000;
+    color: #EAE7DC;
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 30px;
@@ -2148,7 +2147,7 @@ html.menu-opened body {
 	margin-bottom: 30px;
 }
 .footer .footer-widget .footer-about-content p {
-	color: #000;
+	color: #EAE7DC;
 	font-size: 16px;
 	font-family: "Ubuntu",sans-serif;
 }
@@ -2163,7 +2162,7 @@ html.menu-opened body {
 	margin-bottom: 0;
 }
 .footer .footer-menu ul li a {
-	color: #000;
+	color: #EAE7DC;
 	font-family: "Ubuntu",sans-serif;
 	font-size: 16px;
 	position: relative;
@@ -2172,10 +2171,10 @@ html.menu-opened body {
 	transition: all 0.4s ease 0s;
 }
 .footer .footer-widget.footer-menu ul li a:hover {
-	color: #000;
+	color: #EAE7DC;
 }
 .footer-contact-info {
-	color: #000;
+	color: #EAE7DC;
 	font-size: 15px;
 }
 .footer-contact-info .footer-address {
@@ -2207,7 +2206,7 @@ html.menu-opened body {
 	transition: all 0.4s ease 0s;
 }
 .footer .footer-bottom .copyright-text p a:hover {
-	color: #000;
+	color: #8E8D8A;
 }
 .footer .footer-bottom .copyright-text p.title {
 	font-weight: 400;
@@ -2228,13 +2227,13 @@ html.menu-opened body {
 	margin-right: 0;
 }
 .footer .social-icon ul li a {	
-	color: #fff;
+	color: #E98074;
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;
 	font-size: 16px;
 	transition: all 0.4s ease 0s;
-	background-color: #6d469c;
+	background-color: #EAE7DC;
     width: 30px;
     height: 30px;
     border-radius: 50%;

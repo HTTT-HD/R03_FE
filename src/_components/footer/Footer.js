@@ -31,9 +31,9 @@ class Footer extends React.Component {
 							
 								{/* Footer Widget */}
 								<div className="footer-widget footer-about">
-									<h2 className="footer-title">Về chúng tôi</h2>
+									<h2 className="footer-title">About me</h2>
 									<div className="footer-about-content">
-										<p>Chào mừng bạn đến với Nàng Beauty, trải nghiệm làm đẹp hoàn toàn mới cho bộ móng cảu bạn. Một môi trường độc đáo để cho phép bạn trẻ hóa, thư giãn và bộc lộ biệu tượng bên trong của bạn. Chúng tôi tin rằng mọi người đều cảm thấy tuyệt vời trên bộ móng của chính mình. Phá bỏ truyền thống, chúng tôi đã tạo ra một không gian chào đón, an toàn và vui vẻ để kết nối lại với con người cửa bạn.</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 									</div>
 								</div>
 								{/* Footer Widget */}
@@ -46,12 +46,12 @@ class Footer extends React.Component {
 								<div className="footer-widget footer-menu">
 									<h2 className="footer-title">Quick Links</h2>
 									<ul>
-										<li>
+										{/* <li>
 											<Link to="/login">Đăng nhập</Link>
 										</li>
 										<li>
 											<Link to="/stylist-register">Đăng kí</Link>
-										</li>
+										</li> */}
 									</ul>
 								</div>
 								{/* Footer Widget */}
@@ -64,21 +64,21 @@ class Footer extends React.Component {
 								<div className="footer-widget footer-menu">
 									<h2 className="footer-title">Useful links</h2>
 									<ul>
-										<li>
+										{/* <li>
 											<Link to="/search">Tìm kiếm nhân viên nail</Link>
-										</li>
-										<li>
+										</li> */}
+										{/* <li>
 											<Link to="/login">Đăng nhập</Link>
 										</li>
 										<li>
 											<Link to="/stylist-register">Đăng kí</Link>
-										</li>
-										<li>
+										</li> */}
+										{/* <li>
 											<Link to="/booking">Booking</Link>
-										</li>
-										<li>
+										</li> */}
+										{/* <li>
 											<Link to="/customer-dashboard">Dashboard của khách hàng</Link>
-										</li>
+										</li> */}
 									</ul>
 								</div>
 								{/* Footer Widget */}
@@ -131,7 +131,7 @@ class Footer extends React.Component {
 							<div className="row">
 								<div className="col-md-12 col-lg-12">
 									<div className="copyright-text text-center">
-										<p className="mb-0">&copy; 2021 Nàng Beauty. Đã được đăng ký bản quyền.</p>
+										<p className="mb-0">&copy; 2021 Rental Market. Đã được đăng ký bản quyền.</p>
 									</div>
 								</div>
 							</div>

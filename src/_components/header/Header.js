@@ -121,68 +121,16 @@ class Header extends React.Component {
 							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
 								<Link to="/purchase-product">Sản phẩm</Link>
 							</li>
-							{(pathname === ('/') || pathname === ('login') ?
-								(
-									<li className={pathname === ('/login') ? 'active' : ''}>
-										<Link to="/login">Đăng nhập</Link>
-									</li>
-								) :
-								(
-									<li className="nav-item dropdown has-arrow logged-item user-listdrop">
-										<Dropdown>
-											<Dropdown.Toggle variant="light" id="dropdown-basic">
-												<span className="user-img">
-													<img className="rounded-circle" src={UserIcon} width="31" alt="Ryan Taylor" />
-												</span>
-											</Dropdown.Toggle>
-
-											<Dropdown.Menu>
-												<Dropdown.Item href="">
-													{/* <div className="user-header">
-													<div className="avatar avatar-sm">
-														<img src={UserIcon} alt="User Image" className="avatar-img rounded-circle" />
-													</div>
-													<div className="user-text">
-														<h6>Darren Elder</h6>
-														<p className="text-muted mb-0">Nhà tạo mẫu</p>
-													</div>
-												</div> */}
-													{
-														localStorage.getItem('user-info') ?
-															<>
-																<Link>
-																	<Link to="/booking-service">Đặt lịch</Link>
-																</Link>
-															</>
-															:
-															<>
-																<Link>
-																	<Link to="/login">Đăng nhập</Link>
-																	<Link to="/register">Đăng ký</Link>
-																	<Link to="/nail-salon" onClick={logOut}>Đăng xuất</Link>
-																</Link>
-															</>
-													}
-												</Dropdown.Item>
-												{localStorage.getItem('user-info') ?
-													<Nav>
-														<NavDropdown title={user && user.name}>
-															<NavDropdown.Item onClick={logOut}>Đăng xuất</NavDropdown.Item>
-														</NavDropdown>
-													</Nav>
-													: null
-												}
-											</Dropdown.Menu>
-										</Dropdown>
-									</li>
-								))}
+							
 						</ul>
 					</div>
 					<ul className="nav header-navbar-rht menu-select">
-						<li>
-							<Link to="/checkout" className="add-cart"><FontAwesomeIcon icon={faSearch} /></Link>
-						</li>
-						<li className="dropdown language-select">
+						{/* <li className={pathname === ('/login') ? 'active' : ''}>
+							<Link to="/login"><FontAwesomeIcon icon={faUser} /> Đăng nhập</Link>
+						</li> */}
+
+
+						{/* <li className="dropdown language-select">
 							<Dropdown>
 								<Dropdown.Toggle variant="light" id="dropdown-basic2">
 									<span>VIỆT NAM</span>
@@ -192,10 +140,67 @@ class Header extends React.Component {
 									<Dropdown.Item href="">English</Dropdown.Item>
 								</Dropdown.Menu>
 							</Dropdown>
-						</li>
+						</li> */}
 						<li>
 							<Link to="/checkout" className="add-cart"><FontAwesomeIcon icon={faShoppingCart} /></Link>
 						</li>
+						{(pathname === ('/') || pathname === ('login') ?
+							(
+								<li className={pathname === ('/login') ? 'active' : ''}>
+									<Link to="/login"><FontAwesomeIcon icon={faUser} /> Đăng nhập</Link>
+								</li>
+							) :
+							(
+								<li className="nav-item dropdown has-arrow logged-item user-listdrop">
+									<Dropdown>
+										<Dropdown.Toggle variant="light" id="dropdown-basic">
+											<span className="user-img">
+												<img className="rounded-circle" src={UserIcon} width="31" alt="Ryan Taylor" />
+											</span>
+										</Dropdown.Toggle>
+
+										<Dropdown.Menu>
+											<Dropdown.Item href="">
+												{/* <div className="user-header">
+													<div className="avatar avatar-sm">
+														<img src={UserIcon} alt="User Image" className="avatar-img rounded-circle" />
+													</div>
+													<div className="user-text">
+														<h6>Darren Elder</h6>
+														<p className="text-muted mb-0">Nhà tạo mẫu</p>
+													</div>
+												</div> */}
+												{
+													localStorage.getItem('user-info') ?
+														<>
+															<Link>
+																<Link to="/booking-service">Đặt lịch</Link>
+															</Link>
+														</>
+														:
+														<>
+															<Link>
+																<Link to="/login">Đăng nhập</Link>
+																<Link to="/register">Đăng ký</Link>
+																<Link to="/nail-salon" onClick={logOut}>Đăng xuất</Link>
+															</Link>
+														</>
+												}
+											</Dropdown.Item>
+											{localStorage.getItem('user-info') ?
+												<Nav>
+													<NavDropdown title={user && user.name}>
+														<NavDropdown.Item onClick={logOut}>Đăng xuất</NavDropdown.Item>
+													</NavDropdown>
+												</Nav>
+												: null
+											}
+										</Dropdown.Menu>
+									</Dropdown>
+
+								</li>
+							))
+						}
 					</ul>
 				</nav>
 			</header>
