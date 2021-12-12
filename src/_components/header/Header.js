@@ -98,11 +98,11 @@ class Header extends React.Component {
 							<li className={pathname === ('/') ? 'active' : ''}>
 								<Link to="/">Trang chủ</Link>
 							</li>
-							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
-								<Link to="/stylist-dashboard">Admin</Link>
-							</li>
 							<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
-								<Link to="/staff-dashboard">Nhà cung cấp</Link>
+								<Link to="/staff-dashboard">Admin</Link>
+							</li>
+							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
+								<Link to="/stylist-dashboard">Nhà cung cấp</Link>
 							</li>
 							<li className={`has-submenu ${pathname === ('/search') ? 'active' : pathname === ('/booking') ? 'active' : pathname === ('/customer-dashboard') ? 'active' : pathname === ('/login') ? 'active' : pathname === ('/register') ? 'active' : ''}`}>
 								<Link to="">Khách hàng <FontAwesomeIcon icon={faChevronDown} /></Link>
@@ -121,33 +121,18 @@ class Header extends React.Component {
 							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
 								<Link to="/purchase-product">Sản phẩm</Link>
 							</li>
-							
+
 						</ul>
 					</div>
 					<ul className="nav header-navbar-rht menu-select">
-						{/* <li className={pathname === ('/login') ? 'active' : ''}>
-							<Link to="/login"><FontAwesomeIcon icon={faUser} /> Đăng nhập</Link>
-						</li> */}
-
-
-						{/* <li className="dropdown language-select">
-							<Dropdown>
-								<Dropdown.Toggle variant="light" id="dropdown-basic2">
-									<span>VIỆT NAM</span>
-								</Dropdown.Toggle>
-
-								<Dropdown.Menu>
-									<Dropdown.Item href="">English</Dropdown.Item>
-								</Dropdown.Menu>
-							</Dropdown>
-						</li> */}
+						
 						<li>
 							<Link to="/checkout" className="add-cart"><FontAwesomeIcon icon={faShoppingCart} /></Link>
 						</li>
 						{(pathname === ('/') || pathname === ('login') ?
 							(
 								<li className={pathname === ('/login') ? 'active' : ''}>
-									<Link to="/login"><FontAwesomeIcon icon={faUser} /> Đăng nhập</Link>
+									<Link to="/login"><FontAwesomeIcon icon={faUser} /> Login/Register</Link>
 								</li>
 							) :
 							(
@@ -161,44 +146,29 @@ class Header extends React.Component {
 
 										<Dropdown.Menu>
 											<Dropdown.Item href="">
-												{/* <div className="user-header">
+												<div className="user-header">
 													<div className="avatar avatar-sm">
 														<img src={UserIcon} alt="User Image" className="avatar-img rounded-circle" />
 													</div>
 													<div className="user-text">
 														<h6>Darren Elder</h6>
-														<p className="text-muted mb-0">Nhà tạo mẫu</p>
+														<p className="text-muted mb-0">Stylist</p>
 													</div>
-												</div> */}
-												{
-													localStorage.getItem('user-info') ?
-														<>
-															<Link>
-																<Link to="/booking-service">Đặt lịch</Link>
-															</Link>
-														</>
-														:
-														<>
-															<Link>
-																<Link to="/login">Đăng nhập</Link>
-																<Link to="/register">Đăng ký</Link>
-																<Link to="/nail-salon" onClick={logOut}>Đăng xuất</Link>
-															</Link>
-														</>
-												}
+												</div>
 											</Dropdown.Item>
-											{localStorage.getItem('user-info') ?
-												<Nav>
-													<NavDropdown title={user && user.name}>
-														<NavDropdown.Item onClick={logOut}>Đăng xuất</NavDropdown.Item>
-													</NavDropdown>
-												</Nav>
-												: null
-											}
+											<Dropdown.Item href="/stylist-dashboard">
+												Dashboard
+											</Dropdown.Item>
+											<Dropdown.Item href="/stylist-profile-settings">
+												Profile Settings
+											</Dropdown.Item>
+											<Dropdown.Item href="/">
+												Logout
+											</Dropdown.Item>
 										</Dropdown.Menu>
 									</Dropdown>
-
 								</li>
+
 							))
 						}
 					</ul>

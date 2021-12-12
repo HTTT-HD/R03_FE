@@ -34,13 +34,13 @@ class StylistSidebar extends React.Component {
                                 <li>
                                     <Link to="/stylist-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
-                                        <span>Dashboard</span>
+                                        <span>Quản lí đơn hàng</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/my-customers">
                                         <FontAwesomeIcon icon={faUser} />
-                                        <span>Khách hàng của tôi</span>
+                                        <span>Quản lí hàng hóa</span>
                                     </Link>
                                 </li>
                                 <li>
@@ -49,12 +49,7 @@ class StylistSidebar extends React.Component {
                                         <span>Hóa đơn</span>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to="/reviews">
-                                        <FontAwesomeIcon icon={faStar} />
-                                        <span>Đánh giá</span>
-                                    </Link>
-                                </li>
+                               
                                 <li>
                                     <Link to="/stylist-profile-settings">
                                         <FontAwesomeIcon icon={faUserCog} />

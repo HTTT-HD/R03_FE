@@ -24,25 +24,43 @@ class StaffSidebar extends React.Component {
                                 <li>
                                     <Link to="/staff-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
-                                        <span>Dashboard</span>
+                                        <span>Quản lí tài khoản</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/edit-service">
                                         <FontAwesomeIcon icon={faShoppingCart} />
-                                        <span>Dịch vụ</span>
+                                        <span>Quản lí đối tác</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/edit-stylist">
                                         <FontAwesomeIcon icon={faAddressCard} />
-                                        <span>Nhân viên</span>
+                                        <span>Xét duyệt đăng kí bán hàng </span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/edit-product">
                                         <FontAwesomeIcon icon={faBoxOpen} />
-                                        <span>Sản phẩm</span>
+                                        <span>Tính tiền hoa hồng</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/edit-product">
+                                        <FontAwesomeIcon icon={faBoxOpen} />
+                                        <span>Thống kê mặt hàng thiết yếu </span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/edit-product">
+                                        <FontAwesomeIcon icon={faBoxOpen} />
+                                        <span>Thống kê nhu cầu thực phẩm cùng kỳ</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/edit-product">
+                                        <FontAwesomeIcon icon={faBoxOpen} />
+                                        <span>Thống kê khách hàng, shipper, cửa hàng ở các vùng đỏ vàng xanh</span>
                                     </Link>
                                 </li>
                                 <li>
