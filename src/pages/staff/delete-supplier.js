@@ -10,36 +10,43 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/fontawesome-free-solid';
 
-class DeleteProduct extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            data:"",
-            redirect:false
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
-   }
-   
-    handleSubmit(event) {
-        event.preventDefault();
-        //console.log(this.state)
-        axios.delete(`http://localhost:3003/product/del/${localStorage.getItem("pro_id")}`)
-            .then(res => {
-                console.log(res)
-                if(res.data=='True')
-                    {this.setState({redirect:true})}
-            })
-            .catch(error => {
-                console.log(error)
-            })
+class DeleteSupplier extends React.Component {
+
+     constructor(props) {
+     	super(props);
+     	this.state = {
+     		error: null,
+     		isLoaded: false,
+     		services: [],
+             data:"",
+             redirect:false
+     	}
+         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
+     handleSubmit(event) {
+     	event.preventDefault();
+     	//console.log(this.state)
+     	axios.post('http://localhost:3000/admin/service/del',localStorage.getItem("sv_id").toString())
+     		.then(res => {
+     			console.log(res.data)
+     			if(res.data.save)
+     			    {this.setState({redirect:true})}
+     		})
+     		.catch(error => {
+     			console.log(error)
+     		})
+     }
     render() {
         const { redirect } = this.state;
         if (redirect) {
-         	return <Redirect to='/edit-product'/>;
+         	return <Redirect to='/edit-service'/>;
         }
+        // let {services} = this.state;
+        // const sv=services.filter(item=>{
+        //     return item.idservice == localStorage.getItem("sv_id")
+        // })
+        // console.log(sv)
         return (
             <div>
                 {/* Breadcrumb */}
@@ -50,10 +57,10 @@ class DeleteProduct extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Xóa sản phẩm</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Xóa nhà cung cấp</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Xóa sản phẩm</h2>
+                                <h2 className="breadcrumb-title">Xóa nhà cung cấp</h2>
                             </div>
                         </div>
                     </div>
@@ -70,6 +77,7 @@ class DeleteProduct extends React.Component {
                                     <StaffSidebar />
                                 </div>
                                 {/* Profile Sidebar */}
+
                                 <div className="col-md-7 col-lg-8 col-xl-9">
                                     <div className="card">
                                         <div className="card-body">
@@ -80,8 +88,8 @@ class DeleteProduct extends React.Component {
                                                     <div className="card-body">
                                                         <div className="success-cont">
                                                             <FontAwesomeIcon icon={faQuestion} />
-                                                            <h3>Bạn chắc chắn xóa sản phẩm này không?</h3>
-                                                            <p>Nếu bạn nhấn "Xác nhận" thì sản phẩm này được xóa, nếu bạn muốn thêm lại sản phẩm thì vào phần "Chỉnh sửa sản phẩm" để thêm sản phẩm mới.</p>
+                                                            <h3>Bạn chắc chắn xóa nhà cung cấp này không?</h3>
+                                                            <p>Nếu bạn nhấn "Xác nhận" thì nhà cung cấp này được xóa, nếu bạn muốn thêm lại nhà cung cấp thì vào phần "Thêm nhà cung cấp" để thêm nhà cung cấp mới.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -103,4 +111,4 @@ class DeleteProduct extends React.Component {
         )
     }
 }
-export { DeleteProduct };
+export { DeleteSupplier };

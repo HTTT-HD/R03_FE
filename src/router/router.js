@@ -33,10 +33,7 @@ import {
     PaymentGuide,
     BookingStylist,
     StaffChangePassword,
-    EditService,
     AddService,
-    EditEditService,
-    DeleteService,
     PurchaseProduct,
     EditProduct,
     AddProduct,
@@ -48,7 +45,9 @@ import {
     XetDuyetDangKiBanHang, 
     ManageSupplier,
     ManageShipper, 
-    ManageCustomer
+    ManageCustomer,
+    AddSupplier,
+    DeleteSupplier
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -108,10 +107,7 @@ class RouterComponent extends React.Component {
                         <Route path="/Payment-Guide" component={PaymentGuide} />
                         <Route path="/booking-stylist" component={BookingStylist} />
                         <Route path="/staff-change-password" component={StaffChangePassword} />
-                        <Route path="/edit-service" component={EditService} />
                         <Route path="/add-service" component={AddService} />
-                        <Route path="/edit-edit-service" component={EditEditService} />
-                        <Route path="/delete-service" component={DeleteService} />
                         <Route path="/purchase-product" component={PurchaseProduct} />
                         <Route path="/edit-product" component={EditProduct} />
                         <Route path="/add-product" component={AddProduct} />
@@ -122,7 +118,9 @@ class RouterComponent extends React.Component {
                         <Route path="/cancel-booking" component={CancelBooking} />
                         <Route path="/Xetduyetdkbanhang" component={XetDuyetDangKiBanHang} />
                         <Route path="/manage-supplier" component={ManageSupplier} />
+                        <Route path="/add-supplier" component={AddSupplier} />
                         <Route path="/manage-shipper" component={ManageShipper} />
+                        <Route path="/delete-supplier" component={DeleteSupplier} />
                         <Route path="/manage-customer" component={ManageCustomer} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />

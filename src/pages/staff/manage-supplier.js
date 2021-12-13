@@ -73,7 +73,7 @@ class ManageSupplier extends React.Component {
                             </div>
                             <div className="col-md-7 col-lg-8 col-xl-9">
                                 <div className="appointments">
-                                    <Link to="/add-product">
+                                    <Link to="/add-supplier">
                                         <h4 className="card-title d-flex justify-content-between">
                                             <a className="edit-link">
                                                 <FontAwesomeIcon icon={faPlusCircle} className="mr-1" />Thêm khách hàng</a>
@@ -96,8 +96,8 @@ class ManageSupplier extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
-                                                        <Link to="/delete-product" className="btn btn-sm bg-danger-light">
+                                                    <button onClick={() => this.handleButtonClick(nguoiban.manguoiban)}>
+                                                        <Link to="/delete-supplier" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>
                                                     </button>

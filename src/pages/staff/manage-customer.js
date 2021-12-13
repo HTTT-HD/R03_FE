@@ -54,10 +54,10 @@ class ManageCustomer extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Quản lý người giao hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Quản lý khách hàng</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Quản lý người giao hàng</h2>
+                                <h2 className="breadcrumb-title">Quản lý khách hàng</h2>
                             </div>
                         </div>
                     </div>
