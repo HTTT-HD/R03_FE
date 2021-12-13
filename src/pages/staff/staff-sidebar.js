@@ -25,6 +25,12 @@ class StaffSidebar extends React.Component {
                                 <li>
                                     <Link to="/staff-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
+                                        <span>Dashboard</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/staff-dashboard">
+                                        <FontAwesomeIcon icon={faColumns} />
                                         <span>Quản lí tài khoản</span>
                                     </Link>
                                 </li>

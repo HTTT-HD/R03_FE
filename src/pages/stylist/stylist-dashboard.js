@@ -7,10 +7,6 @@ import { StylistSidebar } from './stylist-sidebar';
 // Import Components
 import { Tabs, Tab } from "react-bootstrap";
 
-// Import Images
-import ImgIcon1 from '../../assets/img/icon-01.png';
-import ImgIcon2 from '../../assets/img/icon-02.png';
-import ImgIcon3 from '../../assets/img/icon-03.png';
 import UserAvatar from '../../assets/img/customers/customer.jpg';
 
 // Import Icons
@@ -71,9 +67,6 @@ class StylistDashboard extends React.Component {
 													</div>
 													<div className="col-md-12 col-lg-4">
 														<div className="dash-widget dct-border-rht">
-															<div className="circle-bar circle-bar2">
-																<img src={ImgIcon2} className="img-fluid" alt="Student" />
-															</div>
 															<div className="dash-widget-info">
 																<h6>Khách hàng hôm nay</h6>
 																<h3>160</h3>
@@ -132,21 +125,15 @@ class StylistDashboard extends React.Component {
 														</div>
 													</div>
 												</Tab>
-												
 											</Tabs>
 										</div>
 									</div>
-									
 								</div>
-							
 							</div>
-							
 						</div>
-
 					</div>
 				</div>		
 				{/* Page Content */}
-
 			</div>
         )
     }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Dropdown, NavDropdown, Nav } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faShoppingCart, faTimes, faUser } from '@fortawesome/fontawesome-free-solid';
+import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 
 class PurchaseProduct extends React.Component {
 
@@ -138,13 +138,6 @@ class PurchaseProduct extends React.Component {
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="doc-info-right">
-                                                        <div className="clinic-booking">
-                                                            <button onClick={() => this.handleOrder(product)}>
-                                                                <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>

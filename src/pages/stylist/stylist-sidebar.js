@@ -10,7 +10,7 @@ import { faCalendarCheck, faColumns, faComments, faFileAlt, faHourglassStart, fa
 
 class StylistSidebar extends React.Component {
     render() {
-        return(
+        return (
             <div>
                 {/* Profile Sidebar */}
                 <div className="profile-sidebar">
@@ -21,7 +21,7 @@ class StylistSidebar extends React.Component {
                             </Link>
                             <div className="profile-det-info">
                                 <h3>Urban Mauldin</h3>
-                                
+
                                 <div className="customer-details">
                                     <h5 className="mb-0">Glitter Nail Art</h5>
                                 </div>
@@ -49,7 +49,7 @@ class StylistSidebar extends React.Component {
                                         <span>Hóa đơn</span>
                                     </Link>
                                 </li>
-                               
+
                                 <li>
                                     <Link to="/stylist-profile-settings">
                                         <FontAwesomeIcon icon={faUserCog} />

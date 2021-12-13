@@ -58,18 +58,16 @@ class StaffDashboard extends React.Component {
 								<nav aria-label="breadcrumb" className="page-breadcrumb">
 									<ol className="breadcrumb">
 										<li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-										<li className="breadcrumb-item active" aria-current="page">Quản lí tài khoản</li>
+										<li className="breadcrumb-item active" aria-current="page">Dashboard</li>
 									</ol>
 								</nav>
-								<h2 className="breadcrumb-title">Quản lí tài khoản</h2>
+								<h2 className="breadcrumb-title">Dashboard</h2>
 							</div>
 						</div>
 					</div>
 				</div>
 				{/* Breadcrumb */}
-
 				{/* Page Content */}
-
 				<div className="content">
 					<div className="container">
 						<div className="row">
@@ -79,64 +77,182 @@ class StaffDashboard extends React.Component {
 							<div className="col-md-7 col-lg-8 col-xl-9">
 								<div className="row">
 									<div className="col-md-12">
-										{/* <h4 className="mb-4">Lịch hẹn khách hàng</h4> */}
-										{/* <div className="appointment-tab"> */}
-											{/* <Tabs defaultActiveKey="upcoming" id="uncontrolled-tab-example">
-												<Tab eventKey="upcoming" title="Sắp tới"> */}
-
-			
+										<div className="card dash-card">
+											<div className="card-body">
+												<div className="row">
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng đối tác</h6>
+																<h3>1500</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Đối tác hôm nay</h6>
+																<h3>1500</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Khách hàng hôm nay</h6>
+																<h3>160</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-md-12">
+										<div className="card dash-card">
+											<div className="card-body">
+												<div className="row">
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng lợi nhuận</h6>
+																<h3>12.000.000VND</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng lợi nhuận từ khách hàng</h6>
+																<h3>10.000.000</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng lợi nhuận từ giao hàng</h6>
+																<h3>2.000.000</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-md-12">
+										<div className="card dash-card">
+											<div className="card-body">
+												<div className="row">
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng đơn hàng</h6>
+																<h3>3000</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng đơn hàng thành công</h6>
+																<h3>1000</h3>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-12 col-lg-4">
+														<div className="dash-widget dct-border-rht">
+															<div className="dash-widget-info">
+																<h6>Tổng đơn hàng bị hủy</h6>
+																<h3>2000</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-md-12">
+										<h4 className="mb-4">Top khách hàng mua nhiều nhất</h4>
+										<div className="appointment-tab">
 											<div className="card card-table mb-0">
 												<div className="card-body">
 													<div className="table-responsive">
 														<table className="table table-hover table-center mb-0">
 															<thead>
 																<tr>
-																	<th>Username</th>
-																	<th>Email</th>
-																	<th className="text-center">Role</th>
-																	<th className="text-center">Last Update</th>
-																	<th className="text-center">Action</th>
+																	<th>Tên khách hàng</th>
+																	<th className="text-center">Tổng tiền đã mua</th>
 																	<th></th>
 																</tr>
 															</thead>
-															{
-																this.state.appointment.map(item =>
-																	<tbody>
-																		<tr>
-																			<td>
-																				<h2 className="table-avatar">
-																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																					<Link to="/customer-profile">{item.cus[0].name} <span>{item.ida}</span></Link>
-																				</h2>
-																			</td>
-																			<td>{item.date_reserved} <span className="d-block text-info">{item.start_time + ':00'}</span></td>
-																			<td className="text-center">{item.price}</td>
-																			<td className="text-center">{item.status}</td>
-																			<td className="text-right">
-																				<div className="table-action">
-		
-																					<button onClick={() => this.handleButtonClick(item.ida + " Xác nhận")}>
-																						<Link to="/accept" className="btn btn-sm bg-success-light mr-1">
-																							<FontAwesomeIcon icon={faEdit} /> Chỉnh sửa
-																						</Link>
-																					</button>
-																					<button onClick={() => this.handleButtonClick(item.ida + " Hủy")}>
-																						<Link to="/cancel" className="btn btn-sm bg-danger-light">
-																							<FontAwesomeIcon icon={faTimes} /> Xóa
-																						</Link>
-																					</button>
-																				</div>
-																			</td>
-																		</tr>
-																	</tbody>
-																)}
+															<tbody>
+																<tr>
+																	<td>
+																		<h2 className="table-avatar">
+																			<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
+																			<Link to="/customer-profile">Gordan Whelan <span>#PT0016</span></Link>
+																		</h2>
+																	</td>
+																	<td className="text-center">5.000.000VND</td>
+																	<td className="text-right">
+																		<div className="table-action">
+																			<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
+																				<FontAwesomeIcon icon={faEye} /> Xem
+																			</Link>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
 														</table>
 													</div>
 												</div>
 											</div>
-											{/* </Tab>
-											</Tabs> */}
-										{/* </div> */}
+										</div>
+										<h4 className="mb-4">Top đối tác bán chạy nhất</h4>
+										<div className="appointment-tab">
+											<div className="card card-table mb-0">
+												<div className="card-body">
+													<div className="table-responsive">
+														<table className="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Tên đối tác</th>
+																	<th>Tên cửa tiệm</th>
+																	<th className="text-center">Tổng tiền đã thu</th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>
+																		<h2 className="table-avatar">
+																			<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
+																			<Link to="/customer-profile">Gordan Whelan <span>#PT0016</span></Link>
+																		</h2>
+																	</td>
+																	<td className="text-center">A lo</td>
+																	<td className="text-center">5.000.000VND</td>
+																	<td className="text-right">
+																		<div className="table-action">
+																			<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
+																				<FontAwesomeIcon icon={faEye} /> Xem
+																			</Link>
+																		</div>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
