@@ -15,7 +15,7 @@ import UserAvatar from '../../assets/img/customers/customer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEdit, faEye, faSearch, faTimes } from '@fortawesome/fontawesome-free-solid';
 
-class StaffDashboard extends React.Component {
+class XetDuyetDangKiBanHang extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -84,17 +84,16 @@ class StaffDashboard extends React.Component {
 											{/* <Tabs defaultActiveKey="upcoming" id="uncontrolled-tab-example">
 												<Tab eventKey="upcoming" title="Sắp tới"> */}
 
-			
+	
 											<div className="card card-table mb-0">
 												<div className="card-body">
 													<div className="table-responsive">
 														<table className="table table-hover table-center mb-0">
 															<thead>
 																<tr>
-																	<th>Username</th>
-																	<th>Email</th>
-																	<th className="text-center">Role</th>
-																	<th className="text-center">Last Update</th>
+																	<th>Tên Khách Hàng</th>
+																	<th>Loại Sản Phẩm</th>
+                                                                    <th className="text-center">Trạng Thái</th>
 																	<th className="text-center">Action</th>
 																	<th></th>
 																</tr>
@@ -148,4 +147,4 @@ class StaffDashboard extends React.Component {
 		)
 	}
 }
-export { StaffDashboard };
+export { XetDuyetDangKiBanHang };

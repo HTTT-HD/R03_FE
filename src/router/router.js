@@ -45,7 +45,8 @@ import {
     DeleteProduct,
     Accept,
     Cancel, 
-    CancelBooking
+    CancelBooking,
+    XetDuyetDangKiBanHang
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -118,6 +119,7 @@ class RouterComponent extends React.Component {
                         <Route path="/accept" component={Accept} />
                         <Route path="/cancel" component={Cancel} />
                         <Route path="/cancel-booking" component={CancelBooking} />
+                        <Route path="/Xetduyetdkbanhang" component={XetDuyetDangKiBanHang} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    

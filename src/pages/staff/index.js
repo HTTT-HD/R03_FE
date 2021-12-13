@@ -10,3 +10,4 @@ export * from './delete-product';
 export * from './accept';
 export * from './cancel';
 export * from './my-customers';
+export * from './Xetduyetdkbanhang';
