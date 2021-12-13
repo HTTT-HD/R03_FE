@@ -47,7 +47,9 @@ import {
     ManageShipper, 
     ManageCustomer,
     AddSupplier,
-    DeleteSupplier
+    DeleteSupplier, 
+    AddShipper,
+    DeleteShipper
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -120,6 +122,8 @@ class RouterComponent extends React.Component {
                         <Route path="/manage-supplier" component={ManageSupplier} />
                         <Route path="/add-supplier" component={AddSupplier} />
                         <Route path="/manage-shipper" component={ManageShipper} />
+                        <Route path="/add-shipper" component={AddShipper} />
+                        <Route path="/delete-shipper" component={DeleteShipper} />
                         <Route path="/delete-supplier" component={DeleteSupplier} />
                         <Route path="/manage-customer" component={ManageCustomer} />
                     </Switch>
