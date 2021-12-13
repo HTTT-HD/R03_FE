@@ -29,15 +29,21 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/staff-dashboard">
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <span>Quản lí tài khoản</span>
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link to="/manage-supplier">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí đối tác</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/manage-shipper">
+                                        <FontAwesomeIcon icon={faUser} />
+                                        <span>Quản lí người giao hàng</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/manage-customer">
+                                        <FontAwesomeIcon icon={faUser} />
+                                        <span>Quản lí khách hàng</span>
                                     </Link>
                                 </li>
                                 <li>

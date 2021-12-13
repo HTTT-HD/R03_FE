@@ -10,4 +10,6 @@ export * from './delete-product';
 export * from './accept';
 export * from './cancel';
 export * from './manage-supplier';
+export * from './manage-shipper';
+export * from './manage-customer';
 export * from './Xetduyetdkbanhang';

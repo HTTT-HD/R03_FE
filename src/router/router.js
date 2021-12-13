@@ -46,7 +46,9 @@ import {
     Cancel, 
     CancelBooking,
     XetDuyetDangKiBanHang, 
-    ManageSupplier
+    ManageSupplier,
+    ManageShipper, 
+    ManageCustomer
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -120,6 +122,8 @@ class RouterComponent extends React.Component {
                         <Route path="/cancel-booking" component={CancelBooking} />
                         <Route path="/Xetduyetdkbanhang" component={XetDuyetDangKiBanHang} />
                         <Route path="/manage-supplier" component={ManageSupplier} />
+                        <Route path="/manage-shipper" component={ManageShipper} />
+                        <Route path="/manage-customer" component={ManageCustomer} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    
