@@ -30,12 +30,12 @@ class StaffSidebar extends React.Component {
                                 </li>
                                 <li>
                                     <Link to="/staff-dashboard">
-                                        <FontAwesomeIcon icon={faColumns} />
+                                        <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí tài khoản</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/my-customers">
+                                    <Link to="/manage-supplier">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí đối tác</span>
                                     </Link>

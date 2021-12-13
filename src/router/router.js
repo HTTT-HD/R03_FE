@@ -26,7 +26,6 @@ import {
     ProfileSettings,
     CustomerDashboard,
     CustomerProfile,  
-    CRUDCustomer,
     StylistList,
     Calendar,
     BookingService,
@@ -46,7 +45,8 @@ import {
     Accept,
     Cancel, 
     CancelBooking,
-    XetDuyetDangKiBanHang
+    XetDuyetDangKiBanHang, 
+    ManageSupplier
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -100,7 +100,6 @@ class RouterComponent extends React.Component {
                         <Route path="/profile-settings" component={ProfileSettings} />
                         <Route path="/customer-dashboard" component={CustomerDashboard} />
                         <Route path="/customer-profile" component={CustomerProfile} />
-                        <Route path="/my-customers" component={CRUDCustomer} />
                         <Route path="/map-list" component={StylistList} />       
                         <Route path="/booking-service" component={BookingService} />
                         <Route path="/staff-dashboard" component={StaffDashboard} />
@@ -120,6 +119,7 @@ class RouterComponent extends React.Component {
                         <Route path="/cancel" component={Cancel} />
                         <Route path="/cancel-booking" component={CancelBooking} />
                         <Route path="/Xetduyetdkbanhang" component={XetDuyetDangKiBanHang} />
+                        <Route path="/manage-supplier" component={ManageSupplier} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    

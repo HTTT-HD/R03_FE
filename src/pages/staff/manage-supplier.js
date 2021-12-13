@@ -8,9 +8,8 @@ import { StaffSidebar } from './staff-sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faEdit, faPlusCircle , faStar } from '@fortawesome/fontawesome-free-solid';
 
-import UserImg from '../../assets/img/customers/customer.jpg';
 
-class CRUDCustomer extends React.Component {
+class ManageSupplier extends React.Component {
 
     constructor(props) {
         super(props);
@@ -93,17 +92,10 @@ class CRUDCustomer extends React.Component {
                                                         <div className="customer-details">
                                                             <h5>SDT: {nguoiban.sdt}</h5>
                                                             <h5>Địa chỉ: {nguoiban.diachi}</h5>
-                                                            <h5>Tên đăng nhập: {nguoiban.tendangnhap}</h5>
-                                                            <h5>Mật khẩu: {nguoiban.matkhau}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
-                                                        <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
-                                                            <FontAwesomeIcon icon={faEdit} /> Sửa
-                                                        </Link>
-                                                    </button>
                                                     <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
                                                         <Link to="/delete-product" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
@@ -124,4 +116,4 @@ class CRUDCustomer extends React.Component {
         )
     }
 }
-export { CRUDCustomer };
+export { ManageSupplier };

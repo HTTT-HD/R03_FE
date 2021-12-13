@@ -9,5 +9,5 @@ export * from './edit-edit-product';
 export * from './delete-product';
 export * from './accept';
 export * from './cancel';
-export * from './my-customers';
+export * from './manage-supplier';
 export * from './Xetduyetdkbanhang';
