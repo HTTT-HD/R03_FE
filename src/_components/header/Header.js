@@ -121,14 +121,9 @@ class Header extends React.Component {
 							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
 								<Link to="/purchase-product">Sản phẩm</Link>
 							</li>
-
 						</ul>
 					</div>
 					<ul className="nav header-navbar-rht menu-select">
-						
-						<li>
-							<Link to="/checkout" className="add-cart"><FontAwesomeIcon icon={faShoppingCart} /></Link>
-						</li>
 						{(pathname === ('/') || pathname === ('login') ?
 							(
 								<li className={pathname === ('/login') ? 'active' : ''}>
