@@ -42,14 +42,14 @@ import {
     Accept,
     Cancel, 
     CancelBooking,
-    XetDuyetDangKiBanHang, 
     ManageSupplier,
     ManageShipper, 
     ManageCustomer,
     AddSupplier,
     DeleteSupplier, 
     AddShipper,
-    DeleteShipper
+    DeleteShipper,
+    DeleteCustomer
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -118,7 +118,6 @@ class RouterComponent extends React.Component {
                         <Route path="/accept" component={Accept} />
                         <Route path="/cancel" component={Cancel} />
                         <Route path="/cancel-booking" component={CancelBooking} />
-                        <Route path="/Xetduyetdkbanhang" component={XetDuyetDangKiBanHang} />
                         <Route path="/manage-supplier" component={ManageSupplier} />
                         <Route path="/add-supplier" component={AddSupplier} />
                         <Route path="/manage-shipper" component={ManageShipper} />
@@ -126,6 +125,7 @@ class RouterComponent extends React.Component {
                         <Route path="/delete-shipper" component={DeleteShipper} />
                         <Route path="/delete-supplier" component={DeleteSupplier} />
                         <Route path="/manage-customer" component={ManageCustomer} />
+                        <Route path="/delete-customer" component={DeleteCustomer} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    

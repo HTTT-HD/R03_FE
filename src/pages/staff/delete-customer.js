@@ -10,7 +10,7 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/fontawesome-free-solid';
 
-class DeleteShipper extends React.Component {
+class DeleteCustomer extends React.Component {
 
      constructor(props) {
      	super(props);
@@ -57,10 +57,10 @@ class DeleteShipper extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Xóa người giao hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Xóa khách hàng</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Xóa người giao hàng</h2>
+                                <h2 className="breadcrumb-title">Xóa khách hàng</h2>
                             </div>
                         </div>
                     </div>
@@ -88,8 +88,8 @@ class DeleteShipper extends React.Component {
                                                     <div className="card-body">
                                                         <div className="success-cont">
                                                             <FontAwesomeIcon icon={faQuestion} />
-                                                            <h3>Bạn chắc chắn xóa người giao hàng này không?</h3>
-                                                            <p>Nếu bạn nhấn "Xác nhận" thì người giao hàng này được xóa, nếu bạn muốn thêm lại người giao hàng thì vào phần "Thêm người giao hàng" để thêm người giao hàng mới.</p>
+                                                            <h3>Bạn chắc chắn xóa khách hàng này không?</h3>
+                                                            <p>Nếu bạn nhấn "Xác nhận" thì khách hàng này được xóa, nếu bạn muốn thêm lại nkhách hàng thì vào phần "Thêm khách hàng" để thêm khách hàng mới.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,4 +111,4 @@ class DeleteShipper extends React.Component {
         )
     }
 }
-export { DeleteShipper };
+export { DeleteCustomer };

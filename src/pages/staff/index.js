@@ -9,4 +9,4 @@ export * from './manage-shipper';
 export * from './add-shipper';
 export * from './delete-shipper';
 export * from './manage-customer';
-export * from './Xetduyetdkbanhang';
+export * from './delete-customer';

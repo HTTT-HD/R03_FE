@@ -47,12 +47,6 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/Xetduyetdkbanhang">
-                                        <FontAwesomeIcon icon={faAddressCard} />
-                                        <span>Xét duyệt đăng kí bán hàng </span>
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link to="/">
                                         <FontAwesomeIcon icon={faMoneyBillAlt} />
                                         <span>Tính tiền hoa hồng</span>
