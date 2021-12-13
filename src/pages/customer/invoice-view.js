@@ -18,20 +18,23 @@ class InvoiceView extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/invoice/${localStorage.getItem("id_app")}`)
+        fetch('http://localhost:3003/order/')
             .then(response => response.json())
             .then(data => 
 				{
-				
+					console.log(data)
 					//adding none zero value 
 					let total = 0 ;
-					for(let i = 0 ; i < data.sv.length ; i++)
+					let count = 0;
+					for(let i = 0 ; i < data[0].sanpham.length ; i++)
 					{
-						total += +data.sv[i].price//+ => convert string to int
+						count = data[0].sanpham[i].soluong;
+						total += data[0].sanpham[i].dongia*count//+ => convert string to in
 					}
 					
 					// adding zero value to total
-					let money =  data.sv[0].price; 
+					/*
+					let money =  data[0].sanpham[0].dongia; 
 					let count = 1;
 					for(let i = money.length - 1 ; i >= 0 ; i--)
 					{
@@ -45,15 +48,15 @@ class InvoiceView extends React.Component {
 						}
 					}
 
-					total = total*count;
+					total = total*count;*/
 					total = new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total)
 
 					this.setState(
 						{
-						oderid: data.invoice.ida, 
-						name: data.cus[0].name,
-						date_cre: data.invoice.date_created,
-						service:data.sv,
+						//oderid: data., 
+						//name: data.cus[0].name,
+						date_cre: data[0].ngaydat,
+						service:data[0].sanpham,
 						total: total
 						})	
 				
@@ -106,10 +109,10 @@ class InvoiceView extends React.Component {
 												<div className="invoice-info">
 													<strong className="customer-text">Phương thức thanh toán</strong>
 													<p className="invoice-details invoice-details-two">Thanh toán tại cửa hàng </p>
-													<p className="invoice-details invoice-details-two">	Order: {this.state.oderid}</p> 
-													<p className="invoice-details invoice-details-two">	Issued: {this.state.date_cre} </p>
+													<p className="invoice-details invoice-details-two">	Order: </p> 
+													<p className="invoice-details invoice-details-two">	Issued:  </p>
 													<p className="invoice-details invoice-details-two">	Invoice From: Nàng Beauty </p>
-													<p className="invoice-details invoice-details-two">	Invoice To: {this.state.name} </p>
+													<p className="invoice-details invoice-details-two">	Invoice To:  </p>
 													
 												</div>
 											</div>
@@ -125,10 +128,10 @@ class InvoiceView extends React.Component {
 													<table className="invoice-table table table-bordered">
 														<thead>
 															<tr>
-																<th>Dịch vụ</th>
+																<th>Sản phẩm</th>
 																
-																<th className="text-center">VAT</th>
-																<th className="text-right">Tổng</th>
+																<th className="text-center">Số lượng</th>
+																<th className="text-right">Đơn giá</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -138,12 +141,12 @@ class InvoiceView extends React.Component {
 
 																	<td>
 																		<span>
-																			{service.name}
+																			{service.tensanpham}
 																		</span>
 																	</td>
 																	
-																	<td className="text-center">0</td>
-																	<td className="text-right">{service.price}</td>
+																	<td className="text-center">{service.soluong}</td>
+																	<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia)+'VNĐ'}</td>
 																</tr>
 																)
 																
@@ -160,7 +163,7 @@ class InvoiceView extends React.Component {
 														<tbody>
 														<tr>
 															<th>Tổng tạm tính:</th>
-															<td><span>{this.state.total}</span></td>
+															<td><span>{this.state.total+'VNĐ'}</span></td>
 														</tr>
 													
 														</tbody>

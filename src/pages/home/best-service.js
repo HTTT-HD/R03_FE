@@ -38,13 +38,13 @@ class BestService extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3000/")
+		fetch("http://localhost:3003/product/")
 			.then(res => res.json())
 			.then(
 				(result) => {
 					this.setState({
 						isLoaded: true,
-						services: result.service
+						services: result
 					});
 				},
 				(error) => {
@@ -100,212 +100,32 @@ class BestService extends React.Component {
 							<div className="row row-grid">
 								<div className="col-md-6 col-lg-5 col-xl-3">
 									<div className="card widget-profile pat-widget-profile">
+									{this.state.services.map(item=>(
 										<div className="card-body">
 											<div className="pro-widget-content">
 												<div className="profile-info-widget">
 													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
+														<img src={item.img} alt="User Image" />
 													</Link>
 													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
+														<h3><Link to="/customer-profile"></Link>{item.tensanpham}</h3>
 													</div>
 												</div>
 											</div>
 											<div className="customer-info">
 												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
+													<li>Số lượng <span>{item.soluong}</span></li>
+													<li>Đơn giá <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.dongia)+'VNĐ'}</span></li>
+													<li>Loại sản phẩm <span>{item.loaisanpham}</span></li>
 												</ul>
 											</div>
 										</div>
+									))}
 									</div>
 								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={CustomerImg} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile">Gordan Whelan</Link></h3>
-
-														<div className="customer-details">
-															<h5><b>ID khách hàng :</b> P0016</h5>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>SDT <span>+1 952 001 8563</span></li>
-													<li>Tuổi <span>38 Years, Male</span></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
+								
+								
+								
 							</div>
 						</div>
 						<Slider {...settings} className="stylist-slider">

@@ -282,7 +282,10 @@ table.table td h2 span {
 	border-color: rgba(0, 0, 0, 0.05);
 }
 .card-table .card-body {
+	display: inline-block;
     padding: 0;
+	text-align: center;
+
 }
 .card-table .card-body .table > thead > tr > th {
     border-top: 0;

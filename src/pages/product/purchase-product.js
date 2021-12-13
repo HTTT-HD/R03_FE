@@ -50,7 +50,7 @@ class PurchaseProduct extends React.Component {
 		}
 	}
     render() {
-        // console.log(this.state.order);
+        console.log(this.state.order);
         return (
             <div>
                 <form action="/booking-stylist" method="POST" onSubmit={this.handleSubmit}>
@@ -138,6 +138,13 @@ class PurchaseProduct extends React.Component {
                                                                     </ul>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="doc-info-right">
+                                                        <div className="clinic-booking">
+                                                            <button onClick={() => this.handleOrder(sanpham)}>
+                                                                <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
