@@ -38,7 +38,7 @@ class StylistSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/my-customers">
+                                    <Link to="/edit-product">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí hàng hóa</span>
                                     </Link>

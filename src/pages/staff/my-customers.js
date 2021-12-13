@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 // Import Sidebar
-import { StylistSidebar } from './stylist-sidebar';
+import { StaffSidebar } from './staff-sidebar';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -70,7 +70,7 @@ class CRUDCustomer extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                                <StylistSidebar />
+                                <StaffSidebar />
                             </div>
                             <div className="col-md-7 col-lg-8 col-xl-9">
                                 <div className="appointments">

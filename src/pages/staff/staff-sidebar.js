@@ -28,7 +28,7 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/edit-service">
+                                    <Link to="/my-customers">
                                         <FontAwesomeIcon icon={faShoppingCart} />
                                         <span>Quản lí đối tác</span>
                                     </Link>
@@ -40,7 +40,7 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/edit-product">
+                                    <Link to="/">
                                         <FontAwesomeIcon icon={faBoxOpen} />
                                         <span>Tính tiền hoa hồng</span>
                                     </Link>

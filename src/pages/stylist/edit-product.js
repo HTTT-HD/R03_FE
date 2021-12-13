@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 // Import Sidebar
-import { StaffSidebar } from './staff-sidebar';
+import { StylistSidebar } from './stylist-sidebar';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -69,7 +69,7 @@ class EditProduct extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                                <StaffSidebar />
+                                <StylistSidebar />
                             </div>
                             <div className="col-md-7 col-lg-8 col-xl-9">
                                 <div className="appointments">
