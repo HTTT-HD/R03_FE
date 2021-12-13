@@ -62,10 +62,16 @@ class CustomerSidebar extends React.Component {
                     <div className="dashboard-widget">
                         <nav className="dashboard-menu">
                             <ul>
-                                <li>
+                                {/* <li>
                                     <Link to="/customer-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
                                         <span>Dashboard</span>
+                                    </Link>
+                                </li> */}
+                                <li>
+                                    <Link to="/customer-dashboard">
+                                        <FontAwesomeIcon icon={faColumns} />
+                                        <span>Lịch sửa mua hàng</span>
                                     </Link>
                                 </li>
                                 <li>

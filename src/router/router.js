@@ -7,8 +7,6 @@ import {
     EditBilling,
     AddFollowUp,
     EditFollowUp,
-    BlogDetails,
-    BlogList,
     Booking,
     BookingSuccess,
     ChangePassword,
@@ -80,8 +78,7 @@ class RouterComponent extends React.Component {
                         <Route path="/edit-billing" component={EditBilling} />
                         <Route path="/add-follow-up" component={AddFollowUp} />
                         <Route path="/edit-follow-up" component={EditFollowUp} />
-                        <Route path="/blog-details" component={BlogDetails} />
-                        <Route path="/blog-list" component={BlogList} />
+                       
                         <Route path="/booking" component={Booking} />
                         <Route path="/booking-success" component={BookingSuccess} />
                         <Route path="/calendar" component={Calendar} />

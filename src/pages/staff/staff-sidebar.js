@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressCard, faColumns, faBoxOpen, faLock, faSignOutAlt, faShoppingCart } from '@fortawesome/fontawesome-free-solid';
+import { faAddressCard, faColumns, faBoxOpen, faLock, faSignOutAlt, faShoppingCart, faMoneyBillAlt, faAngleLeft, faAngleRight } from '@fortawesome/fontawesome-free-solid';
 
 class StaffSidebar extends React.Component {
     render() {
-        return(
+        return (
             <div>
                 {/* Profile Sidebar */}
                 <div className="profile-sidebar">
@@ -41,26 +41,26 @@ class StaffSidebar extends React.Component {
                                 </li>
                                 <li>
                                     <Link to="/">
-                                        <FontAwesomeIcon icon={faBoxOpen} />
+                                        <FontAwesomeIcon icon={faMoneyBillAlt} />
                                         <span>Tính tiền hoa hồng</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/edit-product">
-                                        <FontAwesomeIcon icon={faBoxOpen} />
-                                        <span>Thống kê mặt hàng thiết yếu </span>
+                                        <FontAwesomeIcon icon={faAngleRight} />
+                                        <span>TK mặt hàng thiết yếu</span>
+                                    </Link>
+
+                                </li>
+                                <li>
+                                    <Link to="/edit-product">
+                                        <FontAwesomeIcon icon={faAngleRight} />
+                                        <span>TK nhu cầu thực phẩm cùng kỳ</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/edit-product">
-                                        <FontAwesomeIcon icon={faBoxOpen} />
-                                        <span>Thống kê nhu cầu thực phẩm cùng kỳ</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/edit-product">
-                                        <FontAwesomeIcon icon={faBoxOpen} />
-                                        <span>Thống kê khách hàng, shipper, cửa hàng ở các vùng đỏ vàng xanh</span>
+                                        <span><FontAwesomeIcon icon={faAngleRight} />TK Khách hàng, cửa hàng, shipper từng vùng</span>
                                     </Link>
                                 </li>
                                 <li>
