@@ -128,7 +128,7 @@ class BestService extends React.Component {
 								
 							</div>
 						</div>
-						<Slider {...settings} className="stylist-slider">
+						{/* <Slider {...settings} className="stylist-slider">
 
 							{
 								this.state.services.slice(0, 8).map(service => (
@@ -150,7 +150,7 @@ class BestService extends React.Component {
 									</div>
 								))
 							}
-						</Slider>
+						</Slider> */}
 
 						<div className="row justify-content-center">
 							<Link to="/booking-service" className="btn-pink">tất cả sản phẩm</Link>

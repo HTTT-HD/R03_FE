@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
-
+import { CuaHangSidebar } from './Cuahang-sidebar';
 class PurchaseProduct extends React.Component {
 
     constructor(props) {
@@ -41,14 +41,14 @@ class PurchaseProduct extends React.Component {
         });
         // console.log(event);
     }
-    handleChangeInput(){
-		return (event) => {
-			const inputValue = event.target.value;
-			this.setState({
-				searchValue:inputValue
-			})
-		}
-	}
+    handleChangeInput() {
+        return (event) => {
+            const inputValue = event.target.value;
+            this.setState({
+                searchValue: inputValue
+            })
+        }
+    }
     render() {
         console.log(this.state.order);
         return (
@@ -68,7 +68,7 @@ class PurchaseProduct extends React.Component {
                                     <h2 className="breadcrumb-title">Danh sách sản phẩm</h2>
                                 </div>
                             </div>
-                            <Dropdown>
+                            {/* <Dropdown>
                                 <Dropdown.Toggle variant="light" id="dropdown-basic2">
                                     <span>Giỏ hàng <FontAwesomeIcon icon={faShoppingCart} /></span>
                                 </Dropdown.Toggle>
@@ -87,7 +87,7 @@ class PurchaseProduct extends React.Component {
                                         <Link to="./checkout">TIẾN HÀNH THANH TOÁN</Link>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown>
+                            </Dropdown> */}
                         </div>
                     </div>
                     {/* <ul className="nav header-navbar-rht menu-select">
@@ -97,23 +97,50 @@ class PurchaseProduct extends React.Component {
                     </ul> */}
                     {/* Breadcrumb */}
                     {/* Search */}
-					<div className="card search-widget">
-						<div className="card-body">
-							<form className="search-form">
-								<div className="input-group">
-									<input type="text" placeholder="Tìm kiếm..." className="form-control" onChange={this.handleChangeInput()}/>
-									<div className="input-group-append">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+
                     {/* Page Content */}
                     <div className="content">
                         <div className="container">
                             <div className="row">
-                                <div className="col-lg-8 offset-lg-2">
+                                {/* Profile Sidebar */}
+                                <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                                    <CuaHangSidebar />
+                                    <div className="card category-widget">
+                                    <div className="card-header">
+                                        <h4 className="card-title">Sản phẩm đã chọn</h4>
+                                    </div>
+                                    <div className="card-body">
+                                        <ul className="categories">
+                                            {
+                                                
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div className="card-header">
+                                        <h4 className="card-title mb-0">Tổng: </h4>
+                                    </div>
+                                    <div className="btn-searchsubmit-section proceed-btn text-right btn btn-block">
+                                        <button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Xác nhận</button>
+                                    </div>
+                                </div>
+
+                                </div>
+                                
+
+                                {/* Profile Sidebar */}
+                                <div className="col-md-7 col-lg-8 col-xl-9">
                                     {/* Professor Widget */}
+                                    <div className="card search-widget">
+                                        <div className="card-body">
+                                            <form className="search-form">
+                                                <div className="input-group">
+                                                    <input type="text" placeholder="Tìm kiếm..." className="form-control" onChange={this.handleChangeInput()} />
+                                                    <div className="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                     {this.state.sanphams.map(sanpham => (
                                         <div className="card">
                                             <div className="card-body">
