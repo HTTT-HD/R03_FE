@@ -181,20 +181,19 @@ function Checkout() {
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
-																<label>Email</label>
+																<label>Địa chỉ giao</label>
 																<input className="form-control" type="email" value={useremail.email} />
 															
 															</div>
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
-																<label>Số diện thoại</label>
+																<label>Số điện thoại</label>
 																<input className="form-control" type="text" value={userphone.phone}/>
 															
 															</div>
 														</div>
 													</div>
-												<div className="exist-customer">Khách hàng hiện tại? <Link to="#">Click tại đây để đăng nhập</Link></div>
 											</div>
 									
 											{/* Personal Information */}
@@ -234,7 +233,7 @@ function Checkout() {
 															}}
 														/>
 														<span className="checkmark"></span>
-														Thanh toán tại cửa hàng
+														Thanh toán sau khi nhận hàng
 													</label>
 												</div>
 												{/*Payment */}
@@ -281,11 +280,11 @@ function Checkout() {
 
 										{/* Booking professor Info */}
 										<div className="booking-doc-info">
-											<Link to="/stylist-profile" className="booking-doc-img">
+											<Link className="booking-doc-img">
 												<img src={UserImg} alt="User Image" />
 											</Link>
 											<div className="booking-info">
-												<h4><Link to="/stylist-profile">{Name.name}</Link></h4>
+												<h4><Link >{Name.name}Tên cửa hàng</Link></h4>
 												<div className="rating">
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} className="filled" />
@@ -301,11 +300,11 @@ function Checkout() {
 										<div className="booking-summary">
 											<div className="booking-item-wrap">
 												<ul className="booking-date">
-													<li>Ngày <span>{date.date}</span></li>
+													<br/><li>Ngày <span>{date.date}</span></li>
 													<li>Giờ <span>{time.time+':00'}</span></li>
 												</ul>
 												<ul className="booking-fee">
-													<li>Phí dịch vụ <span>{price.price}</span></li>
+													<li>Phí giao hàng <span>{price.price}</span></li>
 												</ul>
 												<div className="booking-total">
 													<ul className="booking-total-list">
