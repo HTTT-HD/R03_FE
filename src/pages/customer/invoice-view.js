@@ -6,67 +6,65 @@ import Logo from '../../assets/img/logo.png';
 
 class InvoiceView extends React.Component {
 	constructor(props) {
-        super(props);
+		super(props);
 
-        this.state = {
-            orderid: "",
-			name:"",
-			date_cre:"",
-			service:[],
+		this.state = {
+			orderid: "",
+			name: "",
+			date_cre: "",
+			service: [],
 			total: 0
-        };
-    }
+		};
+	}
 
-    componentDidMount() {
-        fetch('http://localhost:3003/order/')
-            .then(response => response.json())
-            .then(data => 
+	componentDidMount() {
+		fetch('http://localhost:3003/order/')
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				//adding none zero value 
+				let total = 0;
+				let count = 0;
+				for (let i = 0; i < data[0].sanpham.length; i++) {
+					count = data[0].sanpham[i].soluong;
+					total += data[0].sanpham[i].dongia * count//+ => convert string to in
+				}
+
+				// adding zero value to total
+				/*
+				let money =  data[0].sanpham[0].dongia; 
+				let count = 1;
+				for(let i = money.length - 1 ; i >= 0 ; i--)
 				{
-					console.log(data)
-					//adding none zero value 
-					let total = 0 ;
-					let count = 0;
-					for(let i = 0 ; i < data[0].sanpham.length ; i++)
+					if(money[i] !== '.')
 					{
-						count = data[0].sanpham[i].soluong;
-						total += data[0].sanpham[i].dongia*count//+ => convert string to in
+						count *= 10;
 					}
-					
-					// adding zero value to total
-					/*
-					let money =  data[0].sanpham[0].dongia; 
-					let count = 1;
-					for(let i = money.length - 1 ; i >= 0 ; i--)
+					else
 					{
-						if(money[i] !== '.')
-						{
-							count *= 10;
-						}
-						else
-						{
-							break;
-						}
+						break;
 					}
+				}
 
-					total = total*count;*/
-					total = new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total)
+				total = total*count;*/
+				total = new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total)
 
-					this.setState(
-						{
+				this.setState(
+					{
 						//oderid: data., 
 						//name: data.cus[0].name,
 						date_cre: data[0].ngaydat,
-						service:data[0].sanpham,
+						service: data[0].sanpham,
 						total: total
-						})	
-				
-				
-			});
-    }
+					})
 
-    render() {
-	
-        return (
+
+			});
+	}
+
+	render() {
+
+		return (
 			<div>
 				{/* Breadcrumb */}
 				<div className="breadcrumb-bar">
@@ -89,7 +87,6 @@ class InvoiceView extends React.Component {
 				{/* Page Content */}
 				<div className="content">
 					<div className="container">
-
 						<div className="row">
 							<div className="col-lg-8 offset-lg-2">
 								<div className="invoice-content">
@@ -108,18 +105,20 @@ class InvoiceView extends React.Component {
 											<div className="col-md-12">
 												<div className="invoice-info">
 													<strong className="customer-text">Phương thức thanh toán</strong>
-													<p className="invoice-details invoice-details-two">Thanh toán tại cửa hàng </p>
-													<p className="invoice-details invoice-details-two">	Order: </p> 
-													<p className="invoice-details invoice-details-two">	Issued:  </p>
-													<p className="invoice-details invoice-details-two">	Invoice From: Nàng Beauty </p>
-													<p className="invoice-details invoice-details-two">	Invoice To:  </p>
-													
+													<p className="invoice-details invoice-details-two"> Thanh toán sau khi nhận hàng: </p><br />
+													<strong className="customer-text">Mua tại cửa hàng: Tên cửa hàng</strong>
+													<p className="invoice-details invoice-details-two">	Địa chỉ cửa hàng: 277 Nguyễn văn cừ</p><br />
+													<strong className="customer-text">Người giao hàng</strong>
+													<p className="invoice-details invoice-details-two">	Tên người giao hàng: </p>
+													<p className="invoice-details invoice-details-two">	Số điện thoại người giao hàng:  </p><br />
+													<strong className="customer-text">Giao đến</strong>
+													<p className="invoice-details invoice-details-two">	Địa chỉ giao: </p>
 												</div>
 											</div>
 										</div>
 									</div>
 									{/* Invoice Item */}
-									
+
 									{/* Invoice Item */}
 									<div className="invoice-item invoice-table-wrap">
 										<div className="row">
@@ -129,30 +128,35 @@ class InvoiceView extends React.Component {
 														<thead>
 															<tr>
 																<th>Sản phẩm</th>
-																
+
 																<th className="text-center">Số lượng</th>
 																<th className="text-right">Đơn giá</th>
 															</tr>
 														</thead>
 														<tbody>
 															{
-																this.state.service.map(service=>
+																this.state.service.map(service =>
 																	<tr>
-
-																	<td>
-																		<span>
-																			{service.tensanpham}
-																		</span>
-																	</td>
-																	
-																	<td className="text-center">{service.soluong}</td>
-																	<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia)+'VNĐ'}</td>
-																</tr>
+																		<td>
+																			<span>
+																				{service.tensanpham}Tên sản phẩm
+																			</span>
+																		</td>
+																		<td className="text-center">{service.soluong}3</td>
+																		<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia) + 'VNĐ'}100.000VND</td>
+																	</tr>
 																)
-																
+
 															}
-														
-															
+															<tr>
+																<td>
+																	<span>
+																		Tên sản phẩm
+																	</span>
+																</td>
+																<td className="text-center">3</td>
+																<td className="text-right">100.000VND</td>
+															</tr>
 														</tbody>
 													</table>
 												</div>
@@ -161,11 +165,18 @@ class InvoiceView extends React.Component {
 												<div className="table-responsive">
 													<table className="invoice-table-two table">
 														<tbody>
-														<tr>
-															<th>Tổng tạm tính:</th>
-															<td><span>{this.state.total+'VNĐ'}</span></td>
-														</tr>
-													
+															<tr>
+																<th>Tổng:</th>
+																<td><span>{this.state.total + 'VNĐ'}</span></td>
+															</tr>
+															<tr>
+																<th>Phí giao hàng:</th>
+																<td><span>{this.state.total + 'VNĐ'}</span></td>
+															</tr>
+															<tr>
+																<th>Tổng tạm tính:</th>
+																<td><span>{this.state.total + 'VNĐ'}</span></td>
+															</tr>
 														</tbody>
 													</table>
 												</div>
@@ -173,10 +184,10 @@ class InvoiceView extends React.Component {
 										</div>
 									</div>
 									{/* Invoice Item */}
-									
+
 									{/* Invoice Information */}
 									{/* Invoice Information */}
-									
+
 								</div>
 							</div>
 						</div>
@@ -186,7 +197,7 @@ class InvoiceView extends React.Component {
 				</div>
 				{/* Page Content */}
 			</div>
-        )
-    }
+		)
+	}
 }
 export { InvoiceView };

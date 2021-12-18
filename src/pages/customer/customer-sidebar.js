@@ -51,10 +51,10 @@ class CustomerSidebar extends React.Component {
                             </Link>
                             <div className="profile-det-info">
                                 <h3>{data.name}</h3>
-                                <div className="customer-details">
+                                {/* <div className="customer-details">
                                     <h5><FontAwesomeIcon icon={faBirthdayCake} />{data.dob}</h5>
                                     <h5 className="mb-0"><FontAwesomeIcon icon={faMapMarkerAlt} />{data.address}</h5>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -62,12 +62,6 @@ class CustomerSidebar extends React.Component {
                     <div className="dashboard-widget">
                         <nav className="dashboard-menu">
                             <ul>
-                                {/* <li>
-                                    <Link to="/customer-dashboard">
-                                        <FontAwesomeIcon icon={faColumns} />
-                                        <span>Dashboard</span>
-                                    </Link>
-                                </li> */}
                                 <li>
                                     <Link to="/customer-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
