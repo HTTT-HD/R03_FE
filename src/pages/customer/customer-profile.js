@@ -11,13 +11,6 @@ import { Modal, Tabs, Tab } from "react-bootstrap";
 import UserAvatar from '../../assets/img/stylists/stylist-thumb-01.jpg';
 import UserAvatar1 from '../../assets/img/stylists/stylist-thumb-02.jpg';
 import UserAvatar2 from '../../assets/img/stylists/stylist-thumb-03.jpg';
-import UserAvatar3 from '../../assets/img/stylists/stylist-thumb-04.jpg';
-import UserAvatar4 from '../../assets/img/stylists/stylist-thumb-05.jpg';
-import UserAvatar5 from '../../assets/img/stylists/stylist-thumb-06.jpg';
-import UserAvatar6 from '../../assets/img/stylists/stylist-thumb-07.jpg';
-import UserAvatar7 from '../../assets/img/stylists/stylist-thumb-08.jpg';
-import UserAvatar8 from '../../assets/img/stylists/stylist-thumb-09.jpg';
-import UserAvatar9 from '../../assets/img/stylists/stylist-thumb-10.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -73,7 +66,7 @@ class CustomerProfile extends React.Component {
 													<img src={CustomerImg} alt="User Image" />
 												</Link>
 												<div className="profile-det-info">
-													<h3>Gordan Whelan</h3>
+													<h3>Tên khách hàng</h3>
 													
 													<div className="customer-details">
 														<h5><b>ID khách hàng :</b> PT0016</h5>
@@ -83,8 +76,9 @@ class CustomerProfile extends React.Component {
 										</div>
 										<div className="customer-info">
 											<ul>
-												<li>Số diện thoại <span>+1 952 001 8563</span></li>
-												<li>Tuổi <span>38 Years, Male</span></li>
+												<li>Số diện thoại <span>0961239388</span></li>
+												<li>Sinh ngày <span>01.01.2000</span></li>
+												<li>Giới tính <span>Nữ</span></li>
 											</ul>
 										</div>
 									</div>
@@ -96,16 +90,15 @@ class CustomerProfile extends React.Component {
 								<div className="card database-tbl">
 									<div className="card-body">
 										<Tabs defaultActiveKey="appointments" id="uncontrolled-tab-example">
-											<Tab eventKey="appointments" title="Lịch hẹn">
+											<Tab eventKey="appointments" title="Đơn hàng hôm nay">
 												<div className="card card-table mb-0">
 													<div className="card-body">
 														<div className="table-responsive">
 															<table className="table table-hover table-center mb-0">
 																<thead>
 																	<tr>
-																		<th>Nhà tạo mẫu</th>
-																		<th>Ngày áp dụng</th>
-																		<th>Ngày đặt</th>
+																		<th>Cửa hàng</th>
+																		<th>Thời gian đặt</th>
 																		<th>Chi phí</th>
 																		<th>Trạng thái</th>
 																		<th></th>
@@ -118,30 +111,11 @@ class CustomerProfile extends React.Component {
 																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
 																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
 																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
+																				<Link to="/stylist-profile">Tên cửa hàng <span>SĐT</span></Link>
 																			</h2>
 																		</td>
 																		<td>14 Nov 2019 <span className="d-block text-info">10.00 AM</span></td>
-																		<td>12 Nov 2019</td>
-																		<td>$160</td>
-																		<td><span className="badge badge-pill bg-success-light">Xác nhận</span></td>
-																		<td className="text-right">
-																			<div className="table-action">
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																		<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>12 Nov 2019 <span className="d-block text-info">8.00 PM</span></td>
-																		<td>12 Nov 2019</td>
-																		<td>$250</td>
+																		<td>160.000VND</td>
 																		<td><span className="badge badge-pill bg-success-light">Xác nhận</span></td>
 																		<td className="text-right">
 																			<div className="table-action">
@@ -154,12 +128,11 @@ class CustomerProfile extends React.Component {
 																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
 																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
 																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
+																				<Link to="/stylist-profile">Tên cửa hàng <span>SĐT</span></Link>
 																			</h2>
 																		</td>
 																		<td>11 Nov 2019 <span className="d-block text-info">11.00 AM</span></td>
-																		<td>10 Nov 2019</td>
-																		<td>$400</td>
+																		<td>400.VND</td>
 																		<td><span className="badge badge-pill bg-danger-light">Đã hủy</span></td>
 																		<td className="text-right">
 																			<div className="table-action">
@@ -172,12 +145,11 @@ class CustomerProfile extends React.Component {
 																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
 																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
 																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
+																				<Link to="/stylist-profile">Tên cửa hàng <span>SĐT</span></Link>
 																			</h2>
 																		</td>
 																		<td>10 Nov 2019 <span className="d-block text-info">3.00 PM</span></td>
-																		<td>10 Nov 2019</td>
-																		<td>$350</td>
+																		<td>350.000VND</td>
 																		<td><span className="badge badge-pill bg-warning-light">Đang xử lí</span></td>
 																		<td className="text-right">
 																			<div className="table-action">
@@ -187,67 +159,13 @@ class CustomerProfile extends React.Component {
 																			</div>
 																		</td>
 																	</tr>
-																	<tr>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>9 Nov 2019 <span className="d-block text-info">7.00 PM</span></td>
-																		<td>8 Nov 2019</td>
-																		<td>$75</td>
-																		<td><span className="badge badge-pill bg-success-light">Xác nhận</span></td>
-																		<td className="text-right">
-																			<div className="table-action">
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>8 Nov 2019 <span className="d-block text-info">9.00 AM</span></td>
-																		<td>6 Nov 2019</td>
-																		<td>$175</td>
-																		<td><span className="badge badge-pill bg-danger-light">Đã hủy</span></td>
-																		<td className="text-right">
-																			<div className="table-action">
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>8 Nov 2019 <span className="d-block text-info">6.00 PM</span></td>
-																		<td>6 Nov 2019</td>
-																		<td>$450</td>
-																		<td><span className="badge badge-pill bg-success-light">Xác nhận</span></td>
-																		<td className="text-right">
-																			<div className="table-action">
-																			</div>
-																		</td>
-																	</tr>
 																</tbody>
 															</table>		
 														</div>
 													</div>
 												</div>
 											</Tab>
-											<Tab eventKey="customer-history" title="Lịch sử của khách hàng">
+											<Tab eventKey="customer-history" title="Lịch sử mua hàng">
 												<div className="card card-table mb-0">
 													<div className="card-body">
 														<div className="table-responsive">
@@ -255,65 +173,24 @@ class CustomerProfile extends React.Component {
 																<thead>
 																	<tr>
 																		<th>ID</th>
-																		<th>Ngày thực hiện </th>
-																		<th>Mô tả</th>
-																		<th>Được thực hiện bởi</th>
-																		<th></th>
+																		<th>Ngày mua </th>
+																		<th>Cửa hàng </th>
+																		<th>Chi phí</th>
 																	</tr>     
 																</thead>
 																<tbody>
 																	<tr>
 																		<td><Link to="#">#MR-0010</Link></td>
 																		<td>14 Nov 2020</td>
-																		<td>Nail Filling</td>
 																		<td>
 																			<h2 className="table-avatar">
 																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
 																					<img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" />
 																				</Link>
-																				<Link to="/stylist-profile">Sorell Sexton <span>Nail Art</span></Link>
+																				<Link to="/stylist-profile">Tên cửa hàng <span>SĐT cửa hàng</span></Link>
 																			</h2>
 																		</td>
-																		<td className="text-right">
-																			<div className="table-action">
-																				<Link to="/invoice-view" className="btn btn-sm bg-info-light">
-																					<FontAwesomeIcon icon={faEye} /> Xem
-																				</Link>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td><Link to="#">#MR-0009</Link></td>
-																		<td>13 Nov 2020</td>
-																		<td>Nail Art</td>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td className="text-right">
-																			<div className="table-action">
-																				<Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
-																					<FontAwesomeIcon icon={faEye} /> Xem
-																				</Link>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td><Link to="#">#MR-0008</Link></td>
-																		<td>12 Nov 2020</td>
-																		<td>Gel Nail Art</td>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar2} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Cela Spence <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
+																		<td>100.000VND</td>
 																		<td className="text-right">
 																			<div className="table-action">
 																				<Link to="/invoice-view" className="btn btn-sm bg-info-light">
@@ -323,93 +200,6 @@ class CustomerProfile extends React.Component {
 																		</td>
 																	</tr>
 																</tbody>  	
-															</table>
-														</div>
-													</div>
-												</div>
-											</Tab>
-											<Tab eventKey="billing" title="Hóa đơn">
-												<div className="card card-table mb-0">
-													<div className="card-body">
-														<div className="table-responsive">
-															<table className="table table-hover table-center mb-0">
-																<thead>
-																	<tr>
-																		<th>ID hóa đơn</th>
-																		<th>Nhà tạo mẫu</th>
-																		<th>Chi phí</th>
-																		<th>Đã trả vào</th>
-																		<th></th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td>
-																			<Link to="/invoice-view">#INV-0010</Link>
-																		</td>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Ruby Perrin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>$450</td>
-																		<td>14 Nov 2020</td>
-																		<td className="text-right">
-																			<div className="table-action">
-																				<Link to="/invoice-view" className="btn btn-sm bg-info-light">
-																					<FontAwesomeIcon icon={faEye} /> Xem
-																				</Link>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<Link to="/invoice-view">#INV-0009</Link>
-																		</td>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar1} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Urban Mauldin <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>$300</td>
-																		<td>13 Nov 2020</td>
-																		<td className="text-right">
-																			<div className="table-action">
-																				<Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
-																					<FontAwesomeIcon icon={faEye} /> Xem
-																				</Link>
-																			</div>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td>
-																			<Link to="/invoice-view">#INV-0008</Link>
-																		</td>
-																		<td>
-																			<h2 className="table-avatar">
-																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
-																					<img className="avatar-img rounded-circle" src={UserAvatar2} alt="User Image" />
-																				</Link>
-																				<Link to="/stylist-profile">Cela Spence <span>Nail Art</span></Link>
-																			</h2>
-																		</td>
-																		<td>$150</td>
-																		<td>12 Nov 2020</td>
-																		<td className="text-right">
-																			<div className="table-action">
-																				<Link to="/invoice-view" className="btn btn-sm bg-info-light">
-																					<FontAwesomeIcon icon={faEye} /> Xem
-																				</Link>
-																			</div>
-																		</td>
-																	</tr>
-																</tbody>
 															</table>
 														</div>
 													</div>

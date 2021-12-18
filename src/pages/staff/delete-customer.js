@@ -89,7 +89,7 @@ class DeleteCustomer extends React.Component {
                                                         <div className="success-cont">
                                                             <FontAwesomeIcon icon={faQuestion} />
                                                             <h3>Bạn chắc chắn xóa khách hàng này không?</h3>
-                                                            <p>Nếu bạn nhấn "Xác nhận" thì khách hàng này được xóa, nếu bạn muốn thêm lại nkhách hàng thì vào phần "Thêm khách hàng" để thêm khách hàng mới.</p>
+                                                            <p>Nếu bạn nhấn "Xác nhận" thì khách hàng này được xóa, nếu bạn muốn thêm lại nkhách hàng thì vào phần "Thêm khách hàng" để thêm khácha hàng mới.</p>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -44,13 +44,6 @@ class StylistSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/invoices">
-                                        <FontAwesomeIcon icon={faFileAlt} />
-                                        <span>Hóa đơn</span>
-                                    </Link>
-                                </li>
-
-                                <li>
                                     <Link to="/stylist-profile-settings">
                                         <FontAwesomeIcon icon={faUserCog} />
                                         <span>Cài đặt cấu hình</span>

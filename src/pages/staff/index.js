@@ -10,3 +10,4 @@ export * from './add-shipper';
 export * from './delete-shipper';
 export * from './manage-customer';
 export * from './delete-customer';
+export * from './invoices';
