@@ -49,7 +49,8 @@ import {
     DeleteSupplier, 
     AddShipper,
     DeleteShipper,
-    DeleteCustomer
+    DeleteCustomer,
+    StaffSidebar
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -126,6 +127,7 @@ class RouterComponent extends React.Component {
                         <Route path="/delete-supplier" component={DeleteSupplier} />
                         <Route path="/manage-customer" component={ManageCustomer} />
                         <Route path="/delete-customer" component={DeleteCustomer} />
+                        <Route path="/staff-sidebar" component={StaffSidebar} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    
