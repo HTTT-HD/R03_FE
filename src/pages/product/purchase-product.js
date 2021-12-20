@@ -68,7 +68,7 @@ class PurchaseProduct extends React.Component {
                                     <h2 className="breadcrumb-title">Danh sách sản phẩm</h2>
                                 </div>
                             </div>
-                            {/* <Dropdown>
+                            { <Dropdown>
                                 <Dropdown.Toggle variant="light" id="dropdown-basic2">
                                     <span>Giỏ hàng <FontAwesomeIcon icon={faShoppingCart} /></span>
                                 </Dropdown.Toggle>
@@ -87,7 +87,7 @@ class PurchaseProduct extends React.Component {
                                         <Link to="./checkout">TIẾN HÀNH THANH TOÁN</Link>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown> */}
+                            </Dropdown> }
                         </div>
                     </div>
                     {/* <ul className="nav header-navbar-rht menu-select">
