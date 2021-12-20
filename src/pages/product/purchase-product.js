@@ -12,7 +12,9 @@ class PurchaseProduct extends React.Component {
             error: null,
             isLoaded: false,
             sanphams: [],
-            order: []
+            order: [],
+            total:0,
+            searchValue:""
         }
     }
 
@@ -36,10 +38,12 @@ class PurchaseProduct extends React.Component {
     }
 
     handleOrder(event) {
+        console.log(event);   
         this.setState((state, props) => {
             return { order: [...state.order, event] };
         });
         // console.log(event);
+    
     }
     handleChangeInput() {
         return (event) => {
@@ -51,6 +55,8 @@ class PurchaseProduct extends React.Component {
     }
     render() {
         console.log(this.state.order);
+        let total = 0;
+        let {sanphams,searchValue}=this.state;
         return (
             <div>
                 <form action="/booking-stylist" method="POST" onSubmit={this.handleSubmit}>
@@ -76,7 +82,7 @@ class PurchaseProduct extends React.Component {
                                     {
                                         this.state.order.map(i => (
                                             <Dropdown.Item href="">
-                                                {i.tensanpham} - {i.dongia} VND
+                                                {i.tensanpham} - {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(i.dongia)} VND
                                             </Dropdown.Item>
                                         ))
                                     }
@@ -112,12 +118,16 @@ class PurchaseProduct extends React.Component {
                                     <div className="card-body">
                                         <ul className="categories">
                                             {
-                                                
+                                                this.state.order.map(i=>(
+                                                total+=Number(i.dongia),
+                                                <li>{i.tensanpham} - {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(i.dongia) + 'VNĐ'}</li>
+                
+                                                ))    
                                             }
                                         </ul>
                                     </div>
                                     <div className="card-header">
-                                        <h4 className="card-title mb-0">Tổng: </h4>
+                                        <h4 className="card-title mb-0">Tổng: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total) + 'VNĐ'} </h4>
                                     </div>
                                     <div className="btn-searchsubmit-section proceed-btn text-right btn btn-block">
                                         <button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Xác nhận</button>
@@ -141,7 +151,14 @@ class PurchaseProduct extends React.Component {
                                             </form>
                                         </div>
                                     </div>
-                                    {this.state.sanphams.map(sanpham => (
+                                    {
+                                    sanphams.filter((item)=>{
+                                        if(searchValue==""){
+                                            return item
+                                        }else if(item.tensanpham.toLowerCase().includes(searchValue.toLowerCase())){
+                                            return item
+                                        }
+                                    }).map(sanpham =>
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="stylist-widget">
@@ -177,7 +194,7 @@ class PurchaseProduct extends React.Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
+                                    )}
                                 </div>
                             </div>
                         </div>

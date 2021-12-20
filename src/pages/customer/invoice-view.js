@@ -139,24 +139,16 @@ class InvoiceView extends React.Component {
 																	<tr>
 																		<td>
 																			<span>
-																				{service.tensanpham}Tên sản phẩm
+																				{service.tensanpham}
 																			</span>
 																		</td>
-																		<td className="text-center">{service.soluong}3</td>
-																		<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia) + 'VNĐ'}100.000VND</td>
+																		<td className="text-center">{service.soluong}</td>
+																		<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia) + 'VNĐ'}</td>
 																	</tr>
 																)
 
 															}
-															<tr>
-																<td>
-																	<span>
-																		Tên sản phẩm
-																	</span>
-																</td>
-																<td className="text-center">3</td>
-																<td className="text-right">100.000VND</td>
-															</tr>
+							
 														</tbody>
 													</table>
 												</div>
