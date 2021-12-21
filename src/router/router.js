@@ -35,6 +35,7 @@ import {
     StaffChangePassword,
     AddService,
     PurchaseProduct,
+    ListProduct,
     EditProduct,
     AddProduct,
     EditEditProduct,
@@ -112,6 +113,7 @@ class RouterComponent extends React.Component {
                         <Route path="/staff-change-password" component={StaffChangePassword} />
                         <Route path="/add-service" component={AddService} />
                         <Route path="/purchase-product" component={PurchaseProduct} />
+                        <Route path="/list-product" component={ListProduct} />
                         <Route path="/edit-product" component={EditProduct} />
                         <Route path="/add-product" component={AddProduct} />
                         <Route path="/edit-edit-product" component={EditEditProduct} />
