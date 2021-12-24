@@ -97,37 +97,45 @@ class BestService extends React.Component {
 						</div>
 
 						<div className="col-md-7 col-lg-8 col-xl-9">
-							<div className="row row-grid">
-								<div className="col-md-6 col-lg-5 col-xl-3">
-									<div className="card widget-profile pat-widget-profile">
-									{this.state.services.map(item=>(
-										<div className="card-body">
-											<div className="pro-widget-content">
-												<div className="profile-info-widget">
-													<Link to="/customer-profile" className="booking-doc-img">
-														<img src={item.img} alt="User Image" />
-													</Link>
-													<div className="profile-det-info">
-														<h3><Link to="/customer-profile"></Link>{item.tensanpham}</h3>
+							<div className="row">
+								{this.state.services.map((item) => (
+									<div className="col-md-8 col-lg-5 col-xl-3">
+										<div className="card widget-profile pat-widget-profile">
+											<div className="card-body">
+												<div className="pro-widget-content">
+													<div className="profile-info-widget">
+														<Link to="/customer-profile" className="booking-doc-img">
+															<img src={item.img} alt="User Image" />
+														</Link>
+														<div className="profile-det-info">
+															<h3>
+																<Link to="/customer-profile"></Link>
+																{item.tensanpham}
+															</h3>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div className="customer-info">
-												<ul>
-													<li>Số lượng <span>{item.soluong}</span></li>
-													<li>Đơn giá <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.dongia)+'VNĐ'}</span></li>
-													<li>Loại sản phẩm <span>{item.loaisanpham}</span></li>
-												</ul>
+												<div className="customer-info">
+													<ul>
+														<li>
+															Số lượng <span>{item.soluong}</span>
+														</li>
+														<li>
+															Đơn giá <span>{new Intl.NumberFormat({ style: "currency", currency: "JPY" }).format(item.dongia) + "VNĐ"}</span>
+														</li>
+														<li>
+															Loại sản phẩm <span>{item.loaisanpham}</span>
+														</li>
+													</ul>
+												</div>
 											</div>
 										</div>
-									))}
 									</div>
-								</div>
-								
-								
-								
+								))}
 							</div>
+
 						</div>
+
 						{/* <Slider {...settings} className="stylist-slider">
 
 							{
@@ -158,8 +166,8 @@ class BestService extends React.Component {
 					</div>
 				</section>
 
-				{/* Top Stylist */}
-			</div>
+			{/* Top Stylist */ }
+			</div >
 		)
 	}
 }
