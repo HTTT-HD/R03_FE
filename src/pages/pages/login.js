@@ -39,7 +39,7 @@ class Login extends React.Component {
 		this.setState({ submitted: true });
 		console.log(this.state)
 		fetch(
-				"http://localhost:3000/user/login",
+				"https://localhost:5001/api/ThanhVien/login",
 				{
 					method: "POST",
 					headers: {
@@ -52,58 +52,14 @@ class Login extends React.Component {
 				}
 			).then(res => res.json().then(
 				res => { 
-					console.log(res);
-					localStorage.setItem("Accesstoken",res.token)
+					console.log(res.data);
+					alert(res.message)
+					localStorage.setItem("Accesstoken",res.data.acessToken);
 				})
-				// ,<Redirect push to="http://localhost:3002/nailsalon" />
 			).catch(
 				res => { console.log(res) }
 			)
 	}
-	// handleSubmit(event) {
-	// 	const { email, password } = this.state;
-	// 	axios
-	// 	  .post(
-	// 		"http://localhost:3000/user/profile",
-	// 		{
-	// 		  user: {
-	// 			email: email,
-	// 			password: password
-	// 		  }
-	// 		},
-	// 		{ withCredentials: true }
-	// 	  )
-	// 	  .then(response => {
-	// 		if (response.data.logged_in) {
-	// 		  this.props.handleSuccessfulAuth(response.data);
-	// 		}
-	// 	  })
-	// 	  .catch(error => {
-	// 		console.log("login error", error);
-	// 	  });
-	// 	event.preventDefault();
-	//   }
-	/*handleSubmit(event) {
-		event.preventDefault();
-		console.log(this.state)
-		fetch("http://localhost:3000/user/profile",
-				{
-					method: "POST",
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						token: localStorage.getItem("Accesstoken")
-					})
-				}
-			).then(res => res.text()).then(
-				res => { 
-					console.log(res);
-				}
-			).catch(
-				res => { console.log(res) }
-			)
-	}*/
     render() {
         return (
 			<div>

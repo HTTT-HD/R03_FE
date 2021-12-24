@@ -8,8 +8,56 @@ import LoginImg from '../../assets/img/register-banner.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
+
+
 class Register extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: '',
+			password: '',
+			submitted:false
+		};
 	
+		this.handleChangeUsername = this.handleChangeUsername.bind(this);
+		this.handleChangePassword = this.handleChangePassword.bind(this);
+
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	
+	handleChangeUsername(event) {
+		this.setState({username: event.target.value});
+	}
+
+	handleChangePassword(event) {
+		this.setState({password: event.target.value});
+	}
+	
+	handleSubmit(event) {
+		event.preventDefault();
+		this.setState({ submitted: true });
+		console.log(this.state)
+		fetch(
+				"https://localhost:5001/api/ThanhVien/login",
+				{
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						email: this.state.username,
+						password: this.state.password
+					})
+				}
+			).then(res => res.json().then(
+				res => { 
+					console.log(res.data);
+					localStorage.setItem("Accesstoken",res.data.acessToken);
+				})
+			).catch(
+				res => { console.log(res) }
+			)
+	}
     render() {
         return (
 			<div>
