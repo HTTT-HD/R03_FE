@@ -153,7 +153,7 @@ class BestService extends React.Component {
 						</Slider> */}
 
 						<div className="row justify-content-center">
-							<Link to="/booking-service" className="btn-pink">tất cả sản phẩm</Link>
+							<Link to="/purchase-product" className="btn-pink">tất cả sản phẩm</Link>
 						</div>
 					</div>
 				</section>

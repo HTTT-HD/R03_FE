@@ -17,7 +17,8 @@ class Login extends React.Component {
 		this.state = {
 			username: '',
 			password: '',
-			submitted:false
+			submitted:false,
+			redirect:false
 		};
 	
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -46,21 +47,31 @@ class Login extends React.Component {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
-						email: this.state.username,
-						password: this.state.password
+						taiKhoan: this.state.username,
+						matKhau: this.state.password
 					})
 				}
 			).then(res => res.json().then(
 				res => { 
 					console.log(res.data);
-					alert(res.message)
-					localStorage.setItem("Accesstoken",res.data.acessToken);
+					if(res.succeeded){
+						alert("Đăng nhập thành công!")
+						this.setState({redirect:true})
+						localStorage.setItem("Accesstoken",res.data.acessToken);
+					}else{
+						alert(res.message)
+						this.setState({redirect:false})
+					}
 				})
 			).catch(
 				res => { console.log(res) }
 			)
 	}
     render() {
+		const { redirect } = this.state;
+     	if (redirect) {
+       		return <Redirect to='/'/>;
+		}
         return (
 			<div>
 				{/* Page Content */}
