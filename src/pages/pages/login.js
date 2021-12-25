@@ -40,7 +40,7 @@ class Login extends React.Component {
 		this.setState({ submitted: true });
 		console.log(this.state)
 		fetch(
-				"https://localhost:5001/api/ThanhVien/login",
+				"https://localhost:44376/api/ThanhVien/login",
 				{
 					method: "POST",
 					headers: {
@@ -93,8 +93,8 @@ class Login extends React.Component {
 												</div>
 												<form action="/index" onSubmit={this.handleSubmit}>
 													<div className="form-group form-focus">
-														<input type="email" className="form-control floating" value={this.state.username} onChange={this.handleChangeUsername}/>
-														<label className="focus-label">Email hoặc số điện thoại</label>
+														<input type="text" className="form-control floating" value={this.state.username} onChange={this.handleChangeUsername}/>
+														<label className="focus-label">Tài khoản</label>
 													</div>
 													<div className="form-group form-focus">
 														<input type="password" className="form-control floating" value={this.state.password} onChange={this.handleChangePassword}/>
