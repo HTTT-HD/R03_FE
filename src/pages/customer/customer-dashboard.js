@@ -38,16 +38,23 @@ class CustomerDashboard extends React.Component {
 		localStorage.setItem("status",value)
 	}
 	componentDidMount() {
-		fetch(`http://localhost:3000/user/profile/${localStorage.getItem("Accesstoken")}`)
+		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		{
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+			}
+		})
 			.then(res => res.json())
 			.then(
 				(result) => {
+					console.log(result)
 					this.setState({
 						isLoaded: true,
-						appointment: result.appoint,
-						info: result.info
+						info: result.data
 					});
-					//console.log(this.state.info,this.state.appointment)
 				},
 				(error) => {
 					this.setState({

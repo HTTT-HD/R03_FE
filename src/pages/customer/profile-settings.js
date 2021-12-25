@@ -23,13 +23,22 @@ class ProfileSettings extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch(`http://localhost:3000/user/profile/${localStorage.getItem("Accesstoken")}`)
+		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		{
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+			}
+		})
 			.then(res => res.json())
 			.then(
-				(data) => {
+				(result) => {
+					console.log(result)
 					this.setState({
 						isLoaded: true,
-						data: data.info
+						data: result.data
 					});
 				},
 				(error) => {
@@ -112,7 +121,7 @@ class ProfileSettings extends React.Component {
 																<div className="upload-img">
 																	<div className="change-photo-btn">
 																		<span><FontAwesomeIcon icon={faUpload} /> Tải ảnh lên</span>
-																		<input onChange={(e)=>this.handleChange(e)} name="img" type="file" defaultValue={data.img} className="upload" />
+																	{/*	<input onChange={(e)=>this.handleChange(e)} name="img" type="file" defaultValue={data.img} className="upload" />*/}
 																	</div>
 																	<small className="form-text text-muted">Cho phép JPG, GIF hoặc PNG. Kích thước tối đa 2MB</small>
 																</div>
@@ -122,31 +131,37 @@ class ProfileSettings extends React.Component {
 													<div className="col-12 col-md-6">
 														<div className="form-group">
 															<label>Họ và tên</label>
-															<input onChange={(e)=>this.handleChange(e)} type="text" name="name"className="form-control" defaultValue={data.name} />
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="tenThanhVien"className="form-control" defaultValue={data.tenThanhVien} />
 														</div>
 													</div>
 													<div className="col-12 col-md-6">
 														<div className="form-group">
-															<label>Ngày sinh</label>
-															<input onChange={(e)=>this.handleChange(e)} type="date" name="dob" className="form-control datetimepicker" defaultValue={data.dob} />
+															<label>Giới tính</label>
+															<input onChange={(e)=>this.handleChange(e)} type="date" name="dob" className="form-control datetimepicker" defaultValue={data.tenGioiTinh} />
 														</div>
 													</div>
 													<div className="col-12 col-md-6">
 														<div className="form-group">
 															<label>Email</label>
-															<input onChange={(e)=>this.handleChange(e)} type="email" name="email" className="form-control" defaultValue={data.email} />
+															<input onChange={(e)=>this.handleChange(e)} type="email" name="tenDangNhap" className="form-control" defaultValue={data.tenDangNhap} />
 														</div>
 													</div>
 													<div className="col-12 col-md-6">
 														<div className="form-group">
 															<label>Số điện thoại</label>
-															<input onChange={(e)=>this.handleChange(e)} type="text" name="phone" defaultValue={data.phone} className="form-control" />
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="soDienThoai" defaultValue={data.soDienThoai} className="form-control" />
 														</div>
 													</div>
 													<div className="col-12">
 														<div className="form-group">
 														<label>Địa chỉ</label>
-															<input onChange={(e)=>this.handleChange(e)} type="text" name="address" className="form-control" defaultValue={data.address} />
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="diaChi" className="form-control" defaultValue={data.diaChi} />
+														</div>
+													</div>
+													<div className="col-12">
+														<div className="form-group">
+														<label>CMND</label>
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="cmnd" className="form-control" defaultValue={data.cmnd} />
 														</div>
 													</div>
 												</div>

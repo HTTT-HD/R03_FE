@@ -20,10 +20,38 @@ class CustomerProfile extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			showModal: false
+			showModal: false,
+			isLoaded: false,
+			info:[]
 		}
 	}
-
+	componentDidMount() {
+		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		{
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+			}
+		})
+			.then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result)
+					this.setState({
+						isLoaded: true,
+						info: result.data
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			)
+	}
 	openModal = () => {
 		this.setState({
 			showModal: !this.state.showModal
