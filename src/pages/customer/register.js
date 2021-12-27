@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link,Redirect } from 'react-router-dom'
-
+import { useHistory } from 'react-router';
+import React, { useState, useEffect } from 'react';
 
 // Import Image
 import LoginImg from '../../assets/img/register-banner.png';
