@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom'
-import Axios from 'axios'
 
+import { useContext } from 'react';
 // Import Image
 import LoginImg from '../../assets/img/login-banner.png';
-
+import  UserRolesContext  from '../../authenticationContext';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { AirlineSeatIndividualSuiteSharp } from '@material-ui/icons';
-import axios from 'axios';
-
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,12 +53,15 @@ class Login extends React.Component {
 				res => { 
 					console.log(res.data);
 					if(res.succeeded){
-						alert("Đăng nhập thành công!")
+						alert("Đăng nhập thành công!");
 						this.setState({redirect:true})
+						localStorage.setItem("role",res.data.quyens);
+						localStorage.setItem("isAuthenticated","True")
 						localStorage.setItem("Accesstoken",res.data.acessToken);
 					}else{
 						alert(res.message)
 						this.setState({redirect:false})
+						localStorage.setItem("isAuthenticated","False")
 					}
 				})
 			).catch(
