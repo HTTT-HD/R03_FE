@@ -103,18 +103,18 @@ class CustomerDashboard extends React.Component {
 								<div className="card database-tbl">
 									<div className="card-body">
 										<Tabs defaultActiveKey="appointments" id="uncontrolled-tab-example">
-											<Tab eventKey="appointments" title="Lịch hẹn">
+											<Tab eventKey="appointments" title="Lịch sử mua hàng">
 												<div className="card card-table mb-0">
 													<div className="card-body">
 														<div className="table-responsive">
 															<table className="table table-hover table-center mb-0">
 																<thead>
 																	<tr>
-																		<th>Nhà tạo mẫu</th>
-																		<th>Ngày đặt lịch</th>
-																		<th>Ngày làm đẹp</th>
-																		<th>Chi phí</th>
-																		<th>Status</th>
+																		<th>Tên</th>
+																		<th>Số điện thoại</th>
+																		<th>Mã đơn hàng</th>
+																		<th>Ngày mua</th>
+																	
 																		<th></th>
 																	</tr>
 																</thead>
