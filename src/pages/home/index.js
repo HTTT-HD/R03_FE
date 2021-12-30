@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Banner } from './banner';
-import { BestService } from './best-service';
+import { BestProduct } from './best-product';
 
 class Home extends React.Component {
     render() {
@@ -12,7 +12,7 @@ class Home extends React.Component {
                 {/* Home Banner */}
 
                 {/* Best Service */}
-                <BestService />
+                <BestProduct />
                 {/* Best Service */}
             </div>
         )
