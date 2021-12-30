@@ -46,12 +46,12 @@ class Footer extends React.Component {
 								<div className="footer-widget footer-menu">
 									<h2 className="footer-title">Quick Links</h2>
 									<ul>
-										{/* <li>
+										<li>
 											<Link to="/login">Đăng nhập</Link>
 										</li>
 										<li>
 											<Link to="/stylist-register">Đăng kí</Link>
-										</li> */}
+										</li>
 									</ul>
 								</div>
 								{/* Footer Widget */}

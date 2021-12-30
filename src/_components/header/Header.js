@@ -114,17 +114,17 @@ class Header extends React.Component {
 							<li className={pathname === ('/') ? 'active' : ''}>
 								<Link to="/">Trang chủ</Link>
 							</li>
-							{role === "admin" && (
-								<>
+							{/* {role === "admin" && (
+								<> */}
 									<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
 										<Link to="/staff-dashboard">Admin</Link>
 									</li>
 									<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
 										<Link to="/stylist-dashboard">Nhà cung cấp</Link>
 									</li>
-								</>
-							)
-							}
+								{/* </> */}
+							{/* ) */}
+							{/* } */}
 							<li className={`has-submenu ${pathname === ('/search') ? 'active' : pathname === ('/booking') ? 'active' : pathname === ('/customer-dashboard') ? 'active' : pathname === ('/login') ? 'active' : pathname === ('/register') ? 'active' : ''}`}>
 								<Link to="">Khách hàng <FontAwesomeIcon icon={faChevronDown} /></Link>
 								<ul className="submenu">
@@ -191,7 +191,7 @@ class Header extends React.Component {
 					{(!isAuthenticated ?
 						(
 							<li className={pathname === ('/login') ? 'active' : ''}>
-								<Link to="/login">Đăng nhập</Link>
+								<Link to="/login"><FontAwesomeIcon icon={faUser}/> Đăng nhập </Link>
 							</li>
 						) :
 						(
