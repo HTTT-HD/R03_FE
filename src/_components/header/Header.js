@@ -57,7 +57,6 @@ class Header extends React.Component {
 				sticky.removeClass('nav-sticky');
 				$('body').removeClass('map-up');
 			}
-
 		});
 	}
 	handleLogout() {
@@ -114,17 +113,12 @@ class Header extends React.Component {
 							<li className={pathname === ('/') ? 'active' : ''}>
 								<Link to="/">Trang chủ</Link>
 							</li>
-							{/* {role === "admin" && (
-								<> */}
-									<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
-										<Link to="/staff-dashboard">Admin</Link>
-									</li>
-									<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
-										<Link to="/stylist-dashboard">Nhà cung cấp</Link>
-									</li>
-								{/* </> */}
-							{/* ) */}
-							{/* } */}
+							<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
+								<Link to="/staff-dashboard">Admin</Link>
+							</li>
+							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
+								<Link to="/stylist-dashboard">Nhà cung cấp</Link>
+							</li>
 							<li className={`has-submenu ${pathname === ('/search') ? 'active' : pathname === ('/booking') ? 'active' : pathname === ('/customer-dashboard') ? 'active' : pathname === ('/login') ? 'active' : pathname === ('/register') ? 'active' : ''}`}>
 								<Link to="">Khách hàng <FontAwesomeIcon icon={faChevronDown} /></Link>
 								<ul className="submenu">
@@ -138,6 +132,9 @@ class Header extends React.Component {
 										<Link to="/checkout">Thanh toán</Link>
 									</li>
 								</ul>
+							</li>
+							<li className={pathname === ('/shipper-dashboard') ? 'active' : ''}>
+								<Link to="/shipper-dashboard">Shipper</Link>
 							</li>
 							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
 								<Link to="/purchase-product">Sản phẩm</Link>
@@ -191,7 +188,7 @@ class Header extends React.Component {
 					{(!isAuthenticated ?
 						(
 							<li className={pathname === ('/login') ? 'active' : ''}>
-								<Link to="/login"><FontAwesomeIcon icon={faUser}/> Đăng nhập </Link>
+								<Link to="/login"><FontAwesomeIcon icon={faUser} /> Đăng nhập </Link>
 							</li>
 						) :
 						(

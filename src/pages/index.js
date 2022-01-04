@@ -8,3 +8,4 @@ export * from './privacy-pages';
 export * from './admin';
 export * from './service';
 export * from './product';
+export * from './shipper';

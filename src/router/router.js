@@ -51,7 +51,11 @@ import {
     AddShipper,
     DeleteShipper,
     DeleteCustomer,
-    StaffSidebar
+    StaffSidebar, 
+    ShipperSidebar,
+    ShipperDashboard,
+    ShipperProfileSettings,
+    ShipperChangePassword
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -84,7 +88,6 @@ class RouterComponent extends React.Component {
                         <Route path="/edit-billing" component={EditBilling} />
                         <Route path="/add-follow-up" component={AddFollowUp} />
                         <Route path="/edit-follow-up" component={EditFollowUp} />
-                       
                         <Route path="/booking" component={Booking} />
                         <Route path="/booking-success" component={BookingSuccess} />
                         <Route path="/calendar" component={Calendar} />
@@ -130,6 +133,10 @@ class RouterComponent extends React.Component {
                         <Route path="/manage-customer" component={ManageCustomer} />
                         <Route path="/delete-customer" component={DeleteCustomer} />
                         <Route path="/staff-sidebar" component={StaffSidebar} />
+                        <Route path="/shipper-sidebar" component={ShipperSidebar} />
+                        <Route path="/shipper-dashboard" component={ShipperDashboard} />
+                        <Route path="/shipper-profile-settings" component={ShipperProfileSettings} />
+                        <Route path="/shipper-change-password" component={ShipperChangePassword} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    
