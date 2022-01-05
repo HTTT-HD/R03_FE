@@ -11,22 +11,6 @@ import { faStar } from '@fortawesome/fontawesome-free-solid';
 
 class BestProduct extends React.Component {
 
-	// state= {
-	//     responsive:{
-	//         0: {
-	//             items: 1,
-	//         },
-	//         450: {
-	//             items: 1,
-	//         },
-	//         600: {
-	//             items: 2,
-	//         },
-	//         1000: {
-	//             items: 2,
-	//         },
-	//     },
-	// }
 
 	constructor(props) {
 		super(props);
@@ -159,7 +143,7 @@ class BestProduct extends React.Component {
 						</Slider> */}
 
 						<div className="row justify-content-center">
-							<Link to="/purchase-product" className="btn-pink">tất cả sản phẩm</Link>
+							<Link to="/list-product" className="btn-pink">tất cả sản phẩm</Link>
 						</div>
 					</div>
 				</section>

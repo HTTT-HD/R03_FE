@@ -34,7 +34,7 @@ import {
     BookingStylist,
     StaffChangePassword,
     AddService,
-    PurchaseProduct,
+    ListCuaHang,
     ListProduct,
     EditProduct,
     AddProduct,
@@ -55,7 +55,8 @@ import {
     ShipperSidebar,
     ShipperDashboard,
     ShipperProfileSettings,
-    ShipperChangePassword
+    ShipperChangePassword,
+    PurchaseProduct,
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -115,7 +116,8 @@ class RouterComponent extends React.Component {
                         <Route path="/booking-stylist" component={BookingStylist} />
                         <Route path="/staff-change-password" component={StaffChangePassword} />
                         <Route path="/add-service" component={AddService} />
-                        <Route path="/purchase-product" component={PurchaseProduct} />
+                        <Route path="/list-cuahang" component={ListCuaHang} />
+                        <Route path="/ListSPofCH" component={PurchaseProduct} />
                         <Route path="/list-product" component={ListProduct} />
                         <Route path="/edit-product" component={EditProduct} />
                         <Route path="/add-product" component={AddProduct} />

@@ -68,10 +68,10 @@ class PurchaseProduct extends React.Component {
                                     <nav aria-label="breadcrumb" className="page-breadcrumb">
                                         <ol className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                            <li className="breadcrumb-item active" aria-current="page">Danh sách sản phẩm</li>
+                                            <li className="breadcrumb-item active" aria-current="page">Danh sách sản phẩm của cửa hàng</li>
                                         </ol>
                                     </nav>
-                                    <h2 className="breadcrumb-title">Danh sách sản phẩm</h2>
+                                    <h2 className="breadcrumb-title">Danh sách sản phẩm của cửa hàng</h2>
                                 </div>
                             </div>
                             { <Dropdown>
