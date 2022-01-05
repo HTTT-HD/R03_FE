@@ -64,15 +64,15 @@ class Footer extends React.Component {
 								<div className="footer-widget footer-menu">
 									<h2 className="footer-title">Useful links</h2>
 									<ul>
-										{/* <li>
-											<Link to="/search">Tìm kiếm nhân viên nail</Link>
-										</li> */}
-										{/* <li>
-											<Link to="/login">Đăng nhập</Link>
+										<li>
+											<Link to="/list-product">Sản phẩm</Link>
 										</li>
 										<li>
-											<Link to="/stylist-register">Đăng kí</Link>
-										</li> */}
+											<Link to="/checkout">Thanh Toán</Link>
+										</li>
+										<li>
+											<Link to="/">Đăng kí</Link>
+										</li>
 										{/* <li>
 											<Link to="/booking">Booking</Link>
 										</li> */}
@@ -98,13 +98,13 @@ class Footer extends React.Component {
 											<p className="title">Connect with us</p>
 											<ul>
 												<li>
-													<a href="https://www.facebook.com/N%C3%A0ng-Beauty-105131045177329" target="_blank"><FontAwesomeIcon icon={faFacebookF} /> </a>
+													<a href="#" target="_blank"><FontAwesomeIcon icon={faFacebookF} /> </a>
 												</li>
 												<li>
 													<Link to="#" target="_blank"><FontAwesomeIcon icon={faTwitter} /> </Link>
 												</li>
 												<li>
-													<a href="https://www.youtube.com/channel/UCQM6BH9ZEZmNUl4zpYfMs-Q" target="_blank"><FontAwesomeIcon icon={faYoutube} /> </a>
+													<a href="#" target="_blank"><FontAwesomeIcon icon={faYoutube} /> </a>
 												</li>
 												<li>
 													<Link to="#" target="_blank"><FontAwesomeIcon icon={faInstagram} /></Link>
