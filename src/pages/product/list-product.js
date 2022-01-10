@@ -19,13 +19,22 @@ class ListProduct extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3003/product")
-            .then(res => res.json())
+        fetch(
+            "https://localhost:5001/api/Product/get-all",
+            {
+                method:"POST",
+                body:JSON.stringify({
+					pageIndex: 0,
+                    pageSize: 0
+				})
+            }
+        ).then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     this.setState({
                         isLoaded: true,
-                        sanphams: result
+                        sanphams: result.data.items
                     })
                 },
                 (error) => {
@@ -113,13 +122,13 @@ class ListProduct extends React.Component {
                                                             </Link>
                                                         </div>
                                                         <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tensanpham}</Link></h4>
+                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tenSanPham}</Link></h4>
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
-                                                                        <li>Giá: {sanpham.dongia}</li>
+                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)}</li>
 
-                                                                        <li>Số lượng: {sanpham.soluong}</li>
+                                                                        <li>Số lượng: {sanpham.soLuong}</li>
 
                                                                     </ul>
                                                                 </div>
