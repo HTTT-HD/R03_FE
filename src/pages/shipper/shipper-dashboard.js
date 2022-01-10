@@ -51,16 +51,8 @@ class ShipperDashboard extends React.Component {
 													<div className="col-md-12 col-lg-4">
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
-																<h6>Tổng đối tác</h6>
-																<h3>1500</h3>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-12 col-lg-4">
-														<div className="dash-widget dct-border-rht">
-															<div className="dash-widget-info">
-																<h6>Đối tác hôm nay</h6>
-																<h3>1500</h3>
+																<h6>Tổng khách hàng</h6>
+																<h3>150</h3>
 															</div>
 														</div>
 													</div>
@@ -68,7 +60,7 @@ class ShipperDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Khách hàng hôm nay</h6>
-																<h3>160</h3>
+																<h3>15</h3>
 															</div>
 														</div>
 													</div>
@@ -90,8 +82,8 @@ class ShipperDashboard extends React.Component {
 																	<thead>
 																		<tr>
 																			<th>Tên khách hàng</th>
-																			<th>Ngày hẹn</th>
-																			<th>Mục đích</th>
+																			<th>Ngày giao</th>
+																			<th>Địa chỉ</th>
 																			<th className="text-center">Số tiền thanh toán</th>
 																			<th></th>
 																		</tr>
@@ -101,12 +93,35 @@ class ShipperDashboard extends React.Component {
 																			<td>
 																				<h2 className="table-avatar">
 																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																					<Link to="/customer-profile">Gordan Whelan <span>#PT0016</span></Link>
+																					<Link to="/customer-profile">Nguyễn Hoàng Nam <span>#kh0001</span></Link>
 																				</h2>
 																			</td>
-																			<td>11 Nov 2019 <span className="d-block text-info">10.00 AM</span></td>
-																			<td>Nail Art</td>
-																			<td className="text-center">$150</td>
+																			<td>9 Jan 2022 <span className="d-block text-info">11.30 AM</span></td>
+																			<td>145 Nguyễn Thị Minh Khai, p.5, quận 1</td>
+																			<td className="text-center">150.000VNĐ</td>
+																			<td className="text-right">
+																				<div className="table-action">
+																					<div className="btn btn-sm bg-info-light mr-1">
+																						<FontAwesomeIcon icon={faCheck} /> Nhận
+																					</div>
+																					<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
+																						<FontAwesomeIcon icon={faEye} /> Xem
+																					</Link>
+																				</div>
+																			</td>
+																		</tr>
+																	</tbody>
+																	<tbody>
+																		<tr>
+																			<td>
+																				<h2 className="table-avatar">
+																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
+																					<Link to="/customer-profile">Lê Hoài Ngọc <span>#kh0002</span></Link>
+																				</h2>
+																			</td>
+																			<td>9 Jan 2022 <span className="d-block text-info">12.30 AM</span></td>
+																			<td>145 Nguyễn Thị Minh Khai, p.5, quận 1</td>
+																			<td className="text-center">100.000VNĐ</td>
 																			<td className="text-right">
 																				<div className="table-action">
 																					<Link to="/view-" className="btn btn-sm bg-info-light mr-1">

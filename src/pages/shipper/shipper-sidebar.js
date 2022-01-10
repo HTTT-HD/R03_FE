@@ -20,10 +20,10 @@ class ShipperSidebar extends React.Component {
                                 <img src={StylistImg} alt="User Image" />
                             </Link>
                             <div className="profile-det-info">
-                                <h3>Urban Mauldin</h3>
+                                <h3>Nguyễn Minh Mẫn</h3>
 
                                 <div className="customer-details">
-                                    <h5 className="mb-0">Glitter Nail Art</h5>
+                                    <h5 className="mb-0">Shipper</h5>
                                 </div>
                             </div>
                         </div>
