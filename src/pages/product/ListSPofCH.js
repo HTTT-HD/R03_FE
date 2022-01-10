@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 import { CuaHangSidebar } from './Cuahang-sidebar';
+import { DOMAIN } from './../../constants'
 class PurchaseProduct extends React.Component {
 
     constructor(props) {
@@ -13,19 +14,34 @@ class PurchaseProduct extends React.Component {
             isLoaded: false,
             sanphams: [],
             order: [],
+            user:[],
             total:0,
             searchValue:""
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        fetch("http://localhost:3003/product")
-            .then(res => res.json())
-            .then(
-                (result) => {
+        Promise.all([
+            fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`),
+            fetch(`${DOMAIN}/ThanhVien/user-login`,
+		    {
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+		    })
+        ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(
+                ([result1,result2]) => {
+                    console.log(result1,result2)
                     this.setState({
                         isLoaded: true,
-                        sanphams: result
+                        sanphams: result1.data.items,
+                        user:result2.data
                     })
                 },
                 (error) => {
@@ -42,6 +58,25 @@ class PurchaseProduct extends React.Component {
         this.setState((state, props) => {
             return { order: [...state.order, event] };
         });
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
+                'My-Custom-Header': 'foobar'
+            },
+            body: JSON.stringify({
+                "cuaHangId": event.cuaHangId,
+                "sanPhamId": event.id,
+                "soLuong": 1
+            })
+        };
+        fetch(`${DOMAIN}/Cart/add-product`, requestOptions)
+        .then(
+            (res)=>{
+                console.log(res)
+            }
+        )
         // console.log(event);
     
     }
@@ -53,10 +88,36 @@ class PurchaseProduct extends React.Component {
             })
         }
     }
+    handleSubmit(event){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
+                'My-Custom-Header': 'foobar'
+            },
+            body: JSON.stringify({
+                "cuaHangId": event.cuaHangId,
+                "sanPhamId": event.id,
+                "soLuong": 1
+            })
+        };
+        fetch(`${DOMAIN}/Cart/add-product`, requestOptions)
+        .then(
+            (res)=>{
+                console.log(res)
+            }
+        )
+
+    }
     render() {
         console.log(this.state.order);
         let total = 0;
         let {sanphams,searchValue}=this.state;
+        const product = sanphams.filter(item=>{
+            if (item.cuaHangId == localStorage.getItem("CH_id"))
+                return item
+        })
         return (
             <div>
                 <form action="/booking-stylist" method="POST" onSubmit={this.handleSubmit}>
@@ -82,12 +143,12 @@ class PurchaseProduct extends React.Component {
                                     {
                                         this.state.order.map(i => (
                                             <Dropdown.Item href="">
-                                                {i.tensanpham} - {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(i.dongia)} VND
+                                                {i.tenSanPham} - {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(i.donGia)} VND
                                             </Dropdown.Item>
                                         ))
                                     }
                                     <Dropdown.Item>
-                                        Tổng tiền: {this.state.order.reduce((sum, i) => sum + parseInt(i.dongia.replace(".", "")), 0)} VND
+                                        Tổng tiền: {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(this.state.total)} VND
                                     </Dropdown.Item>
                                     <Dropdown.Item>
                                         <Link to="./checkout">TIẾN HÀNH THANH TOÁN</Link>
@@ -119,8 +180,8 @@ class PurchaseProduct extends React.Component {
                                         <ul className="categories">
                                             {
                                                 this.state.order.map(i=>(
-                                                total+=Number(i.dongia),
-                                                <li>{i.tensanpham} - {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(i.dongia) + 'VNĐ'}</li>
+                                                total+=i.donGia,
+                                                <li>{i.tenSanPham} - {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(i.donGia) + 'VNĐ'}</li>
                 
                                                 ))    
                                             }
@@ -152,10 +213,10 @@ class PurchaseProduct extends React.Component {
                                         </div>
                                     </div>
                                     {
-                                    sanphams.filter((item)=>{
+                                    product.filter((item)=>{
                                         if(searchValue==""){
                                             return item
-                                        }else if(item.tensanpham.toLowerCase().includes(searchValue.toLowerCase())){
+                                        }else if(item.tenSanPham.toLowerCase().includes(searchValue.toLowerCase())){
                                             return item
                                         }
                                     }).map(sanpham =>
@@ -172,13 +233,13 @@ class PurchaseProduct extends React.Component {
                                                             </Link>
                                                         </div>
                                                         <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tensanpham}</Link></h4>
+                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tenSanPham}</Link></h4>
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
-                                                                        <li>Giá: {sanpham.dongia} VND</li>
-                                                                        <li>Loại sản phẩm: {sanpham.loaisanpham} </li>
-                                                                        <li>Số lượng: {sanpham.soluong}</li>
+                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"} VND</li>
+                                                                        <li>Loại sản phẩm: {sanpham.tenDanhMuc} </li>
+                                                                        <li>Số lượng: {sanpham.soLuong}</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

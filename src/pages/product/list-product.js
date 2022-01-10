@@ -18,6 +18,7 @@ class ListProduct extends React.Component {
             total: 0,
             searchValue: ""
         }
+        this.handleClick=this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +55,10 @@ class ListProduct extends React.Component {
                 searchValue: inputValue
             })
         }
+    }
+    handleClick(event){
+        console.log(event)
+        localStorage.setItem("CH_id",event)
     }
     render() {
         console.log(this.state.order);
@@ -107,7 +112,7 @@ class ListProduct extends React.Component {
                                                 <div className="stylist-widget">
                                                     <div className="doc-info-left">
                                                         <div className="stylist-img">
-                                                            <Link to="/list-cuahang">
+                                                            <Link onClick={()=>this.handleClick(sanpham.cuaHangId)} to="/ListSPofCH">
                                                                 <img
                                                                     className="img-fluid"
                                                                     alt="User Image"

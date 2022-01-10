@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin, faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 import { CuaHangSidebar } from './Cuahang-sidebar';
+import { DOMAIN } from './../../constants'
 class ListCuaHang extends React.Component {
 
     constructor(props) {
@@ -16,52 +17,27 @@ class ListCuaHang extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3003/product/")
-            .then(res => res.json())
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     this.setState({
                         isLoaded: true,
-                        services: result
-                    });
+                        services: result.data.items
+                    })
                 },
                 (error) => {
                     this.setState({
                         isLoaded: true,
                         error
-                    });
+                    })
                 }
             )
     }
 
 
     render() {
-        var settings = {
-            dots: false,
-            infinite: true,
-            speed: 700,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            responsive: [{
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3
-                }
-            },
-            {
-                breakpoint: 776,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 567,
-                settings: {
-                    slidesToShow: 1
-                }
-            }]
-        };
-
+        let {services}=this.state;
         return (
             <div>
                 <form action="/booking-stylist" method="POST" onSubmit={this.handleSubmit}>
@@ -97,13 +73,16 @@ class ListCuaHang extends React.Component {
                     {/* Page Content */}
                     <div className="container">
                         <div className="row ">
-                            {this.state.services.map((item) => (
+                            {this.state.services.filter(item=>{
+                                if(item.cuaHangId == localStorage.getItem("CH_id"))
+                                    return item
+                            }).map((item) => (
                                 <div className="col-md-3 col-sm-6">
                                     <div className="card widget-profile pat-widget-profile">
                                         <div className="card-body">
                                             <div className="pro-widget-content">
                                                 <div className="profile-info-widget">
-                                                    <Link to="/ListSPofCH" className="booking-doc-img">
+                                                    <Link  to="/ListSPofCH" className="booking-doc-img">
                                                         <img src={item.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
