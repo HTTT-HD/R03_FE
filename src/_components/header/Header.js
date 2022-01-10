@@ -136,8 +136,22 @@ class Header extends React.Component {
 							<li className={pathname === ('/shipper-dashboard') ? 'active' : ''}>
 								<Link to="/shipper-dashboard">Shipper</Link>
 							</li>
-							<li className={pathname === ('/purchase-product') ? 'active' : ''}>
-								<Link to="/list-product">Sản phẩm</Link>
+							<li className={`has-submenu ${pathname === ('/list-rice') ? 'active' : pathname === ('/list-meat') ? 'active' : pathname === ('/list-seafood') ? 'active' : pathname === ('/other-categories') ? 'active' : ''}`}>
+								<Link to="">Danh mục sản phẩm <FontAwesomeIcon icon={faChevronDown} /></Link>
+								<ul className="submenu">
+									<li className={`${pathname === ('/list-rice') ? 'active' : ''}`}>
+										<Link to="/list-rice">Gạo</Link>
+									</li>
+									<li className={`${pathname === ('/list-meat') ? 'active' : ''}`}>
+										<Link to="/list-meat">Thịt</Link>
+									</li>
+									<li className={pathname === ('/list-seafood') ? 'active' : ''}>
+										<Link to="/list-seafood">Hải sản</Link>
+									</li>
+									<li className={pathname === ('/other-categories') ? 'active' : ''}>
+										<Link to="/other-categories">Khác</Link>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</div>

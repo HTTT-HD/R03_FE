@@ -57,6 +57,10 @@ import {
     ShipperProfileSettings,
     ShipperChangePassword,
     PurchaseProduct,
+    ListProductOfOtherCategories,
+    ListProductOfRice,
+    ListProductOfMeat,
+    ListProductOfSeafood,
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -139,6 +143,10 @@ class RouterComponent extends React.Component {
                         <Route path="/shipper-dashboard" component={ShipperDashboard} />
                         <Route path="/shipper-profile-settings" component={ShipperProfileSettings} />
                         <Route path="/shipper-change-password" component={ShipperChangePassword} />
+                        <Route path="/other-categories" component={ListProductOfOtherCategories} />
+                        <Route path="/list-rice" component={ListProductOfRice} />
+                        <Route path="/list-meat" component={ListProductOfMeat} />
+                        <Route path="/list-seafood" component={ListProductOfSeafood} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    
