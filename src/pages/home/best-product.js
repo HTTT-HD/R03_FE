@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
+import { DOMAIN } from './../../constants'
 // Import Slick Slider
 import Slider from "react-slick";
 import CustomerImg from '../../assets/img/customers/customer.jpg';
@@ -11,50 +11,34 @@ import { faStar } from '@fortawesome/fontawesome-free-solid';
 
 class BestProduct extends React.Component {
 
-	// state= {
-	//     responsive:{
-	//         0: {
-	//             items: 1,
-	//         },
-	//         450: {
-	//             items: 1,
-	//         },
-	//         600: {
-	//             items: 2,
-	//         },
-	//         1000: {
-	//             items: 2,
-	//         },
-	//     },
-	// }
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			error: null,
 			isLoaded: false,
-			services: []
+			sanphams: []
 		};
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3003/product/")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					this.setState({
-						isLoaded: true,
-						services: result
-					});
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
-				}
-			)
-	}
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result)
+                    this.setState({
+                        isLoaded: true,
+                        sanphams: result.data.items
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+    }
 
 
 	render() {
@@ -97,7 +81,7 @@ class BestProduct extends React.Component {
 						</div>
 						<div className="container">
 								<div className="row ">
-									{this.state.services.map((item) => (
+									{this.state.sanphams.map((item) => (
 										<div className="col-md-3 col-sm-6">
 											<div className="card widget-profile pat-widget-profile">
 												<div className="card-body">
@@ -109,7 +93,7 @@ class BestProduct extends React.Component {
 															<div className="profile-det-info">
 																<h3>
 																	<Link to="/customer-profile"></Link>
-																	{item.tensanpham}
+																	{item.tenSanPham}
 																</h3>
 															</div>
 														</div>
@@ -117,13 +101,13 @@ class BestProduct extends React.Component {
 													<div className="customer-info">
 														<ul>
 															<li>
-																Số lượng <span>{item.soluong}</span>
+																Số lượng <span>{item.soLuong}</span>
 															</li>
 															<li>
-																Đơn giá <span>{new Intl.NumberFormat({ style: "currency", currency: "JPY" }).format(item.dongia) + "VNĐ"}</span>
+																Đơn giá <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.donGia) + "VNĐ"}</span>
 															</li>
 															<li>
-																Loại sản phẩm <span>{item.loaisanpham}</span>
+																Loại sản phẩm <span>{item.tenDanhMuc}</span>
 															</li>
 														</ul>
 													</div>
@@ -159,7 +143,7 @@ class BestProduct extends React.Component {
 						</Slider> */}
 
 						<div className="row justify-content-center">
-							<Link to="/purchase-product" className="btn-pink">tất cả sản phẩm</Link>
+							<Link to="/list-product" className="btn-pink">tất cả sản phẩm</Link>
 						</div>
 					</div>
 				</section>

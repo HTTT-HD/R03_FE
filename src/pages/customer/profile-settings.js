@@ -9,6 +9,7 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
 class ProfileSettings extends React.Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ class ProfileSettings extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		fetch(`${DOMAIN}/ThanhVien/user-login`,
 		{
 			method:"GET",
 			headers: {
@@ -137,7 +138,7 @@ class ProfileSettings extends React.Component {
 													<div className="col-12 col-md-6">
 														<div className="form-group">
 															<label>Giới tính</label>
-															<input onChange={(e)=>this.handleChange(e)} type="date" name="dob" className="form-control datetimepicker" defaultValue={data.tenGioiTinh} />
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="GioiTinh" className="form-control" defaultValue={data.tenGioiTinh} />
 														</div>
 													</div>
 													<div className="col-12 col-md-6">

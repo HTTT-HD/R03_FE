@@ -53,7 +53,7 @@ class CuaHangSidebar extends React.Component {
                                 <h3>{data.name}</h3>
                                 <div className="customer-details">
                                     {/* <h5><FontAwesomeIcon icon={faBirthdayCake} />{data.dob}</h5> */}
-                                    <h4>Tên khách hàng</h4>
+                                    <h4>Tên cửa hàng</h4>
                                     <h5 className="mb-0"><FontAwesomeIcon icon={faMapMarkerAlt} />{data.address}</h5>
                                 </div>
                             </div>

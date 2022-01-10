@@ -8,6 +8,7 @@ import LoginImg from '../../assets/img/register-banner.png';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { DOMAIN } from '../../constants';
 
 function makeid(length) {
 	var result           = '';
@@ -41,8 +42,7 @@ class Register extends React.Component {
 		event.preventDefault();
 		this.setState({ submitted: true });
 		console.log(this.state)
-		fetch(
-				"https://localhost:5001/api/ThanhVien/create",
+		fetch(`${DOMAIN}/ThanhVien/create`,
 				{
 					method: "POST",
 					headers: {

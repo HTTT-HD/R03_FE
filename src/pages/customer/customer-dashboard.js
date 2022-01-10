@@ -21,6 +21,7 @@ import UserAvatar9 from '../../assets/img/stylists/stylist-thumb-10.jpg';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEye, faPrint, faTimes } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
 class CustomerDashboard extends React.Component {
 	constructor(props) {
@@ -38,7 +39,7 @@ class CustomerDashboard extends React.Component {
 		localStorage.setItem("status",value)
 	}
 	componentDidMount() {
-		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		fetch(`${DOMAIN}/ThanhVien/user-login`,
 		{
 			method:"GET",
 			headers: {
