@@ -53,7 +53,7 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/">
+                                    <Link to="/commission">
                                         <FontAwesomeIcon icon={faMoneyBillAlt} />
                                         <span>Tính tiền hoa hồng</span>
                                     </Link>

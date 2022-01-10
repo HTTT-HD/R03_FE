@@ -12,3 +12,4 @@ export * from './manage-customer';
 export * from './delete-customer';
 export * from './invoices';
 export * from './staff-sidebar';
+export * from './commission';
