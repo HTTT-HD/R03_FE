@@ -137,7 +137,7 @@ class ProfileSettings extends React.Component {
 													<div className="col-12 col-md-6">
 														<div className="form-group">
 															<label>Giới tính</label>
-															<input onChange={(e)=>this.handleChange(e)} type="date" name="dob" className="form-control datetimepicker" defaultValue={data.tenGioiTinh} />
+															<input onChange={(e)=>this.handleChange(e)} type="text" name="GioiTinh" className="form-control" defaultValue={data.tenGioiTinh} />
 														</div>
 													</div>
 													<div className="col-12 col-md-6">
