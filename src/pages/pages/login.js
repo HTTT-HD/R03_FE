@@ -91,8 +91,8 @@ class Login extends React.Component {
 												</div>
 												<form action="/index" onSubmit={this.handleSubmit}>
 													<div className="form-group form-focus">
-														<input type="email" className="form-control floating" value={this.state.username} onChange={this.handleChangeUsername} />
-														<label className="focus-label">Email hoặc số điện thoại</label>
+														<input type="text" className="form-control floating" value={this.state.username} onChange={this.handleChangeUsername} />
+														<label className="focus-label">Tài khoản</label>
 													</div>
 													<div className="form-group form-focus">
 														<input type="password" className="form-control floating" value={this.state.password} onChange={this.handleChangePassword} />

@@ -4,6 +4,8 @@ import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 import { CuaHangSidebar } from './Cuahang-sidebar';
+import { DOMAIN } from './../../constants'
+
 class ListProduct extends React.Component {
 
     constructor(props) {
@@ -19,16 +21,7 @@ class ListProduct extends React.Component {
     }
 
     componentDidMount() {
-        fetch(
-            "https://localhost:5001/api/Product/get-all",
-            {
-                method:"POST",
-                body:JSON.stringify({
-					pageIndex: 0,
-                    pageSize: 0
-				})
-            }
-        ).then(res => res.json())
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)
