@@ -9,6 +9,7 @@ import UserRolesContext from '../../authenticationContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { AirlineSeatIndividualSuiteSharp } from '@material-ui/icons';
+import { DOMAIN } from '../../constants';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -36,8 +37,7 @@ class Login extends React.Component {
 		event.preventDefault();
 		this.setState({ submitted: true });
 		console.log(this.state)
-		fetch(
-			"https://localhost:5001/api/ThanhVien/login",
+		fetch(`${DOMAIN}/ThanhVien/login`,
 			{
 				method: "POST",
 				headers: {

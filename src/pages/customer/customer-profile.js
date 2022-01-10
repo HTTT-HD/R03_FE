@@ -15,6 +15,7 @@ import UserAvatar2 from '../../assets/img/stylists/stylist-thumb-03.jpg';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPrint, faMapMarkerAlt, faEdit, faTrashAlt, faClock } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
 class CustomerProfile extends React.Component {
 	constructor() {
@@ -26,7 +27,7 @@ class CustomerProfile extends React.Component {
 		}
 	}
 	componentDidMount() {
-		fetch('https://localhost:5001/api/ThanhVien/user-login',
+		fetch(`${DOMAIN}/ThanhVien/user-login`,
 		{
 			method:"GET",
 			headers: {
