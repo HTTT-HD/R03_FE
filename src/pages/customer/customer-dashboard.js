@@ -7,16 +7,7 @@ import { CustomerSidebar } from './customer-sidebar';
 import { Tabs, Tab } from "react-bootstrap";
 
 // Import Images
-import UserAvatar from '../../assets/img/stylists/stylist-thumb-01.jpg';
-import UserAvatar1 from '../../assets/img/stylists/stylist-thumb-02.jpg';
 import UserAvatar2 from '../../assets/img/stylists/stylist-thumb-03.jpg';
-import UserAvatar3 from '../../assets/img/stylists/stylist-thumb-04.jpg';
-import UserAvatar4 from '../../assets/img/stylists/stylist-thumb-05.jpg';
-import UserAvatar5 from '../../assets/img/stylists/stylist-thumb-06.jpg';
-import UserAvatar6 from '../../assets/img/stylists/stylist-thumb-07.jpg';
-import UserAvatar7 from '../../assets/img/stylists/stylist-thumb-08.jpg';
-import UserAvatar8 from '../../assets/img/stylists/stylist-thumb-09.jpg';
-import UserAvatar9 from '../../assets/img/stylists/stylist-thumb-10.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

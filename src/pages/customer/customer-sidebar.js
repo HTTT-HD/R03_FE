@@ -6,7 +6,7 @@ import CustomerImg from '../../assets/img/customers/customer.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBirthdayCake, faBookmark, faColumns, faComments, faLock, faMapMarkerAlt, faSignOutAlt, faUserCog } from '@fortawesome/fontawesome-free-solid';
+import { faCartPlus, faColumns, faComments, faLock, faMapMarkerAlt, faSignOutAlt, faUserCog } from '@fortawesome/fontawesome-free-solid';
 
 class CustomerSidebar extends React.Component {
     constructor(props) {
@@ -66,6 +66,12 @@ class CustomerSidebar extends React.Component {
                                     <Link to="/customer-dashboard">
                                         <FontAwesomeIcon icon={faColumns} />
                                         <span>Lịch sửa mua hàng</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/cart" onClick={() => this.handleButtonClick(data.idc)}>
+                                        <FontAwesomeIcon icon={faCartPlus} />
+                                        <span>Giỏ hàng</span>
                                     </Link>
                                 </li>
                                 <li>
