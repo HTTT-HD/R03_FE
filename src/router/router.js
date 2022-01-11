@@ -62,7 +62,8 @@ import {
     ListProductOfMeat,
     ListProductOfSeafood,
     Commission,
-    Cart
+    Cart,
+    NeededProduct
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -151,6 +152,7 @@ class RouterComponent extends React.Component {
                         <Route path="/list-seafood" component={ListProductOfSeafood} />
                         <Route path="/commission" component={Commission} />
                         <Route path="/cart" component={Cart} />
+                        <Route path="/needed-product" component={NeededProduct} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    

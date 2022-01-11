@@ -59,7 +59,7 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/">
+                                    <Link to="/needed-product">
                                         <FontAwesomeIcon icon={faAngleRight} />
                                         <span>TK mặt hàng thiết yếu</span>
                                     </Link>
