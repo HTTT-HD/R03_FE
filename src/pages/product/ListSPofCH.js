@@ -120,7 +120,7 @@ class PurchaseProduct extends React.Component {
         })
         return (
             <div>
-                <form action="/booking-stylist" method="POST" onSubmit={this.handleSubmit}>
+                <form action="/rentalmarket/checkout" method="POST" onSubmit={this.handleSubmit}>
                     {/* Breadcrumb */}
                     <div className="breadcrumb-bar">
                         <div className="container-fluid">

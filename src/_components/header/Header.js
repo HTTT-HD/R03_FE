@@ -2,6 +2,7 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import $ from "jquery";
 import { Link } from 'react-router-dom';
+import { DOMAIN } from './../../constants'
 
 // Import Images
 import LogoWhite from '../../assets/img/logo-white.png';
@@ -19,70 +20,57 @@ function logOut(params) {
 }
 
 class Header extends React.Component {
+	constructor(props) {
+        super(props)
+        this.state = {
+            error: null,
+            isLoaded: false,
+            data: []
+        }
+    }
 	static contextType = UserRolesContext;
 	componentDidMount() {
-
-		// Mobile menu sidebar overlay
-
-		$('body').append('<div className="sidebar-overlay"></div>');
-		$(document).on('click', '#mobile_btn', function () {
-			$('main-wrapper').toggleClass('slide-nav');
-			$('.sidebar-overlay').toggleClass('opened');
-			$('html').addClass('menu-opened');
-			return false;
-		});
-
-		$(document).on('click', '.sidebar-overlay', function () {
-			$('html').removeClass('menu-opened');
-			$(this).removeClass('opened');
-			$('main-wrapper').removeClass('slide-nav');
-		});
-
-		$(document).on('click', '#menu_close', function () {
-			$('html').removeClass('menu-opened');
-			$('.sidebar-overlay').removeClass('opened');
-			$('main-wrapper').removeClass('slide-nav');
-		});
-
-		//scroll header
-
-		$(window).scroll(function () {
-			var sticky = $('.min-header'),
-				scroll = $(window).scrollTop();
-			if (scroll >= 100) {
-				sticky.addClass('nav-sticky');
-				$('body').addClass('map-up');
+		fetch(`${DOMAIN}/ThanhVien/user-login`,
+		{
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
 			}
-			else {
-				sticky.removeClass('nav-sticky');
-				$('body').removeClass('map-up');
-			}
-		});
+		})
+			.then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result)
+					this.setState({
+						isLoaded: true,
+						data: result.data
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			)
 	}
+	
 	handleLogout() {
 		localStorage.clear();
 		localStorage.removeItem("token");
 	}
 
 	render() {
-		const { role, isAuthenticated, updateIsAuthenticated } = this.context
-		if (!isAuthenticated) {
-			let token = localStorage.getItem("AccessToken");
-			if (token) {
-				updateIsAuthenticated(true)
-			} else {
-				updateIsAuthenticated(false)
-			}
-		}
 		const exclusionArray = []
 		if (exclusionArray.indexOf(this.props.location.pathname) >= 0) {
 			return '';
 		}
-
 		const pathname = this.props.location.pathname;
-
-
-
+		let isAuthenticated = false;
+		if (localStorage.getItem("isAuthenticated")=="True"){isAuthenticated = true;}
+			
 		// let user = JSON.parse(localStorage.getItem('user-info'));
 		console.log(pathname, "Pathnames")
 		return (
@@ -221,7 +209,7 @@ class Header extends React.Component {
 													<img src={UserIcon} alt="User Image" className="avatar-img rounded-circle" />
 												</div>
 												<div className="user-text">
-													<h6>Darren Elder</h6>
+													<h6>{this.state.data.tenThanhVien}</h6>
 													<p className="text-muted mb-0">Nhà tạo mẫu</p>
 												</div>
 											</div>

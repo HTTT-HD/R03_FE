@@ -10,6 +10,7 @@ import { faMapMarkerAlt, faStar } from '@fortawesome/fontawesome-free-solid';
 
 import "./Paypal.css";
 import axios from 'axios';
+import { DOMAIN } from '../../constants';
 import { Alert } from 'bootstrap';
 
 function Checkout() {
@@ -19,7 +20,7 @@ function Checkout() {
 	const [paycheck,setPaycheck]=useState({st:false});
 	const [redirect,setRedirect]=useState({st:false});
 	const [username, setUsername] = useState({name:""});
-	const [useremail, setemail] = useState({email:""});
+	const [address, setemail] = useState({address:""});
 	const [userphone, setphone] = useState({phone:""});
 	const [Name,setName] = useState({name:""})
 	const [price,setPrice]=useState({price:""})
@@ -39,23 +40,21 @@ function Checkout() {
 
 	const paypal = useRef();
 	useEffect(() => {
-		const fetchData = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				token: localStorage.getItem("Accesstoken")
-			})
+		const requestOptions = {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
+            }
 		};
-		fetch("http://localhost:3000/user/profile", fetchData)
+		fetch(`${DOMAIN}/ThanhVien/user-login`, requestOptions)
 		.then(res=>res.json())
 		.then(data =>{
 			//console.log(data.info)
-			const user_object=data.info;
-			username.name=user_object.name
-			useremail.email=user_object.email
-			userphone.phone=user_object.phone
+			const user_object=data.data
+			username.name=user_object.tenThanhVien
+			address.address=user_object.diaChi
+			userphone.phone=user_object.soDienThoai
 			//console.log(user_object.name)
 			//console.log(user_object.email)
 			//console.log(user_object.phone)
@@ -72,7 +71,7 @@ function Checkout() {
                     //description: "Total money",
                     amount: {
                     currency_code: "USD",
-                    value: parseFloat(localStorage.to_USD).toFixed(1), //Pass total money here
+                    value: 500, //Pass total money here
                     },
                 },
                 ],
@@ -80,6 +79,7 @@ function Checkout() {
             },
             onApprove: async (data, actions) => {
 				const order = await actions.order.capture();
+				alert("Thanh toán thành công")
 				const data1 = {
 					ida: localStorage.getItem("id_app"),
 					status: "Chưa xác nhận",
@@ -103,6 +103,7 @@ function Checkout() {
 				});
             },
             onError: (err) => {
+				alert("Thanh toán không thành công")
 				const data2 = {
 					ida: localStorage.getItem("id_app"),
 					status: "Hủy",
@@ -181,19 +182,20 @@ function Checkout() {
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
-																<label>Địa chỉ giao</label>
-																<input className="form-control" type="email" value={useremail.email} />
+																<label>Email</label>
+																<input className="form-control" type="email" value={address.address} />
 															
 															</div>
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
-																<label>Số điện thoại</label>
+																<label>Số diện thoại</label>
 																<input className="form-control" type="text" value={userphone.phone}/>
 															
 															</div>
 														</div>
 													</div>
+												<div className="exist-customer">Khách hàng hiện tại? <Link to="#">Click tại đây để đăng nhập</Link></div>
 											</div>
 									
 											{/* Personal Information */}
@@ -233,7 +235,7 @@ function Checkout() {
 															}}
 														/>
 														<span className="checkmark"></span>
-														Thanh toán sau khi nhận hàng
+														Thanh toán tại cửa hàng
 													</label>
 												</div>
 												{/*Payment */}
@@ -280,11 +282,11 @@ function Checkout() {
 
 										{/* Booking professor Info */}
 										<div className="booking-doc-info">
-											<Link className="booking-doc-img">
+											<Link to="/stylist-profile" className="booking-doc-img">
 												<img src={UserImg} alt="User Image" />
 											</Link>
 											<div className="booking-info">
-												<h4><Link >{Name.name}Tên cửa hàng</Link></h4>
+												<h4><Link to="/stylist-profile">{Name.name}</Link></h4>
 												<div className="rating">
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} className="filled" />
@@ -300,11 +302,11 @@ function Checkout() {
 										<div className="booking-summary">
 											<div className="booking-item-wrap">
 												<ul className="booking-date">
-													<br/><li>Ngày <span>{date.date}</span></li>
+													<li>Ngày <span>{date.date}</span></li>
 													<li>Giờ <span>{time.time+':00'}</span></li>
 												</ul>
 												<ul className="booking-fee">
-													<li>Phí giao hàng <span>{price.price}</span></li>
+													<li>Phí dịch vụ <span>{price.price}</span></li>
 												</ul>
 												<div className="booking-total">
 													<ul className="booking-total-list">

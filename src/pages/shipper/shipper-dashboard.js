@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 // Import Sidebar
 import { ShipperSidebar } from './shipper-sidebar';
-
+import { DOMAIN } from './../../constants'
 // Import Components
 import { Tabs, Tab } from "react-bootstrap";
 
@@ -14,6 +14,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faEye, faTimes } from '@fortawesome/fontawesome-free-solid';
 
 class ShipperDashboard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			error: null,
+			isLoaded: false,
+			orders: []
+		};
+	}
+	componentDidMount() {
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result)
+                    this.setState({
+                        isLoaded: true,
+                        sanphams: result.data.items
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
+		}
     render() {
         return (
 			<div>

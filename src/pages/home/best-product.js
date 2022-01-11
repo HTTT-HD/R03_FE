@@ -38,7 +38,7 @@ class BestProduct extends React.Component {
                     })
                 }
             )
-    }
+		}
 
 
 	render() {
