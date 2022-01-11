@@ -2,7 +2,6 @@ import React from 'react';
 import { Link,Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { CustomerSidebar } from './customer-sidebar';
-import { Alert } from 'bootstrap';
 
 class ChangePassword extends React.Component {
     constructor(props) {
