@@ -123,7 +123,7 @@ class Cart extends React.Component {
                                                                             <h4>Tổng số tiền: 300.000VND</h4>
                                                                         </div>
                                                                         <div className="col">
-                                                                            <Link to="#" className="btn btn-primary submit-btn">Thanh toán</Link>
+                                                                            <Link to="/checkout" className="btn btn-primary submit-btn">Thanh toán</Link>
                                                                         </div>
                                                                     </div>
                                                                     <br />
@@ -214,7 +214,7 @@ class Cart extends React.Component {
                                                                             <h4>Tổng số tiền: 300.000VND</h4>
                                                                         </div>
                                                                         <div className="col">
-                                                                            <Link to="#" className="btn btn-primary submit-btn">Thanh toán</Link>
+                                                                            <Link to="/checkout" className="btn btn-primary submit-btn">Thanh toán</Link>
                                                                         </div>
                                                                     </div>
                                                                     <br />
