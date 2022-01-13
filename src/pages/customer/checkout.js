@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import moment from 'moment';
 import { Link,Redirect } from 'react-router-dom'
 // Import Image
 import UserImg from '../../assets/img/stylists/stylist-thumb-02.jpg';
@@ -19,15 +19,13 @@ function Checkout() {
 	const [isPaymentChecked, setIsPaymentChecked] = useState(true);
 	const [paycheck,setPaycheck]=useState({st:false});
 	const [redirect,setRedirect]=useState({st:false});
-	const [username, setUsername] = useState({name:""});
-	const [address, setemail] = useState({address:""});
-	const [userphone, setphone] = useState({phone:""});
-	const [Name,setName] = useState({name:""})
-	const [price,setPrice]=useState({price:""})
-	const [date,setDate]=useState({date:""})
-	const [time,setTime]=useState({time:""})
-	const [rate,setRate]=useState({rate:""})
-
+	const [username, setUsername] = useState([]);
+	const [address, setaddress] = useState([]);
+	const [userphone, setphone] = useState([]);
+	const [total,setTotal]=useState([]);
+	const [ship,setShip]=useState([]);
+	const [store,setStore]=useState([]);
+	const [date,setDate]=useState([]);
 	const id_app = {id: localStorage.getItem("id_app")};
 	// console.log("id " + id_app.id);
 	// console.log('Sum');
@@ -39,7 +37,7 @@ function Checkout() {
 	// console.log(localStorage.end_time);
 
 	const paypal = useRef();
-	useEffect(() => {
+	useEffect( () => {
 		const requestOptions = {
             method: 'GET',
             headers: { 
@@ -47,18 +45,36 @@ function Checkout() {
                 'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
             }
 		};
-		fetch(`${DOMAIN}/ThanhVien/user-login`, requestOptions)
-		.then(res=>res.json())
-		.then(data =>{
+		async function fetchdata(){
+			const result = await axios(`${DOMAIN}/ThanhVien/user-login`, requestOptions)
 			//console.log(data.info)
-			const user_object=data.data
-			username.name=user_object.tenThanhVien
-			address.address=user_object.diaChi
-			userphone.phone=user_object.soDienThoai
-			//console.log(user_object.name)
+			console.log(result.data.data)
+			const user_object=result.data.data
+			setUsername(user_object.tenThanhVien)//user_object.tenThanhVien
+			setaddress(user_object.diaChi)
+			setphone(user_object.soDienThoai)
+			console.log(username)
 			//console.log(user_object.email)
 			//console.log(user_object.phone)
-		})
+		}
+		fetchdata();
+		async function fetchOrder(){
+			const result = await axios(`${DOMAIN}/Order/detail?donHangId=${localStorage.getItem("id_order")}`, requestOptions)
+			//console.log(data.info)
+			console.log(result.data.data)
+			const detail_order=result.data.data
+			
+			setUsername(detail_order.nguoiDat)//detail_order.tenThanhVien
+			setaddress(detail_order.diaChiNhan)
+			setphone(detail_order.soDienThoai)
+			setTotal(detail_order.tongTien)
+			setShip(detail_order.tienShip)
+			setStore(detail_order.tenCuaHang)
+			//console.log(user_object.email)
+			//console.log(user_object.phone)
+		}
+		fetchOrder();
+		
 		},[]);
 	useEffect(() => {
         window.paypal
@@ -126,16 +142,7 @@ function Checkout() {
         .render(paypal.current);
     }, []);
 	useEffect(() => {
-		fetch(`http://localhost:3000/employee/dashboard/${localStorage.getItem("id_app")}`)
-		.then(res=>res.json())
-		.then(data=>{
-			//console.log(data)
-			Name.name=data.emp[0].lastname+' '+data.emp[0].firstname
-			rate.rate=data.emp[0].rate
-			price.price=data.invoice.price
-			date.date=data.invoice.date_reserved
-			time.time=data.invoice.start_time
-		})
+
 		},[]);	
 
 	if(redirect.st == false){
@@ -177,20 +184,20 @@ function Checkout() {
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
 																<label>Họ và tên</label>
-																<input className="form-control" type="text" value={username.name}/>
+																<input className="form-control" type="text" value={username}/>
 															</div>
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
 																<label>Email</label>
-																<input className="form-control" type="email" value={address.address} />
+																<input className="form-control" type="email" value={address} />
 															
 															</div>
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
 																<label>Số diện thoại</label>
-																<input className="form-control" type="text" value={userphone.phone}/>
+																<input className="form-control" type="text" value={userphone}/>
 															
 															</div>
 														</div>
@@ -276,7 +283,7 @@ function Checkout() {
 								{/* Booking Summary */}
 								<div className="card booking-card">
 									<div className="card-header">
-										<h4 className="card-title">Tổng</h4>
+										<h4 className="card-title">Thông tin hóa đơn</h4>
 									</div>
 									<div className="card-body">
 
@@ -286,14 +293,14 @@ function Checkout() {
 												<img src={UserImg} alt="User Image" />
 											</Link>
 											<div className="booking-info">
-												<h4><Link to="/stylist-profile">{Name.name}</Link></h4>
+												<h4><Link to="/stylist-profile">{store}</Link></h4>
 												<div className="rating">
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} className="filled" />
 													<FontAwesomeIcon icon={faStar} />
-													<span className="d-inline-block average-rating">{rate.rate}</span>
+													
 												</div>
 											</div>
 										</div>
@@ -302,17 +309,17 @@ function Checkout() {
 										<div className="booking-summary">
 											<div className="booking-item-wrap">
 												<ul className="booking-date">
-													<li>Ngày <span>{date.date}</span></li>
-													<li>Giờ <span>{time.time+':00'}</span></li>
+													<li>Ngày <span>{moment().format("DD-MM-YYYY hh:mm:ss")}</span></li>
+													
 												</ul>
 												<ul className="booking-fee">
-													<li>Phí dịch vụ <span>{price.price}</span></li>
+													<li>Phí dịch vụ <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(ship)} VNĐ</span></li>
 												</ul>
 												<div className="booking-total">
 													<ul className="booking-total-list">
 														<li>
 															<span>Tổng</span>
-															<span className="total-cost">{price.price}</span>
+															<span className="total-cost">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(ship+total)} VNĐ</span>
 														</li>
 													</ul>
 												</div>

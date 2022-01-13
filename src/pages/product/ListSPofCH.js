@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link,Redirect } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 import { CuaHangSidebar } from './Cuahang-sidebar';
 import { DOMAIN } from './../../constants'
+import axios from 'Axios'
 class PurchaseProduct extends React.Component {
 
     constructor(props) {
@@ -15,8 +16,11 @@ class PurchaseProduct extends React.Component {
             sanphams: [],
             order: [],
             user:[],
+            cart:[],
+            cart_id:"",
             total:0,
-            searchValue:""
+            searchValue:"",
+            redirect:false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -37,16 +41,16 @@ class PurchaseProduct extends React.Component {
         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
         .then(
                 ([result1,result2]) => {
-                    console.log(result1,result2)
+                    console.log(result2)
                     this.setState({
                         isLoaded: true,
                         sanphams: result1.data.items,
-                        user:result2.data
+                        user:result2.data,
                     })
                 },
                 (error) => {
                     this.setState({
-                        isLoaded: true,
+                        isLoaded: false,
                         error
                     })
                 }
@@ -54,7 +58,6 @@ class PurchaseProduct extends React.Component {
     }
 
     handleOrder(event) {
-        console.log(event);   
         this.setState((state, props) => {
             return { order: [...state.order, event] };
         });
@@ -72,13 +75,44 @@ class PurchaseProduct extends React.Component {
             })
         };
         fetch(`${DOMAIN}/Cart/add-product`, requestOptions)
+        .then((res) => res.json())
         .then(
-            (res)=>{
+            (res) => {
                 console.log(res)
+                localStorage.setItem("id_cart",res.data.id)
+                this.setState({
+                    isLoaded: true,
+                    cart_id:res.data.id,
+                    total:res.data.tongTien
+                })
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: false,
+                    error
+                })
             }
         )
         // console.log(event);
-    
+    }
+    handleOrder2(event){
+        console.log(event)
+        fetch(`${DOMAIN}/Cart/products-in-cart?gioHangId=${this.state.cart_id}`,
+        {
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+			}
+		})
+        .then(res => res.json())
+        .then(res=>{
+          console.log(res)
+          this.setState({
+              cart:res.data
+          })  
+        })
     }
     handleChangeInput() {
         return (event) => {
@@ -89,6 +123,7 @@ class PurchaseProduct extends React.Component {
         }
     }
     handleSubmit(event){
+        event.preventDefault();
         const requestOptions = {
             method: 'POST',
             headers: { 
@@ -97,30 +132,45 @@ class PurchaseProduct extends React.Component {
                 'My-Custom-Header': 'foobar'
             },
             body: JSON.stringify({
-                "cuaHangId": event.cuaHangId,
-                "sanPhamId": event.id,
-                "soLuong": 1
+                nguoiDat: this.state.user.tenThanhVien,
+                soDienThoai: this.state.user.soDienThoai,
+                diaChiNhan: this.state.user.diaChi,
+                cuaHangId: localStorage.getItem("CH_id"),
+                loaiThanhToan: 0
             })
-        };
-        fetch(`${DOMAIN}/Cart/add-product`, requestOptions)
+        }
+        fetch(`${DOMAIN}/Order/order`, requestOptions)
+        .then((res) => res.json())
         .then(
             (res)=>{
+                console.log(this.state.user)
                 console.log(res)
+                localStorage.setItem("id_order",res.data.id)
+                if(res.succeeded){this.setState({
+                    redirect:true
+                })}
+                
+            },
+            (error) => {
+                console.log(error)
             }
         )
 
     }
     render() {
-        console.log(this.state.order);
+       
         let total = 0;
         let {sanphams,searchValue}=this.state;
         const product = sanphams.filter(item=>{
             if (item.cuaHangId == localStorage.getItem("CH_id"))
                 return item
         })
+        if (this.state.redirect) {
+            return <Redirect to='/checkout' />;
+        }
         return (
             <div>
-                <form action="/rentalmarket/checkout" method="POST" onSubmit={this.handleSubmit}>
+                <form action="/ListSPofCH" method="POST" onSubmit={this.handleSubmit}>
                     {/* Breadcrumb */}
                     <div className="breadcrumb-bar">
                         <div className="container-fluid">
@@ -247,7 +297,7 @@ class PurchaseProduct extends React.Component {
                                                     </div>
                                                     <div className="doc-info-right">
                                                         <div className="clinic-booking">
-                                                            <button onClick={() => this.handleOrder(sanpham)}>
+                                                            <button onClick={() => {this.handleOrder(sanpham),this.handleOrder2(this.state.cart_id)}}>
                                                                 <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
                                                             </button>
                                                         </div>

@@ -52,6 +52,7 @@ class Login extends React.Component {
 			res => {
 				console.log(res.data);
 				if (res.succeeded) {
+					alert("Đăng nhập thành công.")
 					localStorage.setItem("role", res.data.quyens);
 					localStorage.setItem("isAuthenticated", "True")
 					localStorage.setItem("Accesstoken", res.data.acessToken);

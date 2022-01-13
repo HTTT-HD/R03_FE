@@ -220,7 +220,7 @@ class Header extends React.Component {
 										<Dropdown.Item href="/stylist-profile-settings">
 											Cài đặt cấu hình
 										</Dropdown.Item>
-										<Dropdown.Item href="/login" onClick={this.handleLogout}>
+										<Dropdown.Item href="/index" onClick={this.handleLogout}>
 											Đăng xuất
 										</Dropdown.Item>
 									</Dropdown.Menu>

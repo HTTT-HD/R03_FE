@@ -3,67 +3,40 @@ import { Link } from 'react-router-dom'
 
 // Import Image
 import Logo from '../../assets/img/logo.png';
+import { DOMAIN } from '../../constants';
 
 class InvoiceView extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			orderid: "",
-			name: "",
-			date_cre: "",
-			service: [],
-			total: 0
+			order:[],
+			product:[]
 		};
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:3003/order/')
-			.then(response => response.json())
-			.then(data => {
-				console.log(data)
-				//adding none zero value 
-				let total = 0;
-				let count = 0;
-				for (let i = 0; i < data[0].sanpham.length; i++) {
-					count = data[0].sanpham[i].soluong;
-					total += data[0].sanpham[i].dongia * count//+ => convert string to in
-				}
-
-				// adding zero value to total
-				/*
-				let money =  data[0].sanpham[0].dongia; 
-				let count = 1;
-				for(let i = money.length - 1 ; i >= 0 ; i--)
-				{
-					if(money[i] !== '.')
-					{
-						count *= 10;
-					}
-					else
-					{
-						break;
-					}
-				}
-
-				total = total*count;*/
-				total = new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total)
-
-				this.setState(
-					{
-						//oderid: data., 
-						//name: data.cus[0].name,
-						date_cre: data[0].ngaydat,
-						service: data[0].sanpham,
-						total: total
-					})
-
-
-			});
+		fetch(`${DOMAIN}/Order/detail?donHangId=${localStorage.getItem("id_order")}`,
+		    {
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+		    })
+			.then(res => res.json())
+			.then(res =>{
+				console.log(res)
+				this.setState({
+					order:res.data,
+					product:res.data.chiTiets
+				})
+			})
 	}
 
 	render() {
-
+		let{order,product}=this.state;
 		return (
 			<div>
 				{/* Breadcrumb */}
@@ -105,14 +78,14 @@ class InvoiceView extends React.Component {
 											<div className="col-md-12">
 												<div className="invoice-info">
 													<strong className="customer-text">Phương thức thanh toán</strong>
-													<p className="invoice-details invoice-details-two"> Thanh toán sau khi nhận hàng: </p><br />
-													<strong className="customer-text">Mua tại cửa hàng: Tên cửa hàng</strong>
-													<p className="invoice-details invoice-details-two">	Địa chỉ cửa hàng: 277 Nguyễn văn cừ</p><br />
+													<p className="invoice-details invoice-details-two"> {order.tenLoaiThanhToan} </p><br />
+													<strong className="customer-text">Mua tại cửa hàng: {order.tenCuaHang}</strong>
+													
 													<strong className="customer-text">Người giao hàng</strong>
-													<p className="invoice-details invoice-details-two">	Tên người giao hàng: </p>
-													<p className="invoice-details invoice-details-two">	Số điện thoại người giao hàng:  </p><br />
+													<p className="invoice-details invoice-details-two">	{order.tenNguoiGiao} </p>
+				
 													<strong className="customer-text">Giao đến</strong>
-													<p className="invoice-details invoice-details-two">	Địa chỉ giao: </p>
+													<p className="invoice-details invoice-details-two">	{order.diaChiNhan} </p>
 												</div>
 											</div>
 										</div>
@@ -134,21 +107,21 @@ class InvoiceView extends React.Component {
 															</tr>
 														</thead>
 														<tbody>
-															{
-																this.state.service.map(service =>
+														{product.map(item =>
+																
 																	<tr>
 																		<td>
 																			<span>
-																				{service.tensanpham}
+																			{item.tenSanPham}
 																			</span>
 																		</td>
-																		<td className="text-center">{service.soluong}</td>
-																		<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(service.dongia) + 'VNĐ'}</td>
+																		<td className="text-center">{item.soLuong}</td>
+																		<td className="text-right">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.donGia)} VNĐ</td>
 																	</tr>
-																)
+																
 
+														)
 															}
-							
 														</tbody>
 													</table>
 												</div>
@@ -159,15 +132,15 @@ class InvoiceView extends React.Component {
 														<tbody>
 															<tr>
 																<th>Tổng:</th>
-																<td><span>{this.state.total + 'VNĐ'}</span></td>
+																<td><span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(order.tongTien)} VNĐ</span></td>
 															</tr>
 															<tr>
 																<th>Phí giao hàng:</th>
-																<td><span>{this.state.total + 'VNĐ'}</span></td>
+																<td><span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(order.tienShip)} VNĐ</span></td>
 															</tr>
 															<tr>
 																<th>Tổng tạm tính:</th>
-																<td><span>{this.state.total + 'VNĐ'}</span></td>
+																<td><span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(order.tongTien+order.tienShip)} VNĐ</span></td>
 															</tr>
 														</tbody>
 													</table>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import axios from 'Axios'
 
 import { CustomerSidebar } from './customer-sidebar';
 
@@ -23,13 +24,15 @@ class CustomerDashboard extends React.Component {
 			appointment: [],
 			status: "",
 			info:[],
+			order:[],
 			redirect: false
 		};
 	}
-	handleButtonClick(value) {
-		localStorage.setItem("status",value)
+	handleClick(event) {
+		localStorage.setItem("id_order",event)
 	}
 	componentDidMount() {
+		Promise.all([
 		fetch(`${DOMAIN}/ThanhVien/user-login`,
 		{
 			method:"GET",
@@ -38,14 +41,25 @@ class CustomerDashboard extends React.Component {
 				Accept: 'application/json',
 				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
 			}
-		})
-			.then(res => res.json())
+		}),
+		fetch(`${DOMAIN}/Order/get-all-for-user`,
+		    {
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+		    })
+		])
+			.then(([res1,res2]) => Promise.all([res1.json(), res2.json()]))
 			.then(
-				(result) => {
-					console.log(result)
+				([result1,result2]) => {
+					console.log(result2)
 					this.setState({
 						isLoaded: true,
-						info: result.data
+						info: result1.data,
+						order:result2.data.items
 					});
 				},
 				(error) => {
@@ -56,11 +70,11 @@ class CustomerDashboard extends React.Component {
 				}
 			)
 	}
+	handleCancel(event) {
+		
+	}
     render() {
-		let {appointment} = this.state;
-		let appoint_temp=appointment.filter(item=>{
-			return item.customer == this.state.info.idc;
-		})
+		let {order} = this.state;
         return (
 			
 			<div>
@@ -103,14 +117,14 @@ class CustomerDashboard extends React.Component {
 																<thead>
 																	<tr>
 																		<th>Tên</th>
-																		<th>Số điện thoại</th>
-																		<th>Mã đơn hàng</th>
-																		<th>Ngày mua</th>
+																		<th>Cửa hàng mua</th>
+																		<th>Hình thức thanh toán</th>
+																		<th>Tổng hóa đơn(chưa tính ship)</th>
 																	
 																		<th></th>
 																	</tr>
 																</thead>
-																{appoint_temp.map(item=>
+																{order.map(item=>
 																<tbody>
 																	<tr>
 																		<td>
@@ -118,25 +132,25 @@ class CustomerDashboard extends React.Component {
 																				<Link to="/stylist-profile" className="avatar avatar-sm mr-2">
 																					<img className="avatar-img rounded-circle" src={UserAvatar2} alt="User Image" />
 																				</Link>
-																				<Link to="/stylist-profile">{item.emp[0].lastname+' '+item.emp[0].firstname} <span>Nail Art</span></Link>
+																				<Link to="/stylist-profile">{item.nguoiDat}</Link>
 																			</h2>
 																		</td>
-																		<td>{item.date_created} <span className="d-block text-info">{item.start_time+':00'}</span></td>
-																		<td>{item.date_reserved}</td>
-																		<td>{item.price}</td>
-																		<td><span className="badge badge-pill bg-danger-light">{item.status}</span></td>
+																		<td>{item.tenCuaHang} <span className="d-block text-info"></span></td>
+																		<td>{item.tenLoaiThanhToan}</td>
+																		<td>{item.tongTien}</td>
+																		<td><span className="badge badge-pill bg-danger-light">{item.tenTrangThai}</span></td>
 																		<td className="text-right">
 																			<div className="table-action">
-																				<button>
-																					<Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
+																				
+																					<Link to="/invoice-view" onClick={()=>{this.handleClick(item.id)}} className="btn btn-sm bg-info-light mr-1">
 																						<FontAwesomeIcon icon={faEye} /> Xem
 																					</Link>
-																				</button>
-																				<button onClick={() => this.handleButtonClick(item.ida+" Hủy")}>
-																					<Link to="/cancel-booking" className="btn btn-sm bg-danger-light">
+																				
+																				
+																					<Link  className="btn btn-sm bg-danger-light"onClick={()=>{this.handleCancel(item.id)}} >
 																						<FontAwesomeIcon icon={faTimes} /> Hủy
 																					</Link>
-																				</button>
+																				
 																			</div>
 																		</td>
 																	</tr>
