@@ -310,7 +310,6 @@ function Checkout() {
 											<div className="booking-item-wrap">
 												<ul className="booking-date">
 													<li>Ngày <span>{moment().format("DD-MM-YYYY hh:mm:ss")}</span></li>
-													
 												</ul>
 												<ul className="booking-fee">
 													<li>Phí dịch vụ <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(ship)} VNĐ</span></li>

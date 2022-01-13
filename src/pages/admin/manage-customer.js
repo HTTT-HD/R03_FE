@@ -6,7 +6,7 @@ import { StaffSidebar } from './staff-sidebar';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faEdit, faPlusCircle , faStar } from '@fortawesome/fontawesome-free-solid';
+import { faMinus } from '@fortawesome/fontawesome-free-solid';
 
 
 class ManageCustomer extends React.Component {

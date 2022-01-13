@@ -126,7 +126,7 @@ class RouterComponent extends React.Component {
                         <Route path="/list-cuahang" component={ListCuaHang} />
                         <Route path="/ListSPofCH" component={PurchaseProduct} />
                         <Route path="/list-product" component={ListProduct} />
-                        <Route path="/edit-product" component={EditProduct} />
+                        <Route path="/manage-product" component={EditProduct} />
                         <Route path="/add-product" component={AddProduct} />
                         <Route path="/edit-edit-product" component={EditEditProduct} />
                         <Route path="/delete-product" component={DeleteProduct} />

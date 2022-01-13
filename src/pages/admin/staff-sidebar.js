@@ -47,6 +47,12 @@ class StaffSidebar extends React.Component {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link to="/manage-product">
+                                        <FontAwesomeIcon icon={faUser} />
+                                        <span>Quản lí sản phẩm</span>
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link to="/invoices">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí hóa đơn</span>

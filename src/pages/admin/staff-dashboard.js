@@ -5,15 +5,12 @@ import axios from 'axios'
 // Import Sidebar
 import { StaffSidebar } from './staff-sidebar';
 
-// Import Components
-import { Tabs, Tab } from "react-bootstrap";
-
 // Import Images
 import UserAvatar from '../../assets/img/customers/customer.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faEdit, faEye, faSearch, faTimes } from '@fortawesome/fontawesome-free-solid';
+import { faEye } from '@fortawesome/fontawesome-free-solid';
 
 class StaffDashboard extends React.Component {
 	constructor(props) {

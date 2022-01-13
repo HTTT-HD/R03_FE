@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom'
 import { StaffSidebar } from './staff-sidebar';
 
 // Import Images
-import UserAvatar from '../../assets/img/customers/customer.jpg';
-
-// Import Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye } from '@fortawesome/fontawesome-free-solid';
+import UserAvatar from '../../assets/img/customers/customer.jpg'
 
 class NeededProduct extends React.Component {
 	render() {

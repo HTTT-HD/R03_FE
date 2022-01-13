@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 
 // Import Sidebar
-import { StylistSidebar } from './stylist-sidebar';
+import { StaffSidebar } from './staff-sidebar'
+import UserAvatar from '../../assets/img/customers/customer.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faEdit, faPlusCircle , faStar } from '@fortawesome/fontawesome-free-solid';
-
-import UserImg from '../../assets/img/customers/customer.jpg';
+import { faMinus, faEdit, faPlusCircle } from '@fortawesome/fontawesome-free-solid';
 
 class EditProduct extends React.Component {
 
@@ -22,7 +21,7 @@ class EditProduct extends React.Component {
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
     handleButtonClick(value) {
-		localStorage.setItem("pro_id", value)
+        localStorage.setItem("pro_id", value)
     }
     componentDidMount() {
         fetch("http://localhost:3003/product/")
@@ -69,7 +68,7 @@ class EditProduct extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                                <StylistSidebar />
+                                <StaffSidebar />
                             </div>
                             <div className="col-md-7 col-lg-8 col-xl-9">
                                 <div className="appointments">
@@ -111,6 +110,29 @@ class EditProduct extends React.Component {
                                             </div>
                                         ))
                                     }
+                                    <div className="appointment-list">
+                                        <div className="profile-info-widget">
+                                            <Link className="booking-doc-img">
+                                                <img src="FUserAvatar" alt="User Image" />
+                                            </Link>
+                                            <div className="profile-det-info">
+                                                <h3>Tên sản phẩm</h3>
+                                                <div className="customer-details">
+                                                    <h5>Giá:</h5>
+                                                    <h5>Thương hiệu:</h5>
+                                                    <h5>Số lượng tồn:</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="appointment-action">
+                                            <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
+                                                <FontAwesomeIcon icon={faEdit} /> Sửa
+                                            </Link>
+                                            <Link to="/delete-product" className="btn btn-sm bg-danger-light">
+                                                <FontAwesomeIcon icon={faMinus} /> Xóa
+                                            </Link>
+                                        </div>
+                                    </div>
                                     {/* product */}
                                 </div>
                             </div>

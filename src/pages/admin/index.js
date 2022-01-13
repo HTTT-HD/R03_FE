@@ -14,3 +14,5 @@ export * from './invoices';
 export * from './staff-sidebar';
 export * from './commission';
 export * from './needed-product';
+export * from './manage-product';
+export * from './edit-edit-product';

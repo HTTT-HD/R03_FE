@@ -6,8 +6,8 @@ import { StaffSidebar } from './staff-sidebar';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faEdit, faPlusCircle , faStar } from '@fortawesome/fontawesome-free-solid';
-
+import { faMinus, faPlusCircle } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
 class ManageSupplier extends React.Component {
 
@@ -23,24 +23,44 @@ class ManageSupplier extends React.Component {
     handleButtonClick(value) {
 		localStorage.setItem("pro_id", value)
     }
-    componentDidMount() {
-        fetch("http://localhost:3003/seller/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    this.setState({
-                        isLoaded: true,
-                        nguoibans: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+    // componentDidMount() {
+    //     fetch("http://localhost:5001/api/ThanhVien/get-all")
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 console.log(result);
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     nguoibans: result
+    //                 });
+    //             },
+    //             (error) => {
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     error
+    //                 });
+    //             }
+    //         )
+    // }
+    componentDidMount(){
+        fetch(`${DOMAIN}/ThanhVien/get-all`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+        .then(res => res.json())
+        .then(
+            (res) => {
+                this.setState({
+                    nguoibans: res.data.items
+                })
+                console.log(res.data.items)
+            }
+        )
     }
 
     render() {
@@ -54,10 +74,10 @@ class ManageSupplier extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Quản lý khách hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Quản lý nhà cung cấp</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Quản lý khách hàng</h2>
+                                <h2 className="breadcrumb-title">Quản lý nhà cung cấp</h2>
                             </div>
                         </div>
                     </div>
@@ -76,7 +96,7 @@ class ManageSupplier extends React.Component {
                                     <Link to="/add-supplier">
                                         <h4 className="card-title d-flex justify-content-between">
                                             <a className="edit-link">
-                                                <FontAwesomeIcon icon={faPlusCircle} className="mr-1" />Thêm khách hàng</a>
+                                                <FontAwesomeIcon icon={faPlusCircle} className="mr-1" />Thêm nhà cung cấp</a>
                                         </h4>
                                     </Link>
                                     {/* product */}
@@ -88,15 +108,15 @@ class ManageSupplier extends React.Component {
                                                         <img src={nguoiban.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
-                                                        <h3>{`${nguoiban.tennguoiban}`}</h3>
+                                                        <h3>{`${nguoiban.tenThanhVien}`}</h3>
                                                         <div className="customer-details">
-                                                            <h5>SDT: {nguoiban.sdt}</h5>
-                                                            <h5>Địa chỉ: {nguoiban.diachi}</h5>
+                                                            <h5>SDT: {nguoiban.soDienThoai}</h5>
+                                                            <h5>Địa chỉ: {nguoiban.diaChi}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(nguoiban.manguoiban)}>
+                                                    <button onClick={() => this.handleButtonClick(nguoiban.maThanhVien)}>
                                                         <Link to="/delete-supplier" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>
