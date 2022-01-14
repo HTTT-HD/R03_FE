@@ -109,13 +109,14 @@ class ListProduct extends React.Component {
                                     <div className="col-md-3 col-sm-6">
                                         <div className="card widget-profile pat-widget-profile">
                                             <div className="card-body">
-                                                <div className="stylist-widget">
-                                                    <div className="doc-info-left">
-                                                        <div className="stylist-img">
+                                                <div className="border rounded">
+                                                    <div className="profile-info-widget">
+                                                        <div className="booking-doc-img">
                                                             <Link onClick={()=>this.handleClick(sanpham.cuaHangId)} to="/ListSPofCH">
                                                                 <img
                                                                     className="img-fluid"
-                                                                    alt="User Image" width="150" width="150"
+                                                                    alt="User Image" 
+                                                                    // className="rounded-circle"
                                                                     src={sanpham.img} />
                                                             </Link>
                                                         </div>
@@ -124,7 +125,7 @@ class ListProduct extends React.Component {
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
-                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)}+VNĐ</li>
+                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)} VNĐ</li>
 
                                                                         <li>Số lượng: {sanpham.soLuong}</li>
 
