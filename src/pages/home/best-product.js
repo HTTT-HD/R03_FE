@@ -22,7 +22,7 @@ class BestProduct extends React.Component {
 	}
 
 	componentDidMount() {
-        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=20`).then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)

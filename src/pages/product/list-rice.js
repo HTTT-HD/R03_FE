@@ -10,13 +10,14 @@ class ListProductOfRice extends React.Component {
             isLoaded: false,
             gaos: []
         };
-        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
-    handleButtonClick(value) {
-        localStorage.setItem("pro_id", value)
+    handleClick(event){
+        console.log(event)
+        localStorage.setItem("CH_id",event)
     }
     componentDidMount() {
-        fetch(`${DOMAIN}/Product/get-all`,
+        fetch(`${DOMAIN}/Product/get-all?PageIndex=1&PageSize=20`,
             {
                 method: "GET",
                 headers: {
@@ -75,7 +76,7 @@ class ListProductOfRice extends React.Component {
                                             <div className="card-body">
                                                 <div className="pro-widget-content">
                                                     <div className="profile-info-widget">
-                                                        <Link to="/ListSPofCH" className="booking-doc-img">
+                                                        <Link to="/ListSPofCH" onClick={()=>this.handleClick(gao.cuaHangId)} className="booking-doc-img">
                                                             <img src={gao.img} alt="User Image" />
                                                         </Link>
                                                         <div className="profile-det-info">

@@ -21,13 +21,14 @@ class CuaHangSidebar extends React.Component {
 		localStorage.setItem("id_cus",value)
     }
 	componentDidMount() {
-		fetch(`http://localhost:3000/user/profile/${localStorage.getItem("Accesstoken")}`)
+		fetch(`https://localhost:5001/api/Store/get?id=${localStorage.getItem("CH_id")}`)
 			.then(res => res.json())
 			.then(
 				(data) => {
+                    console.log(data)
 					this.setState({
 						isLoaded: true,
-						data: data.info
+						data: data.data
 					});
 				},
 				(error) => {
@@ -47,14 +48,14 @@ class CuaHangSidebar extends React.Component {
                     <div className="widget-profile pro-widget-content">
                         <div className="profile-info-widget">
                             <Link to="#" className="booking-doc-img">
-                                <img src={data.img} alt="User Image" />
+                                <img src={data.anhDaiDien} alt="User Image" />
                             </Link>
                             <div className="profile-det-info">
                                 <h3>{data.name}</h3>
                                 <div className="customer-details">
                                     {/* <h5><FontAwesomeIcon icon={faBirthdayCake} />{data.dob}</h5> */}
-                                    <h4>Tên cửa hàng</h4>
-                                    <h5 className="mb-0"><FontAwesomeIcon icon={faMapMarkerAlt} />{data.address}</h5>
+                                    <h4>{data.tenCuaHang}</h4>
+                                    <h5 className="mb-0"><FontAwesomeIcon icon={faMapMarkerAlt} />{data.diaChi}</h5>
                                 </div>
                             </div>
                         </div>

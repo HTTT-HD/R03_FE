@@ -14,6 +14,7 @@ class ListCuaHang extends React.Component {
             isLoaded: false,
             services: []
         };
+        this.handleClick=this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -35,8 +36,10 @@ class ListCuaHang extends React.Component {
                 }
             )
     }
-
-
+    handleClick(event){
+        console.log(event)
+        localStorage.setItem("CH_id",event)
+    }
     render() {
         let {services}=this.state;
         return (
@@ -74,16 +77,13 @@ class ListCuaHang extends React.Component {
                     {/* Page Content */}
                     <div className="container">
                         <div className="row ">
-                            {this.state.services.filter(item=>{
-                                if(item.cuaHangId == localStorage.getItem("CH_id"))
-                                    return item
-                            }).map((item) => (
+                            {services.map(item=> (
                                 <div className="col-md-3 col-sm-6">
                                     <div className="card widget-profile pat-widget-profile">
                                         <div className="card-body">
                                             <div className="pro-widget-content">
                                                 <div className="profile-info-widget">
-                                                    <Link  to="/ListSPofCH" className="booking-doc-img">
+                                                    <Link onClick={()=>this.handleClick(item.id)} to="/ListSPofCH" className="booking-doc-img">
                                                         <img src={item.anhDaiDien} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
