@@ -40,11 +40,11 @@ class StylistDashboard extends React.Component {
 				<div className="content">
 					<div className="container">
 						<div className="row">
-							<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							{/* <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 								<StylistSidebar />
-							</div>
+							</div> */}
 							<div className="col-md-7 col-lg-8 col-xl-9">
-								<div className="row">
+								{/* <div className="row">
 									<div className="col-md-12">
 										<div className="card dash-card">
 											<div className="card-body">
@@ -77,13 +77,13 @@ class StylistDashboard extends React.Component {
 											</div>
 										</div>
 									</div>
-								</div>
-								<div className="row">							
+								</div> */}
+								<div className="row justify-content-center">							
 									<div className="col-md-12">
-										<h4 className="mb-4">Khách hàng</h4>
+										<h4 className="mb-4">Cửa hàng</h4>
 										<div className="appointment-tab">
-											<Tabs defaultActiveKey="upcoming" id="uncontrolled-tab-example">
-												<Tab eventKey="upcoming" title="Sắp tới">
+											{/* <Tabs defaultActiveKey="upcoming" id="uncontrolled-tab-example">
+												<Tab eventKey="upcoming" title="Sắp tới"> */}
 													<div className="card card-table mb-0">
 														<div className="card-body">
 															<div className="table-responsive">
@@ -124,8 +124,8 @@ class StylistDashboard extends React.Component {
 															</div>
 														</div>
 													</div>
-												</Tab>
-											</Tabs>
+												{/* </Tab>
+											</Tabs> */}
 										</div>
 									</div>
 								</div>

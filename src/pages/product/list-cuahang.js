@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapPin, faShoppingCart } from '@fortawesome/fontawesome-free-solid';
+import { faMapPin, faPhone, faShoppingCart } from '@fortawesome/fontawesome-free-solid';
 import { CuaHangSidebar } from './Cuahang-sidebar';
 import { DOMAIN } from './../../constants'
 class ListCuaHang extends React.Component {
@@ -17,7 +17,8 @@ class ListCuaHang extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+        fetch("https://localhost:5001/api/Store/get-all")
+            .then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)
@@ -83,19 +84,20 @@ class ListCuaHang extends React.Component {
                                             <div className="pro-widget-content">
                                                 <div className="profile-info-widget">
                                                     <Link  to="/ListSPofCH" className="booking-doc-img">
-                                                        <img src={item.img} alt="User Image" />
+                                                        <img src={item.anhDaiDien} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
                                                         <h3>
                                                             <Link to="/ListSPofCH"></Link>
-                                                            Ten Cua Hang
+                                                            {item.tenCuaHang}
                                                         </h3>
 
                                                     </div>
                                                     <div className="customer-info">
                                                         <ul>
                                                             <li>
-                                                                <h5 className="mb-0"><FontAwesomeIcon icon={faMapPin} /> Địa chỉ</h5>
+                                                                <h5><FontAwesomeIcon icon={faMapPin}/> {item.diaChi}</h5>
+                                                                <h5><FontAwesomeIcon icon={faPhone}/> {item.soDienThoai}</h5>
 
                                                             </li>
 

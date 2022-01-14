@@ -105,7 +105,7 @@ class Header extends React.Component {
 								<Link to="/staff-dashboard">Admin</Link>
 							</li>
 							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
-								<Link to="/stylist-dashboard">Nhà cung cấp</Link>
+								<Link to="/list-cuahang">Danh sách Cửa hàng</Link>
 							</li>
 							<li className={`has-submenu ${pathname === ('/search') ? 'active' : pathname === ('/booking') ? 'active' : pathname === ('/customer-dashboard') ? 'active' : pathname === ('/login') ? 'active' : pathname === ('/register') ? 'active' : ''}`}>
 								<Link to="">Khách hàng <FontAwesomeIcon icon={faChevronDown} /></Link>
