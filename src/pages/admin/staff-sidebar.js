@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAddressCard, faColumns, faBoxOpen, faLock, faSignOutAlt, faShoppingCart, faMoneyBillAlt, faAngleLeft, faAngleRight, faUser } from '@fortawesome/fontawesome-free-solid';
-import { faUber } from '@fortawesome/free-brands-svg-icons';
+import { faAddressCard, faColumns, faBoxOpen, faLock, faSignOutAlt, faShoppingCart, faMoneyBillAlt, faAngleLeft, faAngleRight, faUser, faWallet, faMoneyBill } from '@fortawesome/fontawesome-free-solid';
+import { faProductHunt, faUber} from '@fortawesome/free-brands-svg-icons';
 
 class StaffSidebar extends React.Component {
     render() {
@@ -48,13 +48,13 @@ class StaffSidebar extends React.Component {
                                 </li> */}
                                 <li>
                                     <Link to="/manage-product">
-                                        <FontAwesomeIcon icon={faUser} />
+                                        <FontAwesomeIcon icon={faProductHunt} />
                                         <span>Quản lí sản phẩm</span>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/invoices">
-                                        <FontAwesomeIcon icon={faUser} />
+                                        <FontAwesomeIcon icon={faMoneyBill} />
                                         <span>Quản lí hóa đơn</span>
                                     </Link>
                                 </li>
