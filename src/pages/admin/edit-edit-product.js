@@ -20,14 +20,14 @@ class EditEditProduct extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch("http://localhost:3003/product/")
+		fetch(`https://localhost:5001/api/Product/get?id=${localStorage.getItem("pro_id")}`)
 			.then(res => res.json())
 			.then(
 				(result) => {
-                    //console.log(result);
+                    console.log(result);
 					this.setState({
 						isLoaded: true,
-						sanphams: result
+						sanphams: result.data
 					});
 				},
 				(error) => {
@@ -40,17 +40,33 @@ class EditEditProduct extends React.Component {
 	}
     handleChange(e) {
         const newData = {...this.state.data};
-        newData["id_sp"] = localStorage.getItem("pro_id")
-        newData[e.target.name]=e.target.value;
+        newData["id"] = localStorage.getItem("pro_id")
+        for (var key in this.state.sanphams){
+            if (key===e.target.name)
+                {newData[e.target.name]=e.target.value;}
+            else newData[e.target.name] = e.target.defaultValue
+        }
         this.setState({data:newData})
+        console.log(this.state.data)
     }
     handleSubmit(event) {
 		event.preventDefault();
 		//console.log(this.state)
-		axios.put(`http://localhost:3003/product/update/${localStorage.getItem("pro_id")}`,this.state.data)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
+                'My-Custom-Header': 'foobar'
+            },
+            body:  this.state.data
+            
+        }
+		fetch("https://localhost:5001/api/Product/create-or-update/}",requestOptions)
+            .then(res => res.json())
 			.then(res => {
 				console.log(res.data)
-				if(res.data==="True")
+				if(res.succeeded)
 				    {this.setState({redirect:true})}
 			})
 			.catch(error => {
@@ -66,9 +82,6 @@ class EditEditProduct extends React.Component {
         //console.log(this.state.sanphams);
         let {sanphams} = this.state;
         //console.log(sanphams);
-        const pr=sanphams.filter(item=>{
-            return item.id == localStorage.getItem("pro_id")
-        })
         //console.log(pr);
         return (
             <div>
@@ -106,13 +119,13 @@ class EditEditProduct extends React.Component {
 
                                         {/* add service Form */}
                                         <form action="" method="POST" onSubmit={this.handleSubmit}>
-                                        {   pr.map((item)=>
+                                        
                                             <div className="row form-row">
                                                 <div className="col-12 col-md-12">
                                                     <div className="form-group">
                                                         <div className="change-avatar">
                                                             <div className="profile-img">
-                                                                <img src={item.img} alt="User Image" />
+                                                                <img src={sanphams.img} alt="User Image" />
                                                             </div>
                                                             <div className="upload-img">
                                                                 <div className="change-photo-btn">
@@ -127,25 +140,25 @@ class EditEditProduct extends React.Component {
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Tên sản phẩm</label>
-                                                        <input defaultValue={item.tensanpham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tensanpham"/>
+                                                        <input defaultValue={sanphams.tenSanPham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="tenSanPham"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Giá sản phẩm (Ví dụ: 30.000 VND)</label>
-                                                        <input defaultValue={item.dongia} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="dongia"/>
+                                                        <input defaultValue={sanphams.donGia} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="donGia"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Loại sản phẩm</label>
-                                                        <input defaultValue={item.loaisanpham} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="loaisanpham" />
+                                                        <input defaultValue={sanphams.moTa} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="moTa" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Số lượng tồn</label>
-                                                        <input defaultValue={item.soluong} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soluong"/>
+                                                        <input defaultValue={sanphams.soLuong} onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="soLuong"/>
                                                     </div>
                                                 </div>
                                                 {/* <div className="col-12">
@@ -159,7 +172,7 @@ class EditEditProduct extends React.Component {
                                                 </div>
                                                 {/* add service Form */}
                                             </div>
-                                        )}
+                                        
                                         </form>
                                     </div>
                                 </div>

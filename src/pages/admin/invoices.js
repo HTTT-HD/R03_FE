@@ -8,6 +8,7 @@ import { DOMAIN } from '../../constants';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/fontawesome-free-solid';
+import moment from 'moment';
 
 class Invoices extends React.Component {
 	constructor(props) {
@@ -17,7 +18,10 @@ class Invoices extends React.Component {
 			isLoaded: false,
 			hoadons: []
 		};
-		this.handleButtonClick = this.handleButtonClick.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(event) {
+		localStorage.setItem("id_order",event)
 	}
 	componentDidMount(){
         fetch(`${DOMAIN}/Order/get-all`,
@@ -32,6 +36,7 @@ class Invoices extends React.Component {
         .then(res => res.json())
         .then(
             (res) => {
+				console.log(res)
                 this.setState({
                     hoadons: res.data.items
                 })
@@ -39,9 +44,6 @@ class Invoices extends React.Component {
             }
         )
     }
-	handleButtonClick(value) {
-		localStorage.setItem("pro_id", value)
-	}
 	render() {
 		return (
 			<div>
@@ -82,37 +84,37 @@ class Invoices extends React.Component {
 													<tr>
 														<th>Khách hàng</th>
 														<th>Cửa hàng</th>
-														<th>Chi phí</th>
+														<th>Tổng tiền</th>
 														<th>Được trả vào</th>
 														<th></th>
 													</tr>
 												</thead>
 												<tbody>
 													{
-														this.state.hoadons.map(hoadon => (
+														this.state.hoadons.map(item => (
 															<tr>
 
 																<td>
 																	<h2 className="table-avatar">
 																		<Link to="/customer-profile" className="avatar avatar-sm mr-2">
-																			<img className="avatar-img rounded-circle" src={UserImg} alt="User Image" />
+																			
 																		</Link>
-																		<Link to="/customer-profile">Gordan Whelan <span>#PT0016</span></Link>
+																		<Link to="/customer-profile">{item.nguoiDat}</Link>
 																	</h2>
 																</td>
 																<td>
 																	<h2 className="table-avatar">
 																		<Link to="/customer-profile" className="avatar avatar-sm mr-2">
-																			<img className="avatar-img rounded-circle" src={UserImg} alt="User Image" />
+																			
 																		</Link>
-																		<Link to="/customer-profile">Gordan Whelan <span>#PT0016</span></Link>
+																		<Link to="/customer-profile">{item.tenCuaHang}</Link>
 																	</h2>
 																</td>
-																<td>450.000VND</td>
-																<td>14 Nov 2019</td>
+																<td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.tongTien+item.tienShip)} VNĐ</td>
+																<td>{moment(item.ngayTao).format()}</td>
 																<td className="text-right">
 																	<div className="table-action">
-																		<Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
+																		<Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1" onClick={()=>{this.handleClick(item.id)}}>
 																			<FontAwesomeIcon icon={faEye} /> Xem
 																		</Link>
 																	</div>

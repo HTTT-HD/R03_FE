@@ -27,6 +27,9 @@ class Cart extends React.Component {
             redirect:false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePlus = this.handlePlus.bind(this);
+        this.handleMinus = this.handleMinus.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -53,13 +56,13 @@ class Cart extends React.Component {
         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
         .then(
                 ([result1,result2]) => {
-                    this.setState((state)=>{
-                        return{isLoaded: true,
+                    this.setState({
+                            isLoaded: true,
                             cart: result1.data,
                             total:result1.data.tongTien,
                             user:result2.data,
                             product:result1.data.products
-                        }
+                        
                     })
                     console.log(this.state.cart,this.state.user)
                 },
@@ -235,7 +238,7 @@ class Cart extends React.Component {
         .then(
             (res)=>{
                 console.log(res)
-                if(res.ok){this.setState({
+                if(res.succeeded){this.setState({
                     redirect:true
                 })}
                 
@@ -304,13 +307,13 @@ class Cart extends React.Component {
                                                                        <tr>
                                                                             <td>
                                                                                 <h2 className="table-avatar">
-                                                                                    <Link to="" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-                                                                                    <Link to="">{item.tenSanPham}<span>#PT0016</span></Link>
+                                                                                    
+                                                                                    <Link to="">{item.tenSanPham}</Link>
                                                                                 </h2>
                                                                             </td>
                                                                             <td>Gạo</td>
                                                                             <td>{item.soLuong}</td>
-                                                                            <td className="text-center">{item.thanhTien}</td>
+                                                                            <td className="text-center">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.thanhTien)} VNĐ</td>
                                                                             <td className="text-right">
                                                                                 <div className="table-action">
                                                                                     <Link type="button" className="btn btn-sm bg-info-light mr-1" onClick={()=>{this.handlePlus(item.sanPhamId)}}>

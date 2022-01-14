@@ -23,14 +23,14 @@ class EditEditProduct extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
-		fetch("http://localhost:3003/product/")
+		fetch(`https://localhost:5001/api/Product/get?id=${localStorage.getItem("pro_id")}`)
 			.then(res => res.json())
 			.then(
 				(result) => {
-                    //console.log(result);
+                    console.log(result);
 					this.setState({
 						isLoaded: true,
-						sanphams: result
+						sanphams: result.data
 					});
 				},
 				(error) => {
@@ -43,7 +43,7 @@ class EditEditProduct extends React.Component {
 	}
     handleChange(e) {
         const newData = {...this.state.data};
-        newData["id_sp"] = localStorage.getItem("pro_id")
+        newData["id"] = localStorage.getItem("pro_id")
         newData[e.target.name]=e.target.value;
         this.setState({data:newData})
     }

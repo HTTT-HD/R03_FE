@@ -24,13 +24,14 @@ class EditProduct extends React.Component {
         localStorage.setItem("pro_id", value)
     }
     componentDidMount() {
-        fetch("http://localhost:3003/product/")
+        fetch("https://localhost:5001/api/Product/get-all")
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     this.setState({
                         isLoaded: true,
-                        sanphams: result
+                        sanphams: result.data.items
                     });
                 },
                 (error) => {
@@ -87,11 +88,11 @@ class EditProduct extends React.Component {
                                                         <img src={item.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
-                                                        <h3>{`${item.tensanpham}`}</h3>
+                                                        <h3>{`${item.tenSanPham}`}</h3>
                                                         <div className="customer-details">
-                                                            <h5>Giá: {item.dongia}</h5>
-                                                            <h5>Thương hiệu: {item.loaisanpham}</h5>
-                                                            <h5>Số lượng tồn: {item.soluong}</h5>
+                                                            <h5>Giá: {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.donGia)} VND</h5>
+                                                            <h5>Danh mục: {item.tenDanhMuc}</h5>
+                                                            <h5>Số lượng tồn: {item.soLuong}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,29 +111,6 @@ class EditProduct extends React.Component {
                                             </div>
                                         ))
                                     }
-                                    <div className="appointment-list">
-                                        <div className="profile-info-widget">
-                                            <Link className="booking-doc-img">
-                                                <img src="FUserAvatar" alt="User Image" />
-                                            </Link>
-                                            <div className="profile-det-info">
-                                                <h3>Tên sản phẩm</h3>
-                                                <div className="customer-details">
-                                                    <h5>Giá:</h5>
-                                                    <h5>Thương hiệu:</h5>
-                                                    <h5>Số lượng tồn:</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="appointment-action">
-                                            <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
-                                                <FontAwesomeIcon icon={faEdit} /> Sửa
-                                            </Link>
-                                            <Link to="/delete-product" className="btn btn-sm bg-danger-light">
-                                                <FontAwesomeIcon icon={faMinus} /> Xóa
-                                            </Link>
-                                        </div>
-                                    </div>
                                     {/* product */}
                                 </div>
                             </div>
