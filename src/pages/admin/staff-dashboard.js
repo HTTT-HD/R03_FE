@@ -4,6 +4,7 @@ import axios from 'axios'
 
 // Import Sidebar
 import { StaffSidebar } from './staff-sidebar';
+import { DOMAIN } from '../../constants';
 
 // Import Images
 import UserAvatar from '../../assets/img/customers/customer.jpg';
@@ -18,33 +19,58 @@ class StaffDashboard extends React.Component {
 		this.state = {
 			error: null,
 			isLoaded: false,
-			appointment: [],
-			status: "",
-			redirect: false
+			hoadons: [],
+			sale:[]
 		};
+		this.handleClick = this.handleClick.bind(this);
 	}
-	handleButtonClick(value) {
-		localStorage.setItem("status", value)
+	handleClick(event) {
+		localStorage.setItem("id_order",event)
 	}
-	componentDidMount() {
-		fetch("http://localhost:3000/employee/dashboard")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					this.setState({
-						isLoaded: true,
-						appointment: result.appoint
-					});
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
-				}
-			)
-	}
+	
+	componentDidMount(){
+		Promise.all([
+        fetch(`${DOMAIN}/Order/get-all`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        }),
+		fetch(`${DOMAIN}/Dashboard/dashboard`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+	])
+	.then(([res1,res2]) => Promise.all([res1.json(), res2.json()]))
+	.then(
+		([result1,result2]) => {
+			console.log(result1)
+			this.setState({
+				isLoaded: true,
+				hoadons: result1.data.items,
+				sale:result2.data
+			});
+		},
+		(error) => {
+			this.setState({
+				isLoaded: true,
+				error
+			});
+		}
+	)
+    }
+
 	render() {
+		let {hoadons,sale}=this.state;
+		
 		return (
 			<div>
 				{/* Breadcrumb */}
@@ -72,40 +98,7 @@ class StaffDashboard extends React.Component {
 								<StaffSidebar />
 							</div>
 							<div className="col-md-7 col-lg-8 col-xl-9">
-								<div className="row">
-									<div className="col-md-12">
-										<div className="card dash-card">
-											<div className="card-body">
-												<div className="row">
-													<div className="col-md-12 col-lg-4">
-														<div className="dash-widget dct-border-rht">
-															<div className="dash-widget-info">
-																<h6>Tổng đối tác</h6>
-																<h3>1500</h3>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-12 col-lg-4">
-														<div className="dash-widget dct-border-rht">
-															<div className="dash-widget-info">
-																<h6>Đối tác hôm nay</h6>
-																<h3>1500</h3>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-12 col-lg-4">
-														<div className="dash-widget dct-border-rht">
-															<div className="dash-widget-info">
-																<h6>Khách hàng hôm nay</h6>
-																<h3>160</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+							
 								<div className="row">
 									<div className="col-md-12">
 										<div className="card dash-card">
@@ -115,7 +108,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng lợi nhuận</h6>
-																<h3>12.000.000VND</h3>
+																<h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang+sale.tienTuShip)} VNĐ</h3>
 															</div>
 														</div>
 													</div>
@@ -123,7 +116,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng lợi nhuận từ khách hàng</h6>
-																<h3>10.000.000</h3>
+																<h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang)} VNĐ</h3>
 															</div>
 														</div>
 													</div>
@@ -131,7 +124,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng lợi nhuận từ giao hàng</h6>
-																<h3>2.000.000</h3>
+																<h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuShip)} VNĐ</h3>
 															</div>
 														</div>
 													</div>
@@ -149,7 +142,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng đơn hàng</h6>
-																<h3>3000</h3>
+																<h3></h3>
 															</div>
 														</div>
 													</div>

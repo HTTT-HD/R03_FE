@@ -313,7 +313,7 @@ class Cart extends React.Component {
                                                                             </td>
                                                                             <td>Gạo</td>
                                                                             <td>{item.soLuong}</td>
-                                                                            <td className="text-center">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.thanhTien)} VNĐ</td>
+                                                                            <td className="text-center">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.thanhTien)} VNĐ</td>
                                                                             <td className="text-right">
                                                                                 <div className="table-action">
                                                                                     <Link type="button" className="btn btn-sm bg-info-light mr-1" onClick={()=>{this.handlePlus(item.sanPhamId)}}>

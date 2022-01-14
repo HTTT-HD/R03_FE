@@ -814,6 +814,7 @@ button.bg-danger:hover {
     margin-bottom: 1.875rem;
 }
 .card-body {
+	size: 328px 210px;
 	padding: 1.5rem;
 }
 .card-title {
@@ -3314,7 +3315,9 @@ html.menu-opened body {
     -ms-flex: 0 0 150px;
     flex: 0 0 150px;
     margin-right: 20px;
+	margin-bottom: 20px;
     width: 150px;
+	height: 100px;
 }
 .stylist-img img {
 	border-radius: 5px;

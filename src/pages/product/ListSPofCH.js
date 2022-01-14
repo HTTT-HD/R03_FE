@@ -27,7 +27,7 @@ class PurchaseProduct extends React.Component {
 
     componentDidMount() {
         Promise.all([
-            fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`),
+            fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=20`),
             fetch(`${DOMAIN}/ThanhVien/user-login`,
                 {
                     method: "GET",
@@ -38,10 +38,10 @@ class PurchaseProduct extends React.Component {
                     }
                 })
         ])
-            .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-            .then(
-                ([result1, result2]) => {
-                    console.log(result2)
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(
+                ([result1,result2]) => {
+                    console.log(result1)
                     this.setState({
                         isLoaded: true,
                         sanphams: result1.data.items,
@@ -164,9 +164,10 @@ class PurchaseProduct extends React.Component {
         let total = 0;
         let { sanphams, searchValue } = this.state;
         const product = sanphams.filter(item => {
-            if (item.cuaHangId == localStorage.getItem("CH_id"))
+            if (item.cuaHangId === localStorage.getItem("CH_id"))
                 return item
         })
+        console.log(product)
         if (this.state.redirect) {
             return <Redirect to='/checkout' />;
         }
@@ -248,43 +249,7 @@ class PurchaseProduct extends React.Component {
                                     </div>
                                 </div>
                                 {/* Profile Sidebar */}
-                                <div className="col-md-7 col-lg-8 col-xl-9">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="stylist-widget">
-                                                <div className="doc-info-left">
-                                                    <div className="stylist-img">
-                                                        <Link to="#">
-                                                            <img
-                                                                className="img-fluid"
-                                                                alt="User Image"
-                                                                src="" />
-                                                        </Link>
-                                                    </div>
-                                                    <div className="doc-info-cont">
-                                                        <h4 className="doc-name"><Link to="#"> Tên sản phẩm</Link></h4>
-                                                        <div className="rating">
-                                                            <div className="clini-infos">
-                                                                <ul>
-                                                                    <li>Giá: 50.000VND</li>
-                                                                    <li>Loại sản phẩm: gạo </li>
-                                                                    <li>Số lượng: 50</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="doc-info-right">
-                                                    <div className="clinic-booking">
-                                                        <button>
-                                                            <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        
                                 <div className="col-md-7 col-lg-8 col-xl-9">
                                     {
                                         product.filter((item) => {
@@ -311,7 +276,7 @@ class PurchaseProduct extends React.Component {
                                                                 <div className="rating">
                                                                     <div className="clini-infos">
                                                                         <ul>
-                                                                            <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"} VND</li>
+                                                                            <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"}</li>
                                                                             <li>Loại sản phẩm: {sanpham.tenDanhMuc} </li>
                                                                             <li>Số lượng: {sanpham.soLuong}</li>
                                                                         </ul>
@@ -319,13 +284,13 @@ class PurchaseProduct extends React.Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {/* <div className="doc-info-right">
+                                                        <div className="doc-info-right">
                                                         <div className="clinic-booking">
                                                             <button onClick={() => {this.handleOrder(sanpham),this.handleOrder2(this.state.cart_id)}}>
                                                                 <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
                                                             </button>
                                                         </div>
-                                                    </div> */}
+                                                    </div> 
                                                     </div>
                                                 </div>
                                             </div>

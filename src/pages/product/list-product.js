@@ -22,7 +22,7 @@ class ListProduct extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=20`).then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)
@@ -115,7 +115,7 @@ class ListProduct extends React.Component {
                                                             <Link onClick={()=>this.handleClick(sanpham.cuaHangId)} to="/ListSPofCH">
                                                                 <img
                                                                     className="img-fluid"
-                                                                    alt="User Image"
+                                                                    alt="User Image" width="150" width="150"
                                                                     src={sanpham.img} />
                                                             </Link>
                                                         </div>
@@ -124,7 +124,7 @@ class ListProduct extends React.Component {
                                                             <div className="rating">
                                                                 <div className="clini-infos">
                                                                     <ul>
-                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)}</li>
+                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)}+VNĐ</li>
 
                                                                         <li>Số lượng: {sanpham.soLuong}</li>
 
