@@ -147,7 +147,7 @@ class CustomerDashboard extends React.Component {
 																					</Link>
 																				
 																				
-																					<Link  className="btn btn-sm bg-danger-light"onClick={()=>{this.handleCancel(item.id)}} >
+																					<Link to="#"className="btn btn-sm bg-danger-light"onClick={()=>{this.handleCancel(item.id)}} >
 																						<FontAwesomeIcon icon={faTimes} /> Hủy
 																					</Link>
 																				

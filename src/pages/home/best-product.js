@@ -82,17 +82,17 @@ class BestProduct extends React.Component {
 						<div className="container">
 								<div className="row ">
 									{this.state.sanphams.map((item) => (
-										<div className="col-md-3 col-sm-6">
+										<div className="col-md-3 col-sm-6" key={item.id}>
 											<div className="card widget-profile pat-widget-profile">
 												<div className="card-body">
 													<div className="pro-widget-content">
 														<div className="profile-info-widget">
-															<Link to="/customer-profile" className="booking-doc-img">
+															<Link to="#" className="booking-doc-img">
 																<img src={item.img} alt="User Image" />
 															</Link>
 															<div className="profile-det-info">
 																<h3>
-																	<Link to="/customer-profile"></Link>
+																	{/* <Link to="#"></Link> */}
 																	{item.tenSanPham}
 																</h3>
 															</div>

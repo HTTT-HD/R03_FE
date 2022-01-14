@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 // Import Sidebar
 import { ShipperSidebar } from './shipper-sidebar';
-import { DOMAIN } from './../../constants'
+import { DOMAIN } from './../../constants';
 // Import Components
 import { Tabs, Tab } from "react-bootstrap";
 
