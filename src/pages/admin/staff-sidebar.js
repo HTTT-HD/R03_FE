@@ -31,10 +31,10 @@ class StaffSidebar extends React.Component {
                                 <li>
                                     <Link to="/manage-supplier">
                                         <FontAwesomeIcon icon={faUser} />
-                                        <span>Quản lí đối tác</span>
+                                        <span>Quản lí thành viên</span>
                                     </Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link to="/manage-shipper">
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí người giao hàng</span>
@@ -45,7 +45,7 @@ class StaffSidebar extends React.Component {
                                         <FontAwesomeIcon icon={faUser} />
                                         <span>Quản lí khách hàng</span>
                                     </Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link to="/manage-product">
                                         <FontAwesomeIcon icon={faUser} />

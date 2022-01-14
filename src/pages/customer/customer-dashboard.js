@@ -125,7 +125,7 @@ class CustomerDashboard extends React.Component {
 																	</tr>
 																</thead>
 																{order.map(item=>
-																<tbody>
+																<tbody key={item.khid}>
 																	<tr>
 																		<td>
 																			<h2 className="table-avatar">
