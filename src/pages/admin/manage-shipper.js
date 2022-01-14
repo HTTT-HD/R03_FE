@@ -16,31 +16,51 @@ class ManageShipper extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            nguoibans: []
+            shippers: []
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
     handleButtonClick(value) {
 		localStorage.setItem("pro_id", value)
     }
-    componentDidMount() {
-        fetch("http://localhost:3003/seller/")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    this.setState({
-                        isLoaded: true,
-                        nguoibans: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+    // componentDidMount() {
+    //     fetch("http://localhost:3003/seller/")
+    //         .then(res => res.json())
+    //         .then(
+    //             (result) => {
+    //                 console.log(result);
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     nguoibans: result
+    //                 });
+    //             },
+    //             (error) => {
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     error
+    //                 });
+    //             }
+    //         )
+    // }
+    componentDidMount(){
+        fetch(`${DOMAIN}/ThanhVien/get-all`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+        .then(res => res.json())
+        .then(
+            (res) => {
+                this.setState({
+                    shippers: res.data.items
+                })
+                console.log(res.data.items)
+            }
+        )
     }
 
     render() {
@@ -81,22 +101,22 @@ class ManageShipper extends React.Component {
                                     </Link>
                                     {/* product */}
                                     {
-                                        this.state.nguoibans.map(nguoiban => (
+                                        this.state.shippers.map(ship => (
                                             <div className="appointment-list">
                                                 <div className="profile-info-widget">
                                                     <Link className="booking-doc-img">
-                                                        <img src={nguoiban.img} alt="User Image" />
+                                                        <img src={ship.img} alt="User Image" />
                                                     </Link>
                                                     <div className="profile-det-info">
-                                                        <h3>{`${nguoiban.tennguoiban}`}</h3>
+                                                        <h3>{`${ship.tenshipper}`}</h3>
                                                         <div className="customer-details">
-                                                            <h5>SDT: {nguoiban.sdt}</h5>
-                                                            <h5>Địa chỉ: {nguoiban.diachi}</h5>
+                                                            <h5>SDT: {ship.sdt}</h5>
+                                                            <h5>Địa chỉ: {ship.diachi}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(nguoibans.manguoiban)}>
+                                                    <button onClick={() => this.handleButtonClick(ship.maThanhVien)}>
                                                         <Link to="/delete-shipper" className="btn btn-sm bg-danger-light">
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
                                                         </Link>
