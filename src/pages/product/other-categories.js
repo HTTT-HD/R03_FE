@@ -1,13 +1,40 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Dropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
-import { CuaHangSidebar } from './Cuahang-sidebar';
 import { DOMAIN } from './../../constants'
 
 class ListProductOfOtherCategories extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            khacs: []
+        };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+    handleButtonClick(value) {
+        localStorage.setItem("pro_id", value)
+    }
+    componentDidMount() {
+        fetch(`${DOMAIN}/Product/get-all`,
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+            })
+            .then(res => res.json())
+            .then(
+                (res) => {
+                    this.setState({
+                        khacs: res.data.items.filter(i => i['tenDanhMuc'] == 'Khác')
+                    })
+                    console.log(res.data.items.filter(i => i['tenDanhMuc'] == 'Khác'))
+                }
+            )
+    }
     render() {
         return (
             <div>
@@ -33,47 +60,52 @@ class ListProductOfOtherCategories extends React.Component {
                         <div className="card-body">
                             <form className="search-form">
                                 <div className="input-group">
-                                    <input type="text" placeholder="Tìm kiếm..." className="form-control"/>
+                                    <input type="text" placeholder="Tìm kiếm..." className="form-control" />
                                     <div className="input-group-append">
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                     <div className="container">
-                        <div className="row">
-                            <div className="col-md-3 col-sm-6">
-                                <div className="card widget-profile pat-widget-profile">
-                                    <div className="card-body">
-                                        <div className="stylist-widget">
-                                            <div className="doc-info-left">
-                                                <div className="stylist-img">
-                                                    <Link >
-                                                        {/* <img
-                                                            className="img-fluid"
-                                                            alt="User Image"
-                                                            src={sanpham.img} /> */}
-                                                    </Link>
-                                                </div>
-                                                <div className="doc-info-cont">
-                                                    <h4 className="doc-name"><Link to="#">tên sản phẩm</Link></h4>
-                                                    <div className="rating">
-                                                        <div className="clini-infos">
-                                                            <ul>
-                                                                <li>Giá: 20.000VND</li>
-                                                                <li>Số lượng: 3</li>
-                                                            </ul>
+                        <div className="row ">
+                            {
+                                this.state.khacs.map(khac => (
+                                    <div className="col-md-3 col-sm-6">
+                                        <div className="card widget-profile pat-widget-profile">
+                                            <div className="card-body">
+                                                <div className="pro-widget-content">
+                                                    <div className="profile-info-widget">
+                                                        <Link to="/ListSPofCH" className="booking-doc-img">
+                                                            <img src={khac.img} alt="User Image" />
+                                                        </Link>
+                                                        <div className="profile-det-info">
+                                                            <h3>
+                                                                {/* <Link to="#"></Link> */}
+                                                                {khac.tenSanPham}
+                                                            </h3>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div className="customer-info">
+                                                    <ul>
+                                                        <li>
+                                                            Số lượng <span>{khac.soLuong}</span>
+                                                        </li>
+                                                        <li>
+                                                            Đơn giá <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(khac.donGia) + "VNĐ"}</span>
+                                                        </li>
+                                                        <li>
+                                                            Loại sản phẩm <span>{khac.tenDanhMuc}</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                ))
+                            }
                         </div>
-                        {/* </div> */}
                     </div>
                 </form>
             </div>

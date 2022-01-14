@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link,Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/fontawesome-free-solid';
@@ -15,12 +15,12 @@ class PurchaseProduct extends React.Component {
             isLoaded: false,
             sanphams: [],
             order: [],
-            user:[],
-            cart:[],
-            cart_id:"",
-            total:0,
-            searchValue:"",
-            redirect:false
+            user: [],
+            cart: [],
+            cart_id: "",
+            total: 0,
+            searchValue: "",
+            redirect: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -29,23 +29,23 @@ class PurchaseProduct extends React.Component {
         Promise.all([
             fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`),
             fetch(`${DOMAIN}/ThanhVien/user-login`,
-		    {
-                method:"GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
-                }
-		    })
+                {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                    }
+                })
         ])
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(
-                ([result1,result2]) => {
+            .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+            .then(
+                ([result1, result2]) => {
                     console.log(result2)
                     this.setState({
                         isLoaded: true,
                         sanphams: result1.data.items,
-                        user:result2.data,
+                        user: result2.data,
                     })
                 },
                 (error) => {
@@ -63,7 +63,7 @@ class PurchaseProduct extends React.Component {
         });
         const requestOptions = {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
                 'My-Custom-Header': 'foobar'
@@ -75,44 +75,44 @@ class PurchaseProduct extends React.Component {
             })
         };
         fetch(`${DOMAIN}/Cart/add-product`, requestOptions)
-        .then((res) => res.json())
-        .then(
-            (res) => {
-                console.log(res)
-                localStorage.setItem("id_cart",res.data.id)
-                this.setState({
-                    isLoaded: true,
-                    cart_id:res.data.id,
-                    total:res.data.tongTien
-                })
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: false,
-                    error
-                })
-            }
-        )
+            .then((res) => res.json())
+            .then(
+                (res) => {
+                    console.log(res)
+                    localStorage.setItem("id_cart", res.data.id)
+                    this.setState({
+                        isLoaded: true,
+                        cart_id: res.data.id,
+                        total: res.data.tongTien
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: false,
+                        error
+                    })
+                }
+            )
         // console.log(event);
     }
-    handleOrder2(event){
+    handleOrder2(event) {
         console.log(event)
         fetch(`${DOMAIN}/Cart/products-in-cart?gioHangId=${this.state.cart_id}`,
-        {
-			method:"GET",
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
-			}
-		})
-        .then(res => res.json())
-        .then(res=>{
-          console.log(res)
-          this.setState({
-              cart:res.data
-          })  
-        })
+            {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    cart: res.data
+                })
+            })
     }
     handleChangeInput() {
         return (event) => {
@@ -122,11 +122,11 @@ class PurchaseProduct extends React.Component {
             })
         }
     }
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault();
         const requestOptions = {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
                 'My-Custom-Header': 'foobar'
@@ -140,28 +140,30 @@ class PurchaseProduct extends React.Component {
             })
         }
         fetch(`${DOMAIN}/Order/order`, requestOptions)
-        .then((res) => res.json())
-        .then(
-            (res)=>{
-                console.log(this.state.user)
-                console.log(res)
-                localStorage.setItem("id_order",res.data.id)
-                if(res.succeeded){this.setState({
-                    redirect:true
-                })}
-                
-            },
-            (error) => {
-                console.log(error)
-            }
-        )
+            .then((res) => res.json())
+            .then(
+                (res) => {
+                    console.log(this.state.user)
+                    console.log(res)
+                    localStorage.setItem("id_order", res.data.id)
+                    if (res.succeeded) {
+                        this.setState({
+                            redirect: true
+                        })
+                    }
+
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
 
     }
     render() {
-       
+
         let total = 0;
-        let {sanphams,searchValue}=this.state;
-        const product = sanphams.filter(item=>{
+        let { sanphams, searchValue } = this.state;
+        const product = sanphams.filter(item => {
             if (item.cuaHangId == localStorage.getItem("CH_id"))
                 return item
         })
@@ -185,7 +187,7 @@ class PurchaseProduct extends React.Component {
                                     <h2 className="breadcrumb-title">Danh sách sản phẩm của cửa hàng</h2>
                                 </div>
                             </div>
-                            { <Dropdown>
+                            {<Dropdown>
                                 <Dropdown.Toggle variant="light" id="dropdown-basic2">
                                     <span>Giỏ hàng <FontAwesomeIcon icon={faShoppingCart} /></span>
                                 </Dropdown.Toggle>
@@ -204,7 +206,7 @@ class PurchaseProduct extends React.Component {
                                         <Link to="./checkout">TIẾN HÀNH THANH TOÁN</Link>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </Dropdown> }
+                            </Dropdown>}
                         </div>
                     </div>
                     {/* <ul className="nav header-navbar-rht menu-select">
@@ -223,89 +225,111 @@ class PurchaseProduct extends React.Component {
                                 <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
                                     <CuaHangSidebar />
                                     <div className="card category-widget">
-                                    <div className="card-header">
-                                        <h4 className="card-title">Sản phẩm đã chọn</h4>
-                                    </div>
-                                    <div className="card-body">
-                                        <ul className="categories">
-                                            {
-                                                this.state.order.map(i=>(
-                                                total+=i.donGia,
-                                                <li>{i.tenSanPham} - {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(i.donGia) + 'VNĐ'}</li>
-                
-                                                ))    
-                                            }
-                                        </ul>
-                                    </div>
-                                    <div className="card-header">
-                                        <h4 className="card-title mb-0">Tổng: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total) + 'VNĐ'} </h4>
-                                    </div>
-                                    <div className="btn-searchsubmit-section proceed-btn text-right btn btn-block">
-                                        <button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Xác nhận</button>
-                                    </div>
-                                </div>
-
-                                </div>
-                                
-
-                                {/* Profile Sidebar */}
-                                <div className="col-md-7 col-lg-8 col-xl-9">
-                                    {/* Professor Widget */}
-                                    <div className="card search-widget">
+                                        <div className="card-header">
+                                            <h4 className="card-title">Sản phẩm đã chọn</h4>
+                                        </div>
                                         <div className="card-body">
-                                            <form className="search-form">
-                                                <div className="input-group">
-                                                    <input type="text" placeholder="Tìm kiếm..." className="form-control" onChange={this.handleChangeInput()} />
-                                                    <div className="input-group-append">
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <ul className="categories">
+                                                {
+                                                    this.state.order.map(i => (
+                                                        total += i.donGia,
+                                                        <li>{i.tenSanPham} - {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(i.donGia) + 'VNĐ'}</li>
+
+                                                    ))
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div className="card-header">
+                                            <h4 className="card-title mb-0">Tổng: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(total) + 'VNĐ'} </h4>
+                                        </div>
+                                        <div className="btn-searchsubmit-section proceed-btn text-right btn btn-block">
+                                            <button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Xác nhận</button>
                                         </div>
                                     </div>
-                                    {
-                                    product.filter((item)=>{
-                                        if(searchValue==""){
-                                            return item
-                                        }else if(item.tenSanPham.toLowerCase().includes(searchValue.toLowerCase())){
-                                            return item
-                                        }
-                                    }).map(sanpham =>
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="stylist-widget">
-                                                    <div className="doc-info-left">
-                                                        <div className="stylist-img">
-                                                            <Link to="#">
-                                                                <img
-                                                                    className="img-fluid"
-                                                                    alt="User Image"
-                                                                    src={sanpham.img} />
-                                                            </Link>
-                                                        </div>
-                                                        <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tenSanPham}</Link></h4>
-                                                            <div className="rating">
-                                                                <div className="clini-infos">
-                                                                    <ul>
-                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"} VND</li>
-                                                                        <li>Loại sản phẩm: {sanpham.tenDanhMuc} </li>
-                                                                        <li>Số lượng: {sanpham.soLuong}</li>
-                                                                    </ul>
-                                                                </div>
+                                </div>
+                                {/* Profile Sidebar */}
+                                <div className="col-md-7 col-lg-8 col-xl-9">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="stylist-widget">
+                                                <div className="doc-info-left">
+                                                    <div className="stylist-img">
+                                                        <Link to="#">
+                                                            <img
+                                                                className="img-fluid"
+                                                                alt="User Image"
+                                                                src="" />
+                                                        </Link>
+                                                    </div>
+                                                    <div className="doc-info-cont">
+                                                        <h4 className="doc-name"><Link to="#"> Tên sản phẩm</Link></h4>
+                                                        <div className="rating">
+                                                            <div className="clini-infos">
+                                                                <ul>
+                                                                    <li>Giá: 50.000VND</li>
+                                                                    <li>Loại sản phẩm: gạo </li>
+                                                                    <li>Số lượng: 50</li>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="doc-info-right">
+                                                </div>
+                                                <div className="doc-info-right">
+                                                    <div className="clinic-booking">
+                                                        <button>
+                                                            <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-7 col-lg-8 col-xl-9">
+                                    {
+                                        product.filter((item) => {
+                                            if (searchValue == "") {
+                                                return item
+                                            } else if (item.tenSanPham.toLowerCase().includes(searchValue.toLowerCase())) {
+                                                return item
+                                            }
+                                        }).map(sanpham =>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="stylist-widget">
+                                                        <div className="doc-info-left">
+                                                            <div className="stylist-img">
+                                                                <Link to="#">
+                                                                    <img
+                                                                        className="img-fluid"
+                                                                        alt="User Image"
+                                                                        src={sanpham.img} />
+                                                                </Link>
+                                                            </div>
+                                                            <div className="doc-info-cont">
+                                                                <h4 className="doc-name"><Link to="#"> {sanpham.tenSanPham}</Link></h4>
+                                                                <div className="rating">
+                                                                    <div className="clini-infos">
+                                                                        <ul>
+                                                                            <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"} VND</li>
+                                                                            <li>Loại sản phẩm: {sanpham.tenDanhMuc} </li>
+                                                                            <li>Số lượng: {sanpham.soLuong}</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/* <div className="doc-info-right">
                                                         <div className="clinic-booking">
                                                             <button onClick={() => {this.handleOrder(sanpham),this.handleOrder2(this.state.cart_id)}}>
                                                                 <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
                                                             </button>
                                                         </div>
+                                                    </div> */}
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
                                 </div>
                             </div>
                         </div>
