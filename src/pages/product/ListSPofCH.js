@@ -262,13 +262,15 @@ class PurchaseProduct extends React.Component {
                                             <div className="card">
                                                 <div className="card-body">
                                                     <div className="stylist-widget">
-                                                        <div className="doc-info-left">
-                                                            <div className="stylist-img">
+                                                        <div className="profile-info-widget">
+                                                            <div className="booking-doc-img">
                                                                 <Link to="#">
                                                                     <img
-                                                                        className="img-fluid"
+                                                                        className="rounded-circle"
                                                                         alt="User Image"
+                                                                        width="150" height="150"
                                                                         src={sanpham.img} />
+                                                                        
                                                                 </Link>
                                                             </div>
                                                             <div className="doc-info-cont">
@@ -286,7 +288,7 @@ class PurchaseProduct extends React.Component {
                                                         </div>
                                                         <div className="doc-info-right">
                                                         <div className="clinic-booking">
-                                                            <button onClick={() => {this.handleOrder(sanpham),this.handleOrder2(this.state.cart_id)}}>
+                                                            <button onClick={() => {this.handleOrder(sanpham),this.handleOrder2(this.state.cart_id)}}  class="btn btn-primary btn-sm">
                                                                 <Link to="#" className="view-pro-btn">Thêm vào giỏ hàng</Link>
                                                             </button>
                                                         </div>
