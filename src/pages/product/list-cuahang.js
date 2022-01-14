@@ -16,7 +16,10 @@ class ListCuaHang extends React.Component {
         };
         this.handleClick=this.handleClick.bind(this);
     }
-
+    handleClick(event){
+        console.log(event)
+        localStorage.setItem("CH_id",event)
+    }
     componentDidMount() {
         fetch("https://localhost:5001/api/Store/get-all")
             .then(res => res.json())

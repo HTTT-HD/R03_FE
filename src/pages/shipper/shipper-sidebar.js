@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
+import { DOMAIN } from './../../constants';
 // Import Images
 import StylistImg from '../../assets/img/stylists/stylist-thumb-02.jpg';
 
@@ -9,7 +9,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faColumns, faLock, faSignOutAlt, faUser, faUserCog } from '@fortawesome/fontawesome-free-solid';
 
 class ShipperSidebar extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            error: null,
+            isLoaded: false,
+            data: [],
+			pathname:'/'
+        }
+    }
+    componentDidMount() {
+		fetch(`${DOMAIN}/ThanhVien/user-login`,
+		{
+			method:"GET",
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+			}
+		})
+			.then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result)
+					this.setState({
+						isLoaded: true,
+						data: result.data
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			)
+	}
     render() {
+        let {data}=this.state;
         return (
             <div>
                 {/* Profile Sidebar */}
@@ -20,7 +57,7 @@ class ShipperSidebar extends React.Component {
                                 <img src={StylistImg} alt="User Image" />
                             </Link>
                             <div className="profile-det-info">
-                                <h3>Nguyễn Minh Mẫn</h3>
+                                <h3>{data.tenThanhVien}</h3>
 
                                 <div className="customer-details">
                                     <h5 className="mb-0">Shipper</h5>

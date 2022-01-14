@@ -77,15 +77,16 @@ class InvoiceView extends React.Component {
 										<div className="row">
 											<div className="col-md-12">
 												<div className="invoice-info">
-													<strong className="customer-text">Phương thức thanh toán</strong>
-													<p className="invoice-details invoice-details-two"> {order.tenLoaiThanhToan} </p><br />
-													<strong className="customer-text">Mua tại cửa hàng: {order.tenCuaHang}</strong>
+													<strong className="customer-text">Phương thức thanh toán:</strong>{order.tenLoaiThanhToan}
+													<strong className="customer-text">Phương thức thanh toán:</strong>{order.tenTrangThai}
+													<p className="invoice-details invoice-details-two">  </p><br />
+													<strong className="customer-text">Mua tại cửa hàng: </strong>{order.tenCuaHang}
 													
-													<strong className="customer-text">Người giao hàng</strong>
-													<p className="invoice-details invoice-details-two">	{order.tenNguoiGiao} </p>
+													<strong className="customer-text">Người giao hàng:</strong>{order.tenNguoiGiao}
+													<p className="invoice-details invoice-details-two">	 </p>
 				
-													<strong className="customer-text">Giao đến</strong>
-													<p className="invoice-details invoice-details-two">	{order.diaChiNhan} </p>
+													<strong className="customer-text">Giao đến:</strong>{order.diaChiNhan}
+													<p className="invoice-details invoice-details-two">	 </p>
 												</div>
 											</div>
 										</div>

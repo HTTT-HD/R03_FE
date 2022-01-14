@@ -1,3 +1,5 @@
+
+  
 import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { Link,Redirect } from 'react-router-dom'
@@ -45,19 +47,6 @@ function Checkout() {
                 'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
             }
 		};
-		async function fetchdata(){
-			const result = await axios(`${DOMAIN}/ThanhVien/user-login`, requestOptions)
-			//console.log(data.info)
-			console.log(result.data.data)
-			const user_object=result.data.data
-			setUsername(user_object.tenThanhVien)//user_object.tenThanhVien
-			setaddress(user_object.diaChi)
-			setphone(user_object.soDienThoai)
-			console.log(username)
-			//console.log(user_object.email)
-			//console.log(user_object.phone)
-		}
-		fetchdata();
 		async function fetchOrder(){
 			const result = await axios(`${DOMAIN}/Order/detail?donHangId=${localStorage.getItem("id_order")}`, requestOptions)
 			//console.log(data.info)

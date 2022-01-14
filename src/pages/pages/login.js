@@ -18,7 +18,7 @@ class Login extends React.Component {
 			password: '',
 			submitted: false,
 			redirect: false,
-			path: '/rentalmarket',
+			path: '',
 			role:[],
 		};
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -57,9 +57,21 @@ class Login extends React.Component {
 					localStorage.setItem("role", res.data.quyens);
 					localStorage.setItem("isAuthenticated", "True")
 					localStorage.setItem("Accesstoken", res.data.acessToken);
-					this.setState({
-						role:res.data.quyens
-					})
+					if(res.data.quyens == null)
+							{ this.setState({
+								path :'/',
+								redirect:true
+							})}
+					if(res.data.quyens[0]==='admin')
+							{ this.setState({
+								path :'/staff-dashboard',
+								redirect:true
+							})}
+						if(res.data.quyens[0]==='giaohang')
+							{ this.setState({
+								path :'/shipper-dashboard',
+								redirect:true
+							})}
 				} else {
 					alert(res.message)
 					localStorage.setItem("isAuthenticated", "False")
@@ -72,7 +84,7 @@ class Login extends React.Component {
 	}
 	render() {
 		const { redirect, path,role } = this.state;
-		console.log(role)
+
 		if (redirect) {
 			return <Redirect to={path} />;
 		}

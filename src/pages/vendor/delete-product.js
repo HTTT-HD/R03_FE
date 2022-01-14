@@ -9,6 +9,7 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
 class DeleteProduct extends React.Component {
     constructor(props) {
@@ -25,15 +26,25 @@ class DeleteProduct extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         //console.log(this.state)
-        axios.delete(`http://localhost:3003/product/del/${localStorage.getItem("pro_id")}`)
-            .then(res => {
-                console.log(res)
-                if(res.data=='True')
-                    {this.setState({redirect:true})}
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        fetch(`${DOMAIN}/Product/delete?id=${localStorage.getItem("pro_id")}`,
+        {
+            method:"DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+        .then(res => res.json())
+        .then(res=>{
+            console.log(res)
+            if(res.succeeded){
+                this.setState({
+                    redirect:true
+                })
+            }
+        }
+        )
     }
     render() {
         const { redirect } = this.state;
@@ -61,7 +72,7 @@ class DeleteProduct extends React.Component {
                 {/* Breadcrumb */}
 
                 {/* Page Content */}
-                <form action="" method="POST" onSubmit={this.handleSubmit}>
+                <form action="" method="DELETE" onSubmit={this.handleSubmit}>
                     <div className="content">
                         <div className="container">
                             <div className="row">

@@ -27,6 +27,7 @@ class CustomerDashboard extends React.Component {
 			order:[],
 			redirect: false
 		};
+		this.handleCancel=this.handleCancel.bind(this)
 	}
 	handleClick(event) {
 		localStorage.setItem("id_order",event)
@@ -71,7 +72,44 @@ class CustomerDashboard extends React.Component {
 			)
 	}
 	handleCancel(event) {
-		
+		Promise.all([
+			fetch(`${DOMAIN}/Order/reject?donHangId=${event}`,
+			{
+				method:"PUT",
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+				}
+			})
+			,
+			fetch(`${DOMAIN}/Order/get-all-for-user`,
+		    {
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+		    })
+		])
+			.then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+			.then(
+				([result1,result2]) => {
+					console.log(result1,result2)
+					this.setState({
+							isLoaded: true,
+							order:result2.data.items
+					})
+
+				},
+				(error) => {
+					this.setState({
+						isLoaded: false,
+						error
+					})
+				}
+			)
 	}
     render() {
 		let {order} = this.state;
@@ -137,7 +175,7 @@ class CustomerDashboard extends React.Component {
 																		</td>
 																		<td>{item.tenCuaHang} <span className="d-block text-info"></span></td>
 																		<td>{item.tenLoaiThanhToan}</td>
-																		<td>{item.tongTien}</td>
+																		<td>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.tongTien)} VNĐ</td>
 																		<td><span className="badge badge-pill bg-danger-light">{item.tenTrangThai}</span></td>
 																		<td className="text-right">
 																			<div className="table-action">
@@ -147,9 +185,9 @@ class CustomerDashboard extends React.Component {
 																					</Link>
 																				
 																				
-																					<Link to="#"className="btn btn-sm bg-danger-light"onClick={()=>{this.handleCancel(item.id)}} >
+																					<button className="btn btn-sm bg-danger-light"onClick={()=>{this.handleCancel(item.id)}} >
 																						<FontAwesomeIcon icon={faTimes} /> Hủy
-																					</Link>
+																					</button>
 																				
 																			</div>
 																		</td>

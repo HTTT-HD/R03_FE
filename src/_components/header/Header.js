@@ -25,8 +25,11 @@ class Header extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            data: []
+            data: [],
+			pathname:'/'
         }
+		this.handleClickAdmin=this.handleClickAdmin.bind(this);
+		this.handleClickshipper=this.handleClickshipper.bind(this);
     }
 	static contextType = UserRolesContext;
 	componentDidMount() {
@@ -56,23 +59,35 @@ class Header extends React.Component {
 				}
 			)
 	}
-	
+	handleClickAdmin(event){
+		if(event!='admin'){
+			alert("Xin lỗi đây là trang của quản trị viên.")
+		}else{
+			this.setState({
+				pathname:'/staff-dashboard'
+			})
+		}
+	}
+	handleClickshipper(event){
+		if(event!='giaohang'){
+			alert("Xin lỗi đây là trang của shipper.")
+		}else{
+			this.setState({
+				pathname:'/shipper-dashboard'
+			})
+		}
+	}
 	handleLogout() {
 		localStorage.clear();
 		localStorage.removeItem("token");
 	}
 
 	render() {
-		const exclusionArray = []
-		if (exclusionArray.indexOf(this.props.location.pathname) >= 0) {
-			return '';
-		}
-		const pathname = this.props.location.pathname;
+		
+		// let user = JSON.parse(localStorage.getItem('user-info'));
 		let isAuthenticated = false;
 		if (localStorage.getItem("isAuthenticated")=="True"){isAuthenticated = true;}
-			
-		// let user = JSON.parse(localStorage.getItem('user-info'));
-		console.log(pathname, "Pathnames")
+		let {pathname}=this.state
 		return (
 			<header className={`header ${(pathname === ('/') ? 'min-header' : '')}`}>
 				<nav className="navbar navbar-expand-lg header-nav">
@@ -102,7 +117,7 @@ class Header extends React.Component {
 								<Link to="/">Trang chủ</Link>
 							</li>
 							<li className={pathname === ('/staff-dashboard') ? 'active' : ''}>
-								<Link to="/staff-dashboard">Admin</Link>
+								<Link to={pathname} onClick={()=>{this.handleClickAdmin(localStorage.getItem("role"))}}>Admin</Link>
 							</li>
 							<li className={pathname === ('/stylist-dashboard') ? 'active' : ''}>
 								<Link to="/list-cuahang">Danh sách Cửa hàng</Link>
@@ -122,7 +137,7 @@ class Header extends React.Component {
 								</ul>
 							</li>
 							<li className={pathname === ('/shipper-dashboard') ? 'active' : ''}>
-								<Link to="/shipper-dashboard">Shipper</Link>
+								<Link to={pathname} onClick={()=>{this.handleClickshipper(localStorage.getItem("role"))}}>Shipper</Link>
 							</li>
 							<li className={`has-submenu ${pathname === ('/list-rice') ? 'active' : pathname === ('/list-meat') ? 'active' : pathname === ('/list-seafood') ? 'active' : pathname === ('/other-categories') ? 'active' : ''}`}>
 								<Link to="">Danh mục sản phẩm <FontAwesomeIcon icon={faChevronDown} /></Link>
@@ -210,7 +225,7 @@ class Header extends React.Component {
 												</div>
 												<div className="user-text">
 													<h6>{this.state.data.tenThanhVien}</h6>
-													<p className="text-muted mb-0">Nhà tạo mẫu</p>
+													<p className="text-muted mb-0"></p>
 												</div>
 											</div>
 										</Dropdown.Item>

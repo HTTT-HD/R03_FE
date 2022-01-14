@@ -238,10 +238,10 @@ class Cart extends React.Component {
         .then(
             (res)=>{
                 console.log(res)
+                localStorage.setItem("id_order", res.data.id)
                 if(res.succeeded){this.setState({
                     redirect:true
                 })}
-                
             },
             (error) => {
                 console.log(error)

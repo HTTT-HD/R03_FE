@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link ,Redirect} from 'react-router-dom'
+import { DOMAIN } from '../../constants';
 // Import Sidebar
 import { StaffSidebar } from './staff-sidebar'
 import UserAvatar from '../../assets/img/customers/customer.jpg';
@@ -16,15 +16,59 @@ class EditProduct extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            sanphams: []
+            sanphams: [],
+            redirect:false
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
     handleButtonClick(value) {
         localStorage.setItem("pro_id", value)
     }
+    handleDelete(event){
+        
+        Promise.all([
+            fetch(`${DOMAIN}/Product/delete?id=${event}`,
+            {
+                method:"DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                }
+            })
+            ,
+            fetch(`${DOMAIN}/Product/get-all?PageIndex=1&PageSize=20`,
+                {
+                    method:"GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+                    }
+                })
+            ])
+            .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+            .then(
+                ([result1,result2]) => {
+                    console.log(result1,result2)
+                    this.setState((state)=>{
+                        return{isLoaded: true,
+                            sanphams:result2.data.items
+                        }
+                    })
+                    console.log(this.state.product)
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: false,
+                        error
+                    })
+                }
+            )
+    }
     componentDidMount() {
-        fetch("https://localhost:5001/api/Product/get-all")
+        fetch("https://localhost:5001/api/Product/get-all?PageIndex=1&PageSize=20")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -97,15 +141,15 @@ class EditProduct extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="appointment-action">
-                                                    <button onClick={() => this.handleButtonClick(item.id)}>
-                                                        <Link to="/edit-edit-product" className="btn btn-sm bg-success-light">
+                                                    <button className="btn btn-sm bg-success-light" onClick={() => this.handleButtonClick(item.id)}>
+                                                        <Link to="/edit-edit-product" >
                                                             <FontAwesomeIcon icon={faEdit} /> Sửa
                                                         </Link>
                                                     </button>
-                                                    <button onClick={() => this.handleButtonClick(item.id)}>
-                                                        <Link to="/delete-product" className="btn btn-sm bg-danger-light">
+                                                    <button className="btn btn-sm bg-danger-light" onClick={() => this.handleDelete(item.id)}>
+                                                        
                                                             <FontAwesomeIcon icon={faMinus} /> Xóa
-                                                        </Link>
+                                                        
                                                     </button>
                                                 </div>
                                             </div>

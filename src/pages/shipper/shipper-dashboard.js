@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link ,Redirect} from 'react-router-dom'
 
 // Import Sidebar
 import { ShipperSidebar } from './shipper-sidebar';
@@ -19,27 +19,16 @@ class ShipperDashboard extends React.Component {
 		this.state = {
 			error: null,
 			isLoaded: false,
-			orders: []
+			orders: [],
+			redirect:false
 		};
+		this.handleButtonClick=this.handleButtonClick.bind(this)
+	}
+	handleClick(event) {
+		localStorage.setItem("id_order",event)
 	}
 	componentDidMount() {
-		fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
-			.then(
-				(result) => {
-					console.log(result)
-					this.setState({
-						isLoaded: true,
-						sanphams: result.data.items
-					})
-				},
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					})
-				}
-			)
-		fetch(`${DOMAIN}/Order/get-all`,
+		fetch(`${DOMAIN}/Order/get-all?PageIndex=1&PageSize=20`,
 			{
 				method: "GET",
 				headers: {
@@ -54,14 +43,36 @@ class ShipperDashboard extends React.Component {
 					this.setState({
 						orders: res.data.items
 					})
-					console.log(res.data.items)
-					console.log(new Date(res.data.items[0].ngayTao).toLocaleString())
 				}
 			)
 	}
+	handleButtonClick(event){
+		localStorage.setItem("id_order",event)
+		fetch(`${DOMAIN}/Order/receive?donHangId=${event}`,
+			{
+				method:"PUT",
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+				}
+			})
+			.then(res => res.json())
+			.then(res=>{
+				if(res.succeeded){
+					alert("Nhận đơn hàng thành công")
+					this.setState({
+						redirect:true
+					})
+				}
+			})
+	}
+    render() {
 
-	render() {
-		return (
+		if (this.state.redirect) {
+            return <Redirect to='invoice-view' />;
+        }
+        return (
 			<div>
 				{/* Breadcrumb */}
 				<div className="breadcrumb-bar">
@@ -120,7 +131,7 @@ class ShipperDashboard extends React.Component {
 										<h4 className="mb-4">Khách hàng</h4>
 										<div className="appointment-tab">
 											<Tabs defaultActiveKey="upcoming" id="uncontrolled-tab-example">
-												<Tab eventKey="upcoming" title="Sắp tới">
+												<Tab eventKey="upcoming" title="">
 													<div className="card card-table mb-0">
 														<div className="card-body">
 															<div className="table-responsive">
@@ -146,8 +157,8 @@ class ShipperDashboard extends React.Component {
 																					</td>
 																					<td>{new Date(item.ngayTao).toLocaleString()} <span className="d-block text-info"></span></td>
 																					<td>{item.diaChiNhan}</td>
-																					{/* <td className="text-center">{item.tongTien}</td> */}
-																					{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.tongTien + item.tienShip)} VNĐ
+																					<td className="text-center">{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.tongTien + item.tienShip)} VNĐ</td> 
+																					<td><span className="badge badge-pill bg-danger-light">{item.tenTrangThai}</span></td>
 																					<td className="text-right">
 																						<div className="table-action">
 																							{/* {new Date(item.ngayTao) > Date.now() ? 
@@ -157,11 +168,11 @@ class ShipperDashboard extends React.Component {
 																									</div>
 																								) : null
 																							} */}
-																							<div className="btn btn-sm bg-info-light mr-1">
-																								<FontAwesomeIcon icon={faCheck} /> Nhận
-																							</div>
-																							<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
-																								<FontAwesomeIcon icon={faEye} /> Xem
+																							
+																							<button className="btn btn-sm bg-info-light mr-1" onClick={()=>{this.handleButtonClick(item.id)}}><FontAwesomeIcon icon={faCheck} /> Nhận</button>	
+																							
+																							<Link to="/invoice-view" onClick={()=>{this.handleClick(item.id)}} className="btn btn-sm bg-info-light mr-1">Xem
+																						
 																							</Link>
 																						</div>
 																					</td>
@@ -169,29 +180,7 @@ class ShipperDashboard extends React.Component {
 																			))
 																		}
 																	</tbody>
-																	<tbody>
-																		<tr>
-																			<td>
-																				<h2 className="table-avatar">
-																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																					<Link to="/customer-profile">Lê Hoài Ngọc <span>#kh0002</span></Link>
-																				</h2>
-																			</td>
-																			<td>9 Jan 2022 <span className="d-block text-info">12.30 AM</span></td>
-																			<td>145 Nguyễn Thị Minh Khai, p.5, quận 1</td>
-																			<td className="text-center">100.000VNĐ</td>
-																			<td className="text-right">
-																				<div className="table-action">
-																					<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
-																						<FontAwesomeIcon icon={faEye} /> Xem
-																					</Link>
-																					<Link to="#" className="btn btn-sm bg-danger-light">
-																						<FontAwesomeIcon icon={faTimes} /> Hủy
-																					</Link>
-																				</div>
-																			</td>
-																		</tr>
-																	</tbody>
+																	
 																</table>
 															</div>
 														</div>
