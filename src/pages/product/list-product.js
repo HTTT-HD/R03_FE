@@ -95,7 +95,6 @@ class ListProduct extends React.Component {
                             </form>
                         </div>
                     </div>
-
                     <div className="container">
                         <div className="row">
                             {
@@ -106,37 +105,38 @@ class ListProduct extends React.Component {
                                         return item
                                     }
                                 }).map(sanpham =>
-                                    <div className="col-md-3 col-sm-6">
-                                        <div className="card widget-profile pat-widget-profile">
-                                            <div className="card-body">
-                                                <div className="stylist-widget">
-                                                    <div className="doc-info-left">
-                                                        <div className="stylist-img">
-                                                            <Link onClick={()=>this.handleClick(sanpham.cuaHangId)} to="/ListSPofCH">
-                                                                <img
-                                                                    className="img-fluid"
-                                                                    alt="User Image" width="150" width="150"
-                                                                    src={sanpham.img} />
-                                                            </Link>
-                                                        </div>
-                                                        <div className="doc-info-cont">
-                                                            <h4 className="doc-name"><Link to="#"> {sanpham.tenSanPham}</Link></h4>
-                                                            <div className="rating">
-                                                                <div className="clini-infos">
-                                                                    <ul>
-                                                                        <li>Giá: {new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia)}+VNĐ</li>
-
-                                                                        <li>Số lượng: {sanpham.soLuong}</li>
-
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                    <div className="col-md-3 col-sm-6" key={sanpham.id}>
+                                    <div className="card widget-profile pat-widget-profile">
+                                        <div className="card-body">
+                                            <div className="pro-widget-content">
+                                                <div className="profile-info-widget">
+                                                    <Link to="#" className="booking-doc-img">
+                                                        <img src={sanpham.img} alt="User Image" />
+                                                    </Link>
+                                                    <div className="profile-det-info">
+                                                        <h3>
+                                                            {/* <Link to="#"></Link> */}
+                                                            {sanpham.tenSanPham}
+                                                        </h3>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className="customer-info">
+                                                <ul>
+                                                    <li>
+                                                        Số lượng <span>{sanpham.soLuong}</span>
+                                                    </li>
+                                                    <li>
+                                                        Đơn giá <span>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sanpham.donGia) + "VNĐ"}</span>
+                                                    </li>
+                                                    <li>
+                                                        Loại sản phẩm <span>{sanpham.tenDanhMuc}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
                                 )}
                         </div>
                         {/* </div> */}

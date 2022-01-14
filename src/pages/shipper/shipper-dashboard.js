@@ -23,25 +23,45 @@ class ShipperDashboard extends React.Component {
 		};
 	}
 	componentDidMount() {
-        fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result)
-                    this.setState({
-                        isLoaded: true,
-                        sanphams: result.data.items
-                    })
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    })
-                }
-            )
-		}
-    render() {
-        return (
+		fetch(`${DOMAIN}/product/get-all?PageIndex=1&PageSize=10`).then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result)
+					this.setState({
+						isLoaded: true,
+						sanphams: result.data.items
+					})
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					})
+				}
+			)
+		fetch(`${DOMAIN}/Order/get-all`,
+			{
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+				}
+			})
+			.then(res => res.json())
+			.then(
+				(res) => {
+					this.setState({
+						orders: res.data.items
+					})
+					console.log(res.data.items)
+					console.log(new Date(res.data.items[0].ngayTao).toLocaleString())
+				}
+			)
+	}
+
+	render() {
+		return (
 			<div>
 				{/* Breadcrumb */}
 				<div className="breadcrumb-bar">
@@ -95,7 +115,7 @@ class ShipperDashboard extends React.Component {
 										</div>
 									</div>
 								</div>
-								<div className="row">							
+								<div className="row">
 									<div className="col-md-12">
 										<h4 className="mb-4">Khách hàng</h4>
 										<div className="appointment-tab">
@@ -115,27 +135,39 @@ class ShipperDashboard extends React.Component {
 																		</tr>
 																	</thead>
 																	<tbody>
-																		<tr>
-																			<td>
-																				<h2 className="table-avatar">
-																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																					<Link to="/customer-profile">Nguyễn Hoàng Nam <span>#kh0001</span></Link>
-																				</h2>
-																			</td>
-																			<td>9 Jan 2022 <span className="d-block text-info">11.30 AM</span></td>
-																			<td>145 Nguyễn Thị Minh Khai, p.5, quận 1</td>
-																			<td className="text-center">150.000VNĐ</td>
-																			<td className="text-right">
-																				<div className="table-action">
-																					<div className="btn btn-sm bg-info-light mr-1">
-																						<FontAwesomeIcon icon={faCheck} /> Nhận
-																					</div>
-																					<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
-																						<FontAwesomeIcon icon={faEye} /> Xem
-																					</Link>
-																				</div>
-																			</td>
-																		</tr>
+																		{
+																			this.state.orders.map(item => (
+																				<tr>
+																					<td>
+																						<h2 className="table-avatar">
+																							{/* <Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link> */}
+																							<Link to="/customer-profile">{item.nguoiDat}</Link>
+																						</h2>
+																					</td>
+																					<td>{new Date(item.ngayTao).toLocaleString()} <span className="d-block text-info"></span></td>
+																					<td>{item.diaChiNhan}</td>
+																					{/* <td className="text-center">{item.tongTien}</td> */}
+																					{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.tongTien + item.tienShip)} VNĐ
+																					<td className="text-right">
+																						<div className="table-action">
+																							{/* {new Date(item.ngayTao) > Date.now() ? 
+																								(
+																									<div className="btn btn-sm bg-info-light mr-1">
+																										<FontAwesomeIcon icon={faCheck} /> Nhận
+																									</div>
+																								) : null
+																							} */}
+																							<div className="btn btn-sm bg-info-light mr-1">
+																								<FontAwesomeIcon icon={faCheck} /> Nhận
+																							</div>
+																							<Link to="/view-" className="btn btn-sm bg-info-light mr-1">
+																								<FontAwesomeIcon icon={faEye} /> Xem
+																							</Link>
+																						</div>
+																					</td>
+																				</tr>
+																			))
+																		}
 																	</tbody>
 																	<tbody>
 																		<tr>
@@ -160,7 +192,7 @@ class ShipperDashboard extends React.Component {
 																			</td>
 																		</tr>
 																	</tbody>
-																</table>		
+																</table>
 															</div>
 														</div>
 													</div>
@@ -172,10 +204,10 @@ class ShipperDashboard extends React.Component {
 							</div>
 						</div>
 					</div>
-				</div>		
+				</div>
 				{/* Page Content */}
 			</div>
-        )
-    }
+		)
+	}
 }
 export { ShipperDashboard };
