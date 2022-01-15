@@ -19,29 +19,29 @@ class NeededProduct extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(event) {
-		localStorage.setItem("id_order",event)
+		localStorage.setItem("id_order", event)
 	}
-	componentDidMount(){
-        fetch(`${DOMAIN}/Order/get-all`,
-        {
-            method:"GET",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
-            }
-        })
-        .then(res => res.json())
-        .then(
-            (res) => {
-				console.log(res)
-                this.setState({
-                    hoadons: res.data.items
-                })
-                console.log(res.data.items)
-            }
-        )
-    }
+	componentDidMount() {
+		fetch(`${DOMAIN}/Order/get-all`,
+			{
+				method: "GET",
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+				}
+			})
+			.then(res => res.json())
+			.then(
+				(res) => {
+					console.log(res)
+					this.setState({
+						hoadons: res.data.items
+					})
+					console.log(res.data.items)
+				}
+			)
+	}
 	render() {
 		return (
 			<div>
@@ -69,7 +69,7 @@ class NeededProduct extends React.Component {
 							<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 								<StaffSidebar />
 							</div>
-							<div className="col-md-7 col-lg-8 col-xl-9">								
+							<div className="col-md-7 col-lg-8 col-xl-9">
 								<div className="row">
 									<div className="col-md-12">
 										<h4 className="mb-4">Top những mặt hàng thiết yếu</h4>
@@ -85,24 +85,18 @@ class NeededProduct extends React.Component {
 																</tr>
 															</thead>
 															<tbody>
-																<tr>
-																	<td>
-																		<h2 className="table-avatar">
-																			<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																			<Link to="/customer-profile">Tên sản phẩm <span>#PT0016</span></Link>
-																		</h2>
-																	</td>
-																	<td className="text-center">Thịt</td>
-																</tr>
-                                                                <tr>
-																	<td>
-																		<h2 className="table-avatar">
-																			<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={UserAvatar} alt="User Image" /></Link>
-																			<Link to="/customer-profile">Tên sản phẩm <span>#PT0016</span></Link>
-																		</h2>
-																	</td>
-																	<td className="text-center">Gạo</td>
-																</tr>
+																{
+																	this.state.hoadons.map(item => (
+																		<tr>
+																			<td>
+                                                                                <h2 className="table-avatar">
+                                                                                    <Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={item.img} alt="User Image" /></Link>
+                                                                                    <Link to="/customer-profile">{item.tenSanPham}</Link>
+                                                                                </h2>
+                                                                            </td>
+																			<Link to="#">{item.tenDanhMuc}</Link>
+																		</tr>
+																	))}
 															</tbody>
 														</table>
 													</div>

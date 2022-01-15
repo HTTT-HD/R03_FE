@@ -1,52 +1,51 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom'
-import axios from 'axios'
 import { StaffSidebar } from './staff-sidebar';
-
-// Import Images
-import UserImg from '../../assets/img/customers/customer.jpg';
-
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion } from '@fortawesome/fontawesome-free-solid';
+import { DOMAIN } from '../../constants';
 
-class DeleteShipper extends React.Component {
-
-     constructor(props) {
-     	super(props);
-     	this.state = {
-     		error: null,
-     		isLoaded: false,
-     		services: [],
-             data:"",
-             redirect:false
-     	}
-         this.handleSubmit = this.handleSubmit.bind(this);
+class DeleteProduct extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            data:"",
+            redirect:false
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-     handleSubmit(event) {
-     	event.preventDefault();
-     	//console.log(this.state)
-     	axios.post('http://localhost:3000/admin/service/del',localStorage.getItem("sv_id").toString())
-     		.then(res => {
-     			console.log(res.data)
-     			if(res.data.save)
-     			    {this.setState({redirect:true})}
-     		})
-     		.catch(error => {
-     			console.log(error)
-     		})
-     }
+   
+    handleSubmit(event) {
+        event.preventDefault();
+        //console.log(this.state)
+        fetch(`${DOMAIN}/Product/delete?id=${localStorage.getItem("pro_id")}`,
+        {
+            method:"DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+        .then(res => res.json())
+        .then(res=>{
+            console.log(res)
+            if(res.succeeded){
+                this.setState({
+                    redirect:true
+                })
+            }
+        }
+        )
+    }
     render() {
         const { redirect } = this.state;
         if (redirect) {
-         	return <Redirect to='/edit-service'/>;
+         	return <Redirect to='/edit-product'/>;
         }
-        // let {services} = this.state;
-        // const sv=services.filter(item=>{
-        //     return item.idservice == localStorage.getItem("sv_id")
-        // })
-        // console.log(sv)
         return (
             <div>
                 {/* Breadcrumb */}
@@ -57,10 +56,10 @@ class DeleteShipper extends React.Component {
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/">Trang chủ</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Xóa người giao hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Xóa sản phẩm</li>
                                     </ol>
                                 </nav>
-                                <h2 className="breadcrumb-title">Xóa người giao hàng</h2>
+                                <h2 className="breadcrumb-title">Xóa sản phẩm</h2>
                             </div>
                         </div>
                     </div>
@@ -68,16 +67,15 @@ class DeleteShipper extends React.Component {
                 {/* Breadcrumb */}
 
                 {/* Page Content */}
-                <form action="" method="POST" onSubmit={this.handleSubmit}>
+                <form action="" method="DELETE" onSubmit={this.handleSubmit}>
                     <div className="content">
                         <div className="container">
                             <div className="row">
                                 {/* Profile Sidebar */}
                                 <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-                                    <StaffSidebar />
+                                    <StylistSidebar />
                                 </div>
                                 {/* Profile Sidebar */}
-
                                 <div className="col-md-7 col-lg-8 col-xl-9">
                                     <div className="card">
                                         <div className="card-body">
@@ -88,8 +86,8 @@ class DeleteShipper extends React.Component {
                                                     <div className="card-body">
                                                         <div className="success-cont">
                                                             <FontAwesomeIcon icon={faQuestion} />
-                                                            <h3>Bạn chắc chắn xóa người giao hàng này không?</h3>
-                                                            <p>Nếu bạn nhấn "Xác nhận" thì người giao hàng này được xóa, nếu bạn muốn thêm lại người giao hàng thì vào phần "Thêm người giao hàng" để thêm người giao hàng mới.</p>
+                                                            <h3>Bạn chắc chắn xóa sản phẩm này không?</h3>
+                                                            <p>Nếu bạn nhấn "Xác nhận" thì sản phẩm này được xóa, nếu bạn muốn thêm lại sản phẩm thì vào phần "Chỉnh sửa sản phẩm" để thêm sản phẩm mới.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,4 +109,4 @@ class DeleteShipper extends React.Component {
         )
     }
 }
-export { DeleteShipper };
+export { DeleteProduct };

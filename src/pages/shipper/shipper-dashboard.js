@@ -7,11 +7,9 @@ import { DOMAIN } from './../../constants';
 // Import Components
 import { Tabs, Tab } from "react-bootstrap";
 
-import UserAvatar from '../../assets/img/customers/customer.jpg';
-
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faEye, faTimes } from '@fortawesome/fontawesome-free-solid';
+import { faCheck, faTimes } from '@fortawesome/fontawesome-free-solid';
 
 class ShipperDashboard extends React.Component {
 	constructor(props) {

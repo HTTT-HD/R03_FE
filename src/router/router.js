@@ -44,13 +44,8 @@ import {
     Cancel, 
     CancelBooking,
     ManageSupplier,
-    ManageShipper, 
-    ManageCustomer,
     AddSupplier,
     DeleteSupplier, 
-    AddShipper,
-    DeleteShipper,
-    DeleteCustomer,
     StaffSidebar, 
     ShipperSidebar,
     ShipperDashboard,
@@ -63,7 +58,8 @@ import {
     ListProductOfSeafood,
     Commission,
     Cart,
-    NeededProduct
+    NeededProduct,
+    Statistical
 } from '../pages';
 
 import { Header, Footer } from '../_components';
@@ -135,12 +131,7 @@ class RouterComponent extends React.Component {
                         <Route path="/cancel-booking" component={CancelBooking} />
                         <Route path="/manage-supplier" component={ManageSupplier} />
                         <Route path="/add-supplier" component={AddSupplier} />
-                        <Route path="/manage-shipper" component={ManageShipper} />
-                        <Route path="/add-shipper" component={AddShipper} />
-                        <Route path="/delete-shipper" component={DeleteShipper} />
                         <Route path="/delete-supplier" component={DeleteSupplier} />
-                        <Route path="/manage-customer" component={ManageCustomer} />
-                        <Route path="/delete-customer" component={DeleteCustomer} />
                         <Route path="/staff-sidebar" component={StaffSidebar} />
                         <Route path="/shipper-sidebar" component={ShipperSidebar} />
                         <Route path="/shipper-dashboard" component={ShipperDashboard} />
@@ -153,6 +144,7 @@ class RouterComponent extends React.Component {
                         <Route path="/commission" component={Commission} />
                         <Route path="/cart" component={Cart} />
                         <Route path="/needed-product" component={NeededProduct} />
+                        <Route path="/statistical" component={Statistical} />
                     </Switch>
                     <Route render={(props) => <Footer {...props} />} />
                 </div>                    

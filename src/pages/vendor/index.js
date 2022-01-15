@@ -4,5 +4,3 @@ export * from './stylist-dashboard';
 export * from './stylist-profile-settings';
 export * from './stylist-profile';
 export * from './stylist-sidebar';
-export * from './delete-product';
-export * from './add-product';

@@ -172,7 +172,6 @@ class EditEditProduct extends React.Component {
                                                 </div>
                                                 {/* add service Form */}
                                             </div>
-                                        
                                         </form>
                                     </div>
                                 </div>

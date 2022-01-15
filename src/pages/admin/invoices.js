@@ -76,7 +76,6 @@ class Invoices extends React.Component {
 							<div className="col-md-7 col-lg-8 col-xl-9">
 								<div className="card card-table">
 									<div className="card-body">
-
 										{/* Invoice Table */}
 										<div className="table-responsive">
 											<table className="table table-hover table-center mb-0">
@@ -93,7 +92,6 @@ class Invoices extends React.Component {
 													{
 														this.state.hoadons.map(item => (
 															<tr>
-
 																<td>
 																	<h2 className="table-avatar">
 																		<Link to="/customer-profile" className="avatar avatar-sm mr-2">
