@@ -57,6 +57,7 @@ class Login extends React.Component {
 					localStorage.setItem("role", res.data.quyens);
 					localStorage.setItem("isAuthenticated", "True")
 					localStorage.setItem("Accesstoken", res.data.acessToken);
+					localStorage.setItem("id_login", res.data.userId)
 					if(res.data.quyens == null)
 							{ this.setState({
 								path :'/',

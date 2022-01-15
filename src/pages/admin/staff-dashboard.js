@@ -20,7 +20,9 @@ class StaffDashboard extends React.Component {
 			error: null,
 			isLoaded: false,
 			hoadons: [],
-			sale:[]
+			sale:[],
+			orders_success:0,
+			orders_cancel:0
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -69,8 +71,13 @@ class StaffDashboard extends React.Component {
     }
 
 	render() {
-		let {hoadons,sale}=this.state;
-		
+		let {hoadons,sale,orders_success,orders_cancel}=this.state;
+		hoadons.filter(item=>{
+			if(item.trangThai==2)
+				return orders_success+=1;
+				if(item.trangThai==-1)
+					return orders_cancel+=1;
+		})
 		return (
 			<div>
 				{/* Breadcrumb */}
@@ -142,7 +149,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng đơn hàng</h6>
-																<h3></h3>
+																<h3>{hoadons.length}</h3>
 															</div>
 														</div>
 													</div>
@@ -150,7 +157,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng đơn hàng thành công</h6>
-																<h3>1000</h3>
+																<h3>{orders_success}</h3>
 															</div>
 														</div>
 													</div>
@@ -158,7 +165,7 @@ class StaffDashboard extends React.Component {
 														<div className="dash-widget dct-border-rht">
 															<div className="dash-widget-info">
 																<h6>Tổng đơn hàng bị hủy</h6>
-																<h3>2000</h3>
+																<h3>{orders_cancel}</h3>
 															</div>
 														</div>
 													</div>

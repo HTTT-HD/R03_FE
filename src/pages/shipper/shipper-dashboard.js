@@ -18,9 +18,12 @@ class ShipperDashboard extends React.Component {
 			error: null,
 			isLoaded: false,
 			orders: [],
+			orders_success:[],
+			orders_process:[],
 			redirect: false
 		};
 		this.handleButtonClick = this.handleButtonClick.bind(this)
+		this.handleSuccess = this.handleSuccess.bind(this)
 	}
 	handleClick(event) {
 		localStorage.setItem("id_order", event)
@@ -65,11 +68,38 @@ class ShipperDashboard extends React.Component {
 				}
 			})
 	}
+	handleSuccess(event){
+		fetch(`${DOMAIN}/Order/finish?donHangId=${event}`,
+			{
+				method: "PUT",
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+				}
+			})
+			.then(res => res.json())
+			.then(res => {
+				if (res.succeeded) {
+					alert("Đã hoàn thành đơn")
+				}
+			})
+	}
 	render() {
-
+		let {orders,orders_process,orders_success}= this.state;
+		orders_process=orders.filter(item=>{
+			return item.trangThai==1
+		})
+		orders_success=orders.filter(item=>{
+			return item.trangThai==2 && item.nguoiGiaoId==localStorage.getItem("id_login")
+		})
+		orders=orders.filter(item=>{
+			return item.trangThai==0
+		})
 		if (this.state.redirect) {
 			return <Redirect to='invoice-view' />;
 		}
+		
 		return (
 			<div>
 				{/* Breadcrumb */}
@@ -145,7 +175,7 @@ class ShipperDashboard extends React.Component {
 																	</thead>
 																	<tbody>
 																		{
-																			this.state.orders.map(item => (
+																			orders.map(item => (
 																				<tr>
 																					<td>
 																						<h2 className="table-avatar">
@@ -209,7 +239,7 @@ class ShipperDashboard extends React.Component {
 																	</thead>
 																	<tbody>
 																		{
-																			this.state.orders.map(item => (
+																			orders_process.map(item => (
 																				<tr>
 																					<td>
 																						<h2 className="table-avatar">
@@ -230,7 +260,7 @@ class ShipperDashboard extends React.Component {
 																									</div>
 																								) : null
 																							} */}
-																							<button className="btn btn-sm bg-info-light mr-1" onClick={() => { this.handleButtonClick(item.id) }}><FontAwesomeIcon icon={faCheck} /> Hoàn thành</button>
+																							<button className="btn btn-sm bg-info-light mr-1" onClick={() => { this.handleSuccess(item.id) }}><FontAwesomeIcon icon={faCheck} /> Hoàn thành</button>
 																							<Link to="/invoice-view" onClick={() => { this.handleClick(item.id) }} className="btn btn-sm bg-info-light mr-1">Xem </Link>
 																							<button className="btn btn-sm bg-danger-light" onClick={() => { this.handleCancel(item.id) }} >
 																								<FontAwesomeIcon icon={faTimes} /> Hủy
@@ -271,7 +301,7 @@ class ShipperDashboard extends React.Component {
 																	</thead>
 																	<tbody>
 																		{
-																			this.state.orders.map(item => (
+																			orders_success.map(item => (
 																				<tr>
 																					<td>
 																						<h2 className="table-avatar">
