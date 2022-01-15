@@ -20,7 +20,8 @@ class ShipperDashboard extends React.Component {
 			orders: [],
 			orders_success:[],
 			orders_process:[],
-			redirect: false
+			redirect: false,
+			redirect1:false
 		};
 		this.handleButtonClick = this.handleButtonClick.bind(this)
 		this.handleSuccess = this.handleSuccess.bind(this)
@@ -82,6 +83,9 @@ class ShipperDashboard extends React.Component {
 			.then(res => {
 				if (res.succeeded) {
 					alert("Đã hoàn thành đơn")
+					this.setState({
+						redirect1: true
+					})
 				}
 			})
 	}
@@ -99,7 +103,9 @@ class ShipperDashboard extends React.Component {
 		if (this.state.redirect) {
 			return <Redirect to='invoice-view' />;
 		}
-		
+		if (this.state.redirect1) {
+			return <Redirect to='shipper-dashboard' />;
+		}
 		return (
 			<div>
 				{/* Breadcrumb */}
