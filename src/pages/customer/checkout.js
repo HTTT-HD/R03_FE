@@ -25,6 +25,7 @@ function Checkout() {
 	const [address, setaddress] = useState([]);
 	const [userphone, setphone] = useState([]);
 	const [total,setTotal]=useState([]);
+	const [USD,setUSD]=useState([]);
 	const [ship,setShip]=useState([]);
 	const [store,setStore]=useState([]);
 	const [date,setDate]=useState([]);
@@ -39,6 +40,20 @@ function Checkout() {
 	// console.log(localStorage.end_time);
 
 	const paypal = useRef();
+	function tryConvert(money, code, encode = true) {
+		const input = parseFloat(money);
+		if (Number.isNaN(input)) {
+		  return '';
+		}
+		const currency = "23,075.00";
+		if (!currency) {
+		  return '';
+		}
+		const sell = parseFloat(currency.sell.replace(',', ''));
+		const output = encode ? input*sell : input/sell;
+		const rounded = Math.round(output * 1000)/1000;
+		return rounded.toString();
+	  }
 	useEffect( () => {
 		const requestOptions = {
             method: 'GET',
@@ -59,6 +74,9 @@ function Checkout() {
 			setTotal(detail_order.tongTien)
 			setShip(detail_order.tienShip)
 			setStore(detail_order.tenCuaHang)
+			setUSD(detail_order.tongTien*0.04388)
+			localStorage.setItem("to_USD",detail_order.tongTien/23000)
+			console.log(USD);
 			//console.log(user_object.email)
 			//console.log(user_object.phone)
 		}
@@ -66,6 +84,7 @@ function Checkout() {
 		
 		},[]);
 	useEffect(() => {
+		console.log(tryConvert(total, "USD", false));
         window.paypal
         .Buttons({
             createOrder: (data, actions, err) => {
@@ -76,7 +95,7 @@ function Checkout() {
                     //description: "Total money",
                     amount: {
                     currency_code: "USD",
-                    value: 500, //Pass total money here
+                    value: parseFloat(localStorage.to_USD).toFixed(1), //Pass total money here
                     },
                 },
                 ],
@@ -84,48 +103,45 @@ function Checkout() {
             },
             onApprove: async (data, actions) => {
 				const order = await actions.order.capture();
-				alert("Thanh toán thành công")
-				const data1 = {
-					ida: localStorage.getItem("id_app"),
-					status: "Chưa xác nhận",
-					end_time: Math.round(localStorage.end_time),
-					total: localStorage.total+'.000',
-					payment: "PayPal"
-				}
-				axios.post('http://localhost:3000/checkout/save-checkout',data1)
-				.then(res => {
-					console.log("Payment Success");
-					if(res)
+				const requestOptions = {
+					method: 'PUT',
+					headers: { 
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`,
+						'My-Custom-Header': 'foobar'
+					},
+					body: JSON.stringify({
+						donHangId: localStorage.getItem("id_order"),
+						loaiThanhToan:1
+					})
+				};
+				async function fetchResult(){
+					const rs = await fetch(`${DOMAIN}/Order/update-payment`,
 					{
+						method: "PUT",
+						headers: {
+							'Content-Type': 'application/json',
+							Accept: 'application/json',
+							'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+						},
+						body:JSON.stringify({
+							donHangId: localStorage.getItem("id_order"),
+							loaiThanhToan:1
+						})
+					})
+					const res = await rs.json();
+					console.log(res)
+					if(res.succeeded){
+						alert("Thanh toán thành công !")
 						paycheck.st=true;
 						redirect.st=true;
-					}
-					console.log(paycheck)
-				})
-				.catch(err => {
-					console.log("Not ok");
-					console.log(err);
-				});
-            },
-            onError: (err) => {
-				alert("Thanh toán không thành công")
-				const data2 = {
-					ida: localStorage.getItem("id_app"),
-					status: "Hủy",
-					end_time: Math.round(localStorage.end_time),
-					total: localStorage.total+'.000',
-					payment: "PayPal"
-				}
-				axios.post('http://localhost:3000/checkout/save-checkout',data2)
-				.then(res => {
-					console.log("Payment fail");
-					if(res)
-						setPaycheck(paycheck)
-				})
-				.catch(err => {
-					console.log(err);
-				});
-			// Redirect sang trang booking-fail.
+					}else{
+						alert("Thanh toán không thành công")
+					}						
+					console.log(redirect.st,paycheck.st)
+					
+			}
+			fetchResult();
             },
         })
         .render(paypal.current);
@@ -178,7 +194,7 @@ function Checkout() {
 														</div>
 														<div className="col-md-12 col-sm-12">
 															<div className="form-group card-label">
-																<label>Email</label>
+																<label>Địa chỉ giao</label>
 																<input className="form-control" type="email" value={address} />
 															
 															</div>
@@ -323,8 +339,7 @@ function Checkout() {
 				{/* Page Content */}
 			</div>
 		)
-	}
-	else{
+	}else{
 		if(redirect.st == true && paycheck.st == true){
 			return <Redirect to='booking-success'/>
 		}

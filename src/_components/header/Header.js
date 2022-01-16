@@ -224,8 +224,7 @@ class Header extends React.Component {
 													<img src={UserIcon} alt="User Image" className="avatar-img rounded-circle" />
 												</div>
 												<div className="user-text">
-													<h6>{this.state.data.tenThanhVien}</h6>
-													<p className="text-muted mb-0"></p>
+													<h6>{localStorage.getItem("ten_login")}</h6>
 												</div>
 											</div>
 										</Dropdown.Item>

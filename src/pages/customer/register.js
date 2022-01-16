@@ -34,8 +34,13 @@ class Register extends React.Component {
 	handleChange(e) {
         const newData = {...this.state.data};
 		newData['maThanhVien']='tv'+makeid(3);
+		if(e.target.name=="gioiTinh"){
+            newData[e.target.name]=Number(e.target.value)
+        }else{newData[e.target.name]=e.target.value}
         newData[e.target.name]=e.target.value;
-        this.setState({data:newData})
+		newData['gioiTinh']=Number(newData['gioiTinh']);
+		console.log(this.state.data)
+		this.setState({data:newData})
 	}
 	
 	handleSubmit(event) {
@@ -110,13 +115,26 @@ class Register extends React.Component {
 														<label className="focus-label">Tên đăng nhập</label>
 													</div>
 													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="password" className="form-control floating" name="matKhau" />
+														<label className="focus-label">Mật khẩu</label>
+													</div>
+													<div className="form-group form-focus">
 														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="cmnd" />
 														<label className="focus-label">CMND</label>
 													</div>
-													<div className="form-group form-focus">
-														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="matKhau" />
-														<label className="focus-label">Mật khẩu</label>
-													</div>
+													
+													<div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>Danh mục</label>
+                                                        <select className="form-control select" onChange={(e)=>this.handleChange(e)} name ="gioiTinh">
+                                                            <option  value="0">Khác</option>
+                                                            <option  value="1" >Nữ</option>
+                                                            <option  value="2">Nam</option>
+                                                            
+                                                        </select>
+                                                        
+                                                    </div>
+											    </div>
 													<div className="terms-and-policy pt-2 pb-2">
 														<input type="checkbox" required name="checkbox" defaultValue="check" id="agree" /><span className="agree">Tôi đồng ý với các <span className="terms"><Link to="/terms-condition" target="_blank">Điều khoản sử dụng</Link> và <Link to="/privacy-policy" target="_blank">Chính sách bảo mật</Link> này.</span></span>
 													</div>

@@ -21,6 +21,8 @@ class Commission extends React.Component {
             startDate: new Date(),
             redirect: false,
             check1: false,
+            hoadons: [],
+			sale:[]
         };
         this.handleChange = this.handleChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -31,78 +33,47 @@ class Commission extends React.Component {
             startDate: date
         })
     }
-
-    onFormSubmit(e) {
-        e.preventDefault();
-        var time = ''
-        var day = ''
-        var month = ''
-
-        if (this.state.startDate.getHours().toString().length < 2) {
-            time += '0'
-            time += this.state.startDate.getHours().toString()
-        }
-        else {
-            time += this.state.startDate.getHours().toString()
-        }
-
-        if (this.state.startDate.getDate().toString().length < 2) {
-            day += '0'
-            day += this.state.startDate.getDate().toString()
-        }
-        else {
-            day += this.state.startDate.getDate().toString()
-        }
-
-        if ((this.state.startDate.getMonth() + 1).toString().length < 2) {
-            month += '0'
-            month += (this.state.startDate.getMonth() + 1).toString()
-        }
-        else {
-            month += (this.state.startDate.getMonth() + 1).toString()
-        }
-
-        var result = this.state.startDate.getFullYear().toString() + '-' + month + '-' + day
-            + "@" + time
-        localStorage.setItem("date_booking", result)
-        const data = {
-            chosen_date: result,
-            id_appoint: localStorage.getItem("id_app")
-        }
-
-        axios.post('http://localhost:3000/booking', data)
-            .then(res => {
-                console.log(res.data)
-                this.setState({ redirect: true })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
-        axios.post('http://localhost:3000/checkout', data)
-            .then(res => {
-                var end_time = 0;
-                var sum = 0;
-                console.log('OK');
-                console.log(data.id_appoint);
-                console.log(res.data.detail_app);
-                console.log(localStorage.getItem("id_app"));
-                for (let i = 0; i < res.data["detail_app"].length; i++) {
-                    sum += parseFloat(res.data["detail_app"][i]["price"]);
-                    end_time += parseFloat(res.data["detail_app"][i]["duration"].slice(0, res.data["detail_app"][i]["duration"].indexOf("phút") - 1));
-                }
-                end_time /= 60;
-                end_time += res.data["detail_app"][0].Appointment[0]["start_time"];
-                var to_USD = sum * 0.04388;
-                localStorage.setItem("total", sum);
-                localStorage.setItem("end_time", end_time);
-                localStorage.setItem("to_USD", to_USD)
-                this.setState({ check1: true });
-
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    handleClick(event) {
+		localStorage.setItem("id_order",event)
+	}
+    componentDidMount(){
+		Promise.all([
+        fetch(`${DOMAIN}/Order/get-all`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        }),
+		fetch(`${DOMAIN}/Dashboard/dashboard`,
+        {
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+            }
+        })
+	])
+	.then(([res1,res2]) => Promise.all([res1.json(), res2.json()]))
+	.then(
+		([result1,result2]) => {
+			console.log(result1)
+			this.setState({
+				isLoaded: true,
+				hoadons: result1.data.items,
+				sale:result2.data
+			});
+		},
+		(error) => {
+			this.setState({
+				isLoaded: true,
+				error
+			});
+		}
+	)
     }
     render() {
         const { redirect } = this.state;
@@ -176,8 +147,8 @@ class Commission extends React.Component {
                                             <table className="table table-hover table-center mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID hóa đơn</th>
                                                         <th>Cửa hàng</th>
+                                                        <th>Loại thanh toán</th>
                                                         <th>Tiền hóa đơn</th>
                                                         <th>Tiền ship</th>
                                                         <th>Tiền hoa hồng</th>
@@ -185,52 +156,32 @@ class Commission extends React.Component {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                {this.state.hoadons.map(item=>(
                                                     <tr>
                                                         <td>
-                                                            <Link to="/invoice-view">#INV-0010</Link>
+                                                            <Link to="">{item.tenCuaHang}</Link>
                                                         </td>
                                                         <td>
                                                             <h2 className="table-avatar">
                                                                 <Link to="/ListSPofCH" className="avatar avatar-sm mr-2">
                                                                     <img className="avatar-img rounded-circle" src={UserImg} alt="User Image" />
                                                                 </Link>
-                                                                <Link to="/ListSPofCH">Tên cửa hàng <span>#PT0016</span></Link>
+                                                                    <Link to="">{item.tenLoaiThanhToan}</Link>
                                                             </h2>
                                                         </td>
-                                                        <td>450.000VND</td>
-                                                        <td>50.000VND</td>
-                                                        <td>45.000VND</td>
+                                                        <td>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.tongTien)} VNĐ</td>
+                                                        <td>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.tienShip)} VNĐ</td>
+                                                        <td>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(item.tienShip*0.05+item.tongTien*0.05)} VNĐ</td>
                                                         <td className="text-right">
                                                             <div className="table-action">
-                                                                <Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
+                                                                <Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1" onClick={()=>{this.handleClick(item.id)}}>
                                                                     <FontAwesomeIcon icon={faEye} /> Xem
                                                                 </Link>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <Link to="/invoice-view">#INV-0010</Link>
-                                                        </td>
-                                                        <td>
-                                                            <h2 className="table-avatar">
-                                                                <Link to="/ListSPofCH" className="avatar avatar-sm mr-2">
-                                                                    <img className="avatar-img rounded-circle" src={UserImg} alt="User Image" />
-                                                                </Link>
-                                                                <Link to="/ListSPofCH">Tên cửa hàng <span>#PT0016</span></Link>
-                                                            </h2>
-                                                        </td>
-                                                        <td>450.000VND</td>
-                                                        <td>50.000VND</td>
-                                                        <td>45.000VND</td>
-                                                        <td className="text-right">
-                                                            <div className="table-action">
-                                                                <Link to="/invoice-view" className="btn btn-sm bg-info-light mr-1">
-                                                                    <FontAwesomeIcon icon={faEye} /> Xem
-                                                                </Link>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    ))}
+                                                
                                                 </tbody>
                                             </table>
                                         </div>
@@ -246,7 +197,7 @@ class Commission extends React.Component {
                                                         <div className="dash-widget dct-border-rht">
                                                             <div className="dash-widget-info">
                                                                 <h6>Tổng tiền hóa đơn</h6>
-                                                                <h3>900.000VND</h3>
+                                                                <h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang)} VNĐ</h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,7 +205,7 @@ class Commission extends React.Component {
                                                         <div className="dash-widget dct-border-rht">
                                                             <div className="dash-widget-info">
                                                                 <h6>Tổng tiền ship</h6>
-                                                                <h3>100.000VND</h3>
+                                                                <h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang+sale.tienTuShip)}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -262,7 +213,7 @@ class Commission extends React.Component {
                                                         <div className="dash-widget dct-border-rht">
                                                             <div className="dash-widget-info">
                                                                 <h6>Tổng tiền hoa hồng</h6>
-                                                                <h3>100.000VND</h3>
+                                                                <h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang+sale.tienTuShip)} VNĐ</h3>
                                                             </div>
                                                         </div>
                                                     </div>
