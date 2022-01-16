@@ -9,12 +9,45 @@ import UserAvatar from '../../assets/img/customers/customer.jpg'
 import { DOMAIN } from '../../constants';
 
 class NeededProduct extends React.Component {
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		error: null,
+	// 		isLoaded: false,
+	// 		hoadons: []
+	// 	};
+	// 	this.handleClick = this.handleClick.bind(this);
+	// }
+	// handleClick(event) {
+	// 	localStorage.setItem("id_order", event)
+	// }
+	// componentDidMount() {
+	// 	fetch(`${DOMAIN}/Order/get-all`,
+	// 		{
+	// 			method: "GET",
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 				Accept: 'application/json',
+	// 				'Authorization': `Bearer ${localStorage.getItem("Accesstoken")}`
+	// 			}
+	// 		})
+	// 		.then(res => res.json())
+	// 		.then(
+	// 			(res) => {
+	// 				console.log(res)
+	// 				this.setState({
+	// 					hoadons: res.data.items
+	// 				})
+	// 				console.log(res.data.items)
+	// 			}
+	// 		)
+	// }
 	constructor(props) {
 		super(props);
 		this.state = {
 			error: null,
 			isLoaded: false,
-			hoadons: []
+			sanphams: []
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -22,7 +55,7 @@ class NeededProduct extends React.Component {
 		localStorage.setItem("id_order", event)
 	}
 	componentDidMount() {
-		fetch(`${DOMAIN}/Order/get-all`,
+		fetch(`${DOMAIN}/Product/get-all`,
 			{
 				method: "GET",
 				headers: {
@@ -36,7 +69,7 @@ class NeededProduct extends React.Component {
 				(res) => {
 					console.log(res)
 					this.setState({
-						hoadons: res.data.items
+						sanphams: res.data.items
 					})
 					console.log(res.data.items)
 				}
@@ -86,14 +119,14 @@ class NeededProduct extends React.Component {
 															</thead>
 															<tbody>
 																{
-																	this.state.hoadons.map(item => (
+																	this.state.sanphams.slice(0, 10).map(item => (
 																		<tr>
 																			<td>
-                                                                                <h2 className="table-avatar">
-                                                                                    <Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={item.img} alt="User Image" /></Link>
-                                                                                    <Link to="/customer-profile">{item.tenSanPham}</Link>
-                                                                                </h2>
-                                                                            </td>
+																				<h2 className="table-avatar">
+																					<Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={item.img} alt="User Image" /></Link>
+																					<Link to="/customer-profile">{item.tenSanPham}</Link>
+																				</h2>
+																			</td>
 																			<Link to="#">{item.tenDanhMuc}</Link>
 																		</tr>
 																	))}

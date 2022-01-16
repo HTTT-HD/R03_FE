@@ -70,9 +70,9 @@ class Statistical extends React.Component {
                                 <StaffSidebar />
                             </div>
                             <div className="col-md-7 col-lg-8 col-xl-9">
-                                <div className="row">
+                            <div className="row">
                                     <div className="col-md-12">
-                                        <h4 className="mb-4">Thời gian kỳ nào đó (tính trên 1 tháng)</h4>
+                                        <h4 className="mb-4">Thống kê sản phẩm mới thêm vào tuần này</h4>
                                         <div className="appointment-tab">
                                             <div className="card card-table mb-0">
                                                 <div className="card-body">
@@ -88,7 +88,95 @@ class Statistical extends React.Component {
                                                             </thead>
                                                             <tbody>
                                                                 {
-                                                                    this.state.sanphams.map(item => (
+                                                                    this.state.sanphams.slice(0,4).map(item => (
+                                                                        <tr>
+                                                                            <td>
+                                                                                <h2 className="table-avatar">
+                                                                                    <Link to="/customer-profile">{item.tenCuaHang}</Link>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h2 className="table-avatar">
+                                                                                    <Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={item.img} alt="User Image" /></Link>
+                                                                                    <Link to="/customer-profile">{item.tenSanPham}</Link>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.donGia)} VNĐ</td>
+                                                                            <td className="text-center">{item.tenDanhMuc}</td>
+                                                                        </tr>
+                                                                    ))
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <h4 className="mb-4">Thống kê sản phẩm mới thêm vào tuần trước</h4>
+                                        <div className="appointment-tab">
+                                            <div className="card card-table mb-0">
+                                                <div className="card-body">
+                                                    <div className="table-responsive">
+                                                        <table className="table table-hover table-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Tên cửa hàng</th>
+                                                                    <th>Tên sản phẩm</th>
+                                                                    <th>Giá sản phẩm</th>
+                                                                    <th>Danh mục sản phẩm</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    this.state.sanphams.slice(4,8).map(item => (
+                                                                        <tr>
+                                                                            <td>
+                                                                                <h2 className="table-avatar">
+                                                                                    <Link to="/customer-profile">{item.tenCuaHang}</Link>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h2 className="table-avatar">
+                                                                                    <Link to="/customer-profile" className="avatar avatar-sm mr-2"><img className="avatar-img rounded-circle" src={item.img} alt="User Image" /></Link>
+                                                                                    <Link to="/customer-profile">{item.tenSanPham}</Link>
+                                                                                </h2>
+                                                                            </td>
+                                                                            <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.donGia)} VNĐ</td>
+                                                                            <td className="text-center">{item.tenDanhMuc}</td>
+                                                                        </tr>
+                                                                    ))
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <h4 className="mb-4">Thống kê sản phẩm mới thêm vào 2 tuần trước</h4>
+                                        <div className="appointment-tab">
+                                            <div className="card card-table mb-0">
+                                                <div className="card-body">
+                                                    <div className="table-responsive">
+                                                        <table className="table table-hover table-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Tên cửa hàng</th>
+                                                                    <th>Tên sản phẩm</th>
+                                                                    <th>Giá sản phẩm</th>
+                                                                    <th>Danh mục sản phẩm</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    this.state.sanphams.slice(8,20).map(item => (
                                                                         <tr>
                                                                             <td>
                                                                                 <h2 className="table-avatar">
