@@ -10,6 +10,15 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/fontawesome-free-solid';
+function makeid(length) {
+	var result           = '';
+	var characters       = '0123456789';
+	var charactersLength = characters.length;
+	for ( var i = 0; i < length; i++ ) {
+	   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	return result;
+ }
 
 class AddSupplier extends React.Component {
     constructor(props) {
@@ -22,21 +31,40 @@ class AddSupplier extends React.Component {
     }
     handleChange(e) {
         const newData = {...this.state.data};
+		newData['maThanhVien']='ncc'+makeid(3);
+		if(e.target.name=="gioiTinh"){
+            newData[e.target.name]=Number(e.target.value)
+        }else{newData[e.target.name]=e.target.value}
         newData[e.target.name]=e.target.value;
-        this.setState({data:newData})
-    }
+		newData['gioiTinh']=Number(newData['gioiTinh']);
+		console.log(this.state.data)
+		this.setState({data:newData})
+	}
     handleSubmit(event) {
 		event.preventDefault();
 		//console.log(this.state)
-		axios.post('http://localhost:5001/api/ThanhVien/create',this.state.data)
-			.then(res => {
-                if(res.data.save)
-				    {this.setState({redirect:true})}
-			})
-			.catch(error => {
-				console.log(error)
-			})
-        console.log(this.state)
+		fetch(`${DOMAIN}/ThanhVien/create`,
+				{
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body:JSON.stringify(this.state.data)
+				}
+			).then(res => res.json().then(
+				res => {
+					if(res.succeeded){
+						alert("Đăng ký thành công")
+						this.setState({redirect:true})
+					}
+					else{
+						alert(res.message)
+					}
+					console.log(res);
+				})
+			).catch(
+				res => { console.log(res) }
+			)
 	}
     render() {
         const { redirect } = this.state;
@@ -78,68 +106,52 @@ class AddSupplier extends React.Component {
                                     <div className="card-body">
 
                                         {/* add service Form */}
-                                        <form action="" method="POST" onSubmit={this.handleSubmit}>
-                                            <div className="row form-row">
-                                                <div className="col-12">
+                                        <form action="/" onSubmit={this.handleSubmit}>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="tenThanhvien" />
+														<label className="focus-label">Tên</label>
+													</div>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="soDienThoai" />
+														<label className="focus-label">Số điện thoại</label>
+													</div>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="diaChi" />
+														<label className="focus-label">Địa chỉ</label>
+													</div>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="tenDangnhap" />
+														<label className="focus-label">Tên đăng nhập</label>
+													</div>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="password" className="form-control floating" name="matKhau" />
+														<label className="focus-label">Mật khẩu</label>
+													</div>
+													<div className="form-group form-focus">
+														<input onChange={(e)=>this.handleChange(e)} type="text" className="form-control floating" name="cmnd" />
+														<label className="focus-label">CMND</label>
+													</div>
+													
+													<div className="col-md-6">
                                                     <div className="form-group">
-                                                        <label>Mã nhà cung cấp</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id"/>
+                                                        <label>Danh mục</label>
+                                                        <select className="form-control select" onChange={(e)=>this.handleChange(e)} name ="gioiTinh">
+                                                            <option  value="0">Khác</option>
+                                                            <option  value="1" >Nữ</option>
+                                                            <option  value="2">Nam</option>
+                                                            
+                                                        </select>
+                                                        
                                                     </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Hình ảnh</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="img"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Họ và tên</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="name"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Địa chỉ</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="address" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Số điện thoại</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="phone" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Giới tính</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="username" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>CMND</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="username" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Tên đăng nhập</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="username" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-group">
-                                                        <label>Mật khẩu</label>
-                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="pass" />
-                                                    </div>
-                                                </div>
-                                                <div className="submit-section">
-                                                    <button type="submit" className="btn btn-primary submit-btn">Thêm nhà cung cấp</button>
-                                                </div>
-                                                {/* add service Form */}
-                                            </div>
-                                        </form>
+											    </div>
+													<div className="terms-and-policy pt-2 pb-2">
+														<input type="checkbox" required name="checkbox" defaultValue="check" id="agree" /><span className="agree">Tôi đồng ý với các <span className="terms"><Link to="/terms-condition" target="_blank">Điều khoản sử dụng</Link> và <Link to="/privacy-policy" target="_blank">Chính sách bảo mật</Link> này.</span></span>
+													</div>
+													<div className="text-right">
+														<Link to="/login" className="forgot-link">Bạn đã có sẵn tài khoản?</Link>
+													</div>
+													<button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Đăng ký</button>
+												</form>
                                     </div>
                                 </div>
                             </div>

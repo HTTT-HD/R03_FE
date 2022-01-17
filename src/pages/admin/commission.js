@@ -13,6 +13,7 @@ import UserImg from '../../assets/img/customers/customer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/fontawesome-free-solid';
 import UserImg9 from '../../assets/img/customers/customer9.jpg';
+import { DOMAIN } from '../../constants';
 
 class Commission extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Commission extends React.Component {
 			sale:[]
         };
         this.handleChange = this.handleChange.bind(this);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(date) {
@@ -76,6 +77,7 @@ class Commission extends React.Component {
 	)
     }
     render() {
+        let {sale}=this.state;
         const { redirect } = this.state;
         const { check1 } = this.state;
         console.log(redirect)
@@ -205,7 +207,7 @@ class Commission extends React.Component {
                                                         <div className="dash-widget dct-border-rht">
                                                             <div className="dash-widget-info">
                                                                 <h6>Tổng tiền ship</h6>
-                                                                <h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuCuaHang+sale.tienTuShip)}</h3>
+                                                                <h3>{new Intl.NumberFormat({ style: 'currency', currency: 'JPY' }).format(sale.tienTuShip)} VNĐ</h3>
                                                             </div>
                                                         </div>
                                                     </div>
