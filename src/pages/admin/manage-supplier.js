@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 // Import Sidebar
 import { StaffSidebar } from './staff-sidebar';
+import StylistImg from '../../assets/img/stylists/stylist-thumb-02.jpg';
 
 // Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -112,7 +113,7 @@ class ManageSupplier extends React.Component {
                                                             <div className="appointment-list">
                                                                 <div className="profile-info-widget">
                                                                     <Link className="booking-doc-img">
-                                                                        <img src={thanhvien.img} alt="User Image" />
+                                                                        <img src={StylistImg} alt="User Image" />
                                                                     </Link>
                                                                     <div className="profile-det-info">
                                                                         <h3>{`${thanhvien.tenThanhVien}`}</h3>

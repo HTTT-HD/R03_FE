@@ -80,26 +80,16 @@ class AddSupplier extends React.Component {
                                         {/* add service Form */}
                                         <form action="" method="POST" onSubmit={this.handleSubmit}>
                                             <div className="row form-row">
-                                                <div className="col-12 col-md-12">
-                                                    <div className="form-group">
-                                                        <div className="change-avatar">
-                                                            <div className="profile-img">
-                                                                <img src={UserImg} alt="User Image" />
-                                                            </div>
-                                                            <div className="upload-img">
-                                                                <div className="change-photo-btn">
-                                                                    <span><FontAwesomeIcon icon={faUpload} /> Tải ảnh lên</span>
-                                                                    <input onChange={(e)=>this.handleChange(e)} type="file" className="upload" name="img"/>
-                                                                </div>
-                                                                <small className="form-text text-muted">Cho phép JPG, GIF hoặc PNG. Kích thước tối đa 2MB</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div className="col-12">
                                                     <div className="form-group">
                                                         <label>Mã nhà cung cấp</label>
                                                         <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="id"/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>Hình ảnh</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name ="img"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
@@ -118,6 +108,18 @@ class AddSupplier extends React.Component {
                                                     <div className="form-group">
                                                         <label>Số điện thoại</label>
                                                         <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="phone" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>Giới tính</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="username" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label>CMND</label>
+                                                        <input onChange={(e)=>this.handleChange(e)} type="text" className="form-control" name="username" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
